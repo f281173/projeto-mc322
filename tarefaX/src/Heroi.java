@@ -3,7 +3,7 @@ public class Heroi{
     private int vida;
     private int escudo;
 
-    private Heroi(String nome, int vida, int escudo){
+    public Heroi(String nome, int vida, int escudo){
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
