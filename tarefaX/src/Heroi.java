@@ -8,6 +8,7 @@ public class Heroi{
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
+        this.dano = new CartaDano[10];
     }
     
     public int acessoEscudo() {
@@ -49,6 +50,7 @@ public class Heroi{
         this.escudo = carta_escudo.acessoEscudoGanho();
     }
 
+
     public int Estar_vivo(){
         if (this.vida <=0){
             return 0; 
@@ -56,6 +58,11 @@ public class Heroi{
             return 1;
         }
     }
+
+
+    public void adiciona_card(CartaDano carta, int i) {
+        this.dano[i] = carta;
+}
 
 }
 
