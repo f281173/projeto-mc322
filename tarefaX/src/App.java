@@ -32,7 +32,6 @@ public class App {
         System.out.println(enemy1.acessoNome() + " " + enemy1.acessoVida() + "/" + vida_inicial_e1 + " de vida  | "
             + enemy1.acessoEscudo() + " de escudo ");
 
-        // System.out.println("Energia: " + player1.acessoEnergia() + " de energia disponível"); // troquei o método acesso a energia pela variável
         System.out.println("Energia: " + energia + " de energia disponível"); // linha corrigida
         System.out.println("1 - Usar Carta de Dano");
         System.out.println("2 - Usar Carta de Escudo");
@@ -80,7 +79,7 @@ public class App {
 
       /* ataque do inimigo */
       if (enemy1.estaVivo()) { // o inimigo só vai atacar se estiver vivo (caso a gente mate ele antes de passar de turno)
-        System.out.println("Turno do Inimigo:");
+        System.out.println("\nTurno do Inimigo:");
         enemy1.atacar(player1);
         System.out.println(enemy1.acessoNome() + " executou o ataque");
         System.out.println("\n-----------------------------------------------------------\n"); // teste para ver se melhora a visualização (?)
@@ -98,18 +97,4 @@ public class App {
 
 }
 
-// escolha seu heroi
 
-/*
- * fazer o turno inimigo
- * fazer read me
- * ajustar energia
- * 
- * 
- * 
- */
-
-
-/* testes:
-Quando fiquei usei o escudo ele passou de turno automaticamente
-depois digitei apenas 1 para ficar dando dano e a vida do inimigo ficou negativa */
