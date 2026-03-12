@@ -18,9 +18,6 @@ public class Heroi {
         this.tamanhoVetor = 0;
     }
 
-    public int acessoEscudo() {
-        return this.escudo;
-    }
 
     public int encontraNome(String nome_carta) {
         int i = 0;
@@ -52,9 +49,11 @@ public class Heroi {
 
     }
 
+    
     public void ganhaEscudo(CartaEscudo carta_escudo) {
         this.escudo = carta_escudo.acessoEscudoGanho();
     }
+
 
     public boolean estaVivo() {
         if (this.vida <= 0) {
@@ -76,6 +75,11 @@ public class Heroi {
 
         
 }
+
+    public int acessoEscudo() {
+        return this.escudo;
+    }
+
 
     public int acessoEnergia() {
         return this.energia;

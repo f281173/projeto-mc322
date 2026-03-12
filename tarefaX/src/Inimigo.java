@@ -12,15 +12,7 @@ public class Inimigo {
         this.dano = dano;
     }
 
-    public int acessoDano() {
-        return this.dano;
-    }
-
-    public int acessoEscudo() {
-        return this.escudo;
-    }
-
-
+    
     public void ReceberDano(Heroi personagem, String nome_carta) {
         
         // encontra nome i .. acesosocartadano
@@ -43,9 +35,18 @@ public class Inimigo {
         return false;
     }
 
+    
     public void atacar(Heroi personagem) {
         personagem.RecebeDano(this);
         
+    }
+
+    public int acessoDano() {
+        return this.dano;
+    }
+
+    public int acessoEscudo() {
+        return this.escudo;
     }
     
     public String acessoNome() {

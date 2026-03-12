@@ -4,26 +4,27 @@ public class App {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
 
-    Heroi player1 = new Heroi("Shrek", 100, 40, 5, 10); //criei o atributo capacidade que é a quantidade de cartas
+    Heroi player1 = new Heroi("Shrek", 100, 20, 5, 10); //criei o atributo capacidade que é a quantidade de cartas
     Inimigo enemy1 = new Inimigo("Dragão", 80, 10, 40);                     // que o Heoroi pode ter.
     CartaDano card1 = new CartaDano("Bola de Fogo", 2, 15);
     CartaDano card2 = new CartaDano("Corte de Espada", 1, 10);
-    CartaEscudo shield = new CartaEscudo("Proteção", 3, 40);
+    CartaEscudo shield = new CartaEscudo("Proteção", 3, 20);
 
-    player1.adiciona_card(card1); //mudei esse método para não precisar passar o indice do vetor
-    player1.adiciona_card(card2); //mudei esse método para não precisar passar o indice do vetor
+    player1.adiciona_card(card1); 
+    player1.adiciona_card(card2); 
     System.out.println("\n-----------------------------------------------------------\n"); // teste para ver se fica melhor a visualização (?)
 
 
-    int vida_inicial_p1 = player1.acessoVida(); // a vida tem que estar aqui para não mudar a cada turno.
-    int vida_inicial_e1 = enemy1.acessoVida(); // a vida tem que estar aqui para não mudar a cada turno.
+    int vida_inicial_p1 = player1.acessoVida(); 
+    int vida_inicial_e1 = enemy1.acessoVida(); 
 
     while (player1.estaVivo() && enemy1.estaVivo()) {
+  
       int energia = player1.acessoEnergia(); // energia inicial do personagem heroi.
       int opcao = 0;
       player1.resetarEscudo();
 
-      /*tirei a condição de energia > 0 para forçar o usuario selecionar 3 para passar o turno */
+      
       while (opcao != 3 && enemy1.estaVivo()) { // eu posso matar o inimigo antes de passar de turno (adicionei um condicional a mais)
         // bloco com as opções
         System.out.println(player1.acessoNome() + " " + player1.acessoVida() + "/" + vida_inicial_p1 + " de vida  | "
