@@ -1,60 +1,55 @@
+import java.util.ArrayList;
 
-public class Heroi {
-    private String nome;
-    private int vida;
-    private int escudo;
+public class Heroi extends Entidade {
     private int energia;
-    private CartaDano[] dano;
-    private int tamanhoVetor;
-    private int capacidade;
+    private ArrayList<CartaDano> maoJogador; 
 
-    public Heroi(String nome, int vida, int escudo, int energia, int capacidade) {
+    public Heroi(String nome, int vida, int escudo, int energia) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
         this.energia = energia;
-        this.dano = new CartaDano[capacidade];
-        this.capacidade = capacidade;
-        this.tamanhoVetor = 0;
+        this.maoJogador = new ArrayList<>();
     }
-
 
     public int encontraNome(String nomeCarta) {
         int i = 0;
 
-        while (i < this.dano.length) {
-            if (this.dano[i].acessoCartaDanoNome().equals(nomeCarta))
+        while (i < this.maoJogador.size()) {  
+            if (this.maoJogador.get(i).acessoNome().equals(nomeCarta))
                 return i;
             i++;
         }
         return -1;
     }
 
-    public CartaDano encontraCarta(String nomeCarta) {
+@Override
+    public Carta encontraCarta(String nomeCarta) {
         int i = encontraNome(nomeCarta);
-        CartaDano carta = this.dano[i];
+        Carta carta = this.maoJogador.get(i);
         return carta;
     }
 
-    public void recebeDano(Inimigo personagem) {
+@Override    
+    public void recebeDano(Entidade personagem, CartaDano carta) {
 
-        if (this.escudo >= personagem.acessoDano()) {
-            this.escudo -= personagem.acessoDano();
+        if (this.escudo >= carta.acessoCartaDanoDano()) {
+            this.escudo -= carta.acessoCartaDanoDano();
         } else {
 
-            int danoRestante = personagem.acessoDano() - this.escudo;
+            int danoRestante = carta.acessoCartaDanoDano() - this.escudo;
             this.escudo = 0;
             this.vida -= danoRestante;
         }
 
     }
 
-    
+@Override
     public void ganhaEscudo(CartaEscudo cartaEscudo) {
         this.escudo = cartaEscudo.acessoEscudoGanho();
     }
 
-
+@Override    
     public boolean estaVivo() {
         if (this.vida <= 0) {
             return false;
@@ -63,23 +58,15 @@ public class Heroi {
         }
     }
 
+@Override
     public void adiciona_card(CartaDano carta) {
-        if (this.tamanhoVetor < this.capacidade) {
-            this.dano[this.tamanhoVetor] = carta;
-            this.tamanhoVetor = this.tamanhoVetor + 1;
-            System.out.println(carta.acessoCartaDanoNome() + " foi inserido ao seu deck");
-            }
-        else {
-            System.out.println("O seu deck está cheio ! Impossível adicionar mais cartas");
-        } 
-
-        
+        this.maoJogador.add(carta);
 }
 
+@Override 
     public int acessoEscudo() {
         return this.escudo;
     }
-
 
     public int acessoEnergia() {
         return this.energia;
@@ -89,6 +76,7 @@ public class Heroi {
         this.escudo = 0;
     }
 
+@Override
     public String acessoNome() {
         return this.nome;
     }
@@ -98,12 +86,12 @@ public class Heroi {
     }
 
     public void imprimeCartasDano() {
-        for (int i = 0; i < 2 /* this.dano.length */; i++) {
-            System.out.println(i + "-" + this.dano[i].acessoCartaDanoNome());
+        for (int i = 0; i < this.maoJogador.size(); i++) {
+            System.out.println(i + "-" + this.maoJogador.get(i).acessoNome() + " -  " + this.maoJogador.get(i).acessoDescricao());
         }
     }
 
-    public CartaDano[] acessoVetorCartaDano() {
-        return this.dano;
+    public ArrayList<CartaDano> getMaoJogador() {
+        return this.maoJogador;
     }
 }

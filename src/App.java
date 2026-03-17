@@ -1,23 +1,40 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
+
+  public static final String RESET = "\u001B[0m";
+  public static final String NEGRITO = "\u001B[1m";
+  public static final String VERMELHO = "\u001B[31m";
+  public static final String VERDE = "\u001B[32m";
+  public static final String AMARELO = "\u001B[33m";
+  public static final String AZUL = "\u001B[34m";
+  public static final String CIANO = "\u001B[36m";
+
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
 
-    Heroi player1 = new Heroi("Shrek", 100, 20, 5, 10); 
-    Inimigo enemy1 = new Inimigo("Dragão", 80, 10, 40);                    
-    CartaDano card1 = new CartaDano("Bola de Fogo", 2, 15);
-    CartaDano card2 = new CartaDano("Corte de Espada", 1, 10);
-    CartaEscudo shield = new CartaEscudo("Proteção", 3, 20);
+    Heroi player1 = new Heroi("Shrek", 100, 20, 5); 
+    Inimigo enemy1 = new Inimigo("Dragão", 80, 10);                    
+    CartaDano card1 = new CartaDano("Bola de Fogo", "Custa 2 de energia e causa 15 de dano", 2, 15);
+    CartaDano card2 = new CartaDano("Corte de Espada", "Custa 1 de energia e causa 10 de dano",  1, 10);
+    CartaDano card3 = new CartaDano("Soco do ogro", "Custa 3 de energia e causa 30 de dano",  3, 30);
+    CartaDano card4 = new CartaDano("Pântano tenebroso", "Custa 5 de energia e causa 40 de dano",  5, 40);
 
-    System.out.println("Bem vindo ao jogo de RPG do Shrek !!");
-    System.out.println("Use suas cartas para destruir o Dragão\n");
+    CartaEscudo shield = new CartaEscudo("Proteção","Custa 3 de energia e recebe 20 de escudo", 3, 20);
+    
+    System.out.println(NEGRITO  + "===========================================================" + RESET);
+    System.out.println(NEGRITO + CIANO + "           BEM-VINDO AO JOGO DE RPG DO SHREK !!            " + RESET);
+    System.out.println(NEGRITO + "===========================================================" + RESET);
+    System.out.println("Use suas cartas para destruir o " + VERMELHO + NEGRITO + "Dragão!" + RESET + "\n");
 
+
+    enemy1.adiciona_card(card2);
     player1.adiciona_card(card1); 
-    player1.adiciona_card(card2); 
-    System.out.println("\n-----------------------------------------------------------\n");
-
-
+    player1.adiciona_card(card2);
+    player1.adiciona_card(card3); 
+    player1.adiciona_card(card4);  
+    
     int vida_inicial_p1 = player1.acessoVida(); 
     int vida_inicial_e1 = enemy1.acessoVida(); 
 
@@ -29,36 +46,43 @@ public class App {
 
       while (opcao != 3 && enemy1.estaVivo()) { 
 
-        System.out.println(player1.acessoNome() + " " + player1.acessoVida() + "/" + vida_inicial_p1 + " de vida  | "
-            + player1.acessoEscudo() + " de escudo");
-        System.out.println("vs");
-        System.out.println(enemy1.acessoNome() + " " + enemy1.acessoVida() + "/" + vida_inicial_e1 + " de vida  | "
-            + enemy1.acessoEscudo() + " de escudo ");
+        System.out.println("\n" + NEGRITO + "=================== STATUS DA BATALHA ===================" + RESET);
+        
+        System.out.println(CIANO + NEGRITO + player1.acessoNome() + RESET + " " 
+            + VERDE + "[VIVO] " + player1.acessoVida() + "/" + vida_inicial_p1 + RESET + " de vida" + "  | "
+            + AZUL + "🛡️  " + player1.acessoEscudo() +  RESET + " de escudo");
 
-        System.out.println("Energia: " + energia + " de energia disponível");
-        System.out.println("1 - Usar Carta de Dano");
-        System.out.println("2 - Usar Carta de Escudo");
+        System.out.println(NEGRITO + "                           vs" + RESET);
+
+        System.out.println(VERMELHO + NEGRITO + enemy1.acessoNome() + RESET + " " 
+            + VERDE + "[VIVO] " + enemy1.acessoVida() + "/" + vida_inicial_e1 + RESET + " de vida" + "  | "
+            + AZUL + "🛡️  " + enemy1.acessoEscudo()  + RESET + " de escudo");
+        System.out.println(NEGRITO + "=========================================================" + RESET);
+
+        System.out.println(AMARELO + "⚡ Energia: " + RESET  + energia + " disponíveis");
+        System.out.println("1 - Usar Carta de " + VERMELHO + "Dano" + RESET);
+        System.out.println("2 - Usar Carta de " + AZUL + "Escudo" + RESET);
         System.out.println("3 - Encerrar Turno");
-        System.out.println("Escolha:");
+        System.out.print(NEGRITO + "Escolha: " + RESET);
 
         opcao = sc.nextInt();
 
         if (opcao == 1) {
-          System.out.println("Suas Cartas:");
+          System.out.println(CIANO + "\nSuas Cartas:" + RESET);
           player1.imprimeCartasDano();
 
-          System.out.println("Escolha a carta:");
+          System.out.print(NEGRITO + "Escolha a carta: " + RESET);
           int i = sc.nextInt();
-          CartaDano[] vetor = player1.acessoVetorCartaDano();
-          CartaDano carta_escolhida = vetor[i];
-          int custo = carta_escolhida.acessoCartaDanoCusto();
+          ArrayList<CartaDano> vetor = player1.getMaoJogador();
+          CartaDano carta_escolhida = vetor.get(i);
+          int custo = carta_escolhida.acessoCusto();
 
           if (energia >= custo) {
-            enemy1.ReceberDano(player1, carta_escolhida.acessoCartaDanoNome());
+            enemy1.recebeDano(player1, carta_escolhida);
             energia -= custo;
-            System.out.println("\nVocê usou " + carta_escolhida.acessoCartaDanoNome() + "!");
+            System.out.println(VERMELHO + "\n⚔️  Você usou " + carta_escolhida.acessoNome() + " e causou dano!" + RESET);
           } else {
-            System.out.println("\nVOCÊ  NÃO TEM MAIS ENERGIA!");
+            System.out.println(NEGRITO + VERMELHO + "\n⚠️  VOCÊ NÃO TEM MAIS ENERGIA!" + RESET);
           }
         }
 
@@ -67,9 +91,9 @@ public class App {
           if (energia >= custo) {
             player1.ganhaEscudo(shield);
             energia -= custo;
-            System.out.println("Você ganhou escudo!");
+            System.out.println(AZUL + "\n🛡️  Você ativou " + shield.acessoNome() + " e ganhou escudo!" + RESET);
           } else {
-            System.out.println("\nVOCÊ  NÃO TEM MAIS ENERGIA!");
+            System.out.println(NEGRITO + VERMELHO + "\n⚠️  VOCÊ NÃO TEM MAIS ENERGIA!" + RESET);
           }
 
         }
@@ -77,26 +101,28 @@ public class App {
         else {
           break; 
         }
-        System.out.println("\n-----------------------------------------------------------\n"); 
+        
       }
 
       /* ataque do inimigo */
       if (enemy1.estaVivo()) { // o inimigo só vai atacar se estiver vivo (caso a gente mate ele antes de passar de turno)
-        System.out.println("\n-----------------------------------------------------------\n");
-        System.out.println("\nTurno do Inimigo:");
+        System.out.println("\n" + VERMELHO + NEGRITO + "================== TURNO DO INIMIGO ==================" + RESET);
+        System.out.println(VERMELHO + "O " + enemy1.acessoNome() + " está atacando..." + RESET);
         enemy1.atacar(player1);
         System.out.println(enemy1.acessoNome() + " executou o ataque");
-        System.out.println("\n-----------------------------------------------------------\n"); 
+        System.out.println(VERMELHO + NEGRITO + "======================================================\n" + RESET);
       }
 
     }
 
     /* vamos verificar quem ganhou o jogo */
+    System.out.println("\n" + NEGRITO + "==================== FIM DE JOGO ====================" + RESET);
     if (player1.estaVivo()) {
-      System.out.println("Parabéns, você ganhou !!" + "\uD83D\uDE0A"); // emoji feliz
+      System.out.println(NEGRITO + VERDE + "🎉 Parabéns, você ganhou !! \uD83D\uDE0A" + RESET);
     } else {
-      System.out.println("Você foi derrotado !" + "\uD83D\uDE35"); // emoji de derrota
+      System.out.println(NEGRITO + VERMELHO + "💀 Você foi derrotado ! \uD83D\uDE35" + RESET);
     }
+    System.out.println(NEGRITO + "=====================================================" + RESET);
   }
 
 }

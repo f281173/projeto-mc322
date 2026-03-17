@@ -1,22 +1,26 @@
-public class Inimigo {
-    private String nome;
-    private int vida;
-    private int escudo;
-    private int dano;
+public class Inimigo extends  Entidade {
+    private CartaDano carta;
 
 
-    public Inimigo(String nome, int vida, int escudo, int dano) {
+    public Inimigo(String nome, int vida, int escudo) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
-        this.dano = dano;
     }
 
-    
-    public void ReceberDano(Heroi personagem, String nome_carta) {
+@Override
+    public CartaDano encontraCarta(String nomeCarta) {
+        return this.carta;
+    }
+
+@Override
+    public void adiciona_card(CartaDano carta) {
+       this.carta = carta;
+    }
+
+@Override
+    public void recebeDano(Entidade  personagem, CartaDano carta) {
         
-        // encontra nome i .. acesosocartadano
-        CartaDano carta = personagem.encontraCarta(nome_carta);
         int valorDano = carta.acessoCartaDanoDano();
 
         if (this.escudo >=  valorDano) {
@@ -27,28 +31,35 @@ public class Inimigo {
         this.escudo = 0;
         this.vida -= dano_restante;}
     }
-    
 
+@Override 
     public boolean estaVivo() {
         if (this.vida > 0)
             return true;
         return false;
     }
 
-    
     public void atacar(Heroi personagem) {
-        personagem.recebeDano(this);
+        personagem.recebeDano(this, this.carta);
         
     }
 
     public int acessoDano() {
-        return this.dano;
+        return this.carta.acessoCartaDanoDano();
     }
 
+@Override
+    public void ganhaEscudo(CartaEscudo cartaEscudo) {
+        this.escudo += 0;
+    }
+
+
+@Override     
     public int acessoEscudo() {
         return this.escudo;
     }
-    
+
+@Override
     public String acessoNome() {
         return this.nome;
     }

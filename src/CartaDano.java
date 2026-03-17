@@ -1,34 +1,38 @@
 
-public class CartaDano {
-
-    private String nome;
-    private int custo;
+public class CartaDano extends Carta{
     private int danoCarta;
 
-    public CartaDano(String nome, int custo, int dano) {
+    public CartaDano(String nome, String descricao, int custo, int dano) {
         this.nome = nome;
+        this.descricao = descricao;
         this.custo = custo;
         this.danoCarta = dano;
+
     }
 
-    public int validaDano() {
-        return this.danoCarta;
+@Override
+    public void usar(Entidade vilao) {
+        vilao.vida -= this.danoCarta;
     }
-
-    public int causaDano(int vida_inimigo) {
-        vida_inimigo -= this.danoCarta;
-        return vida_inimigo;
-    }
-    
-    public String acessoCartaDanoNome() {
+ 
+@Override
+    public String acessoNome() {
         return this.nome;
     }
+
 
     public int acessoCartaDanoDano() {
         return this.danoCarta;
     }
 
-    public int acessoCartaDanoCusto() {
+@Override
+    public int acessoCusto() {
         return this.custo;
     }
+
+    
+@Override
+    public String acessoDescricao(){
+        return this.descricao;}
+
 }
