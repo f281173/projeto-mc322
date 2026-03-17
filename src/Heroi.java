@@ -85,7 +85,7 @@ public class Heroi extends Entidade {
         return this.vida;
     }
 
-    public void imprimeCartasDano() {
+    public void imprimeCartas() {
         for (int i = 0; i < this.maoJogador.size(); i++) {
             System.out.println(i + "-" + this.maoJogador.get(i).acessoNome() + " -  " + this.maoJogador.get(i).acessoDescricao());
         }
@@ -93,5 +93,10 @@ public class Heroi extends Entidade {
 
     public ArrayList<CartaDano> getMaoJogador() {
         return this.maoJogador;
+    }
+
+    
+    public void resetaMaoJogador() {
+        this.maoJogador = new ArrayList<>();
     }
 }
