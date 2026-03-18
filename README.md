@@ -6,7 +6,7 @@
 
 
 ## Visão Geral
-Num lugar tão, tão distante, a paz de um pântano bucólico foi interrompida por perigos diversos. Este projeto é uma simulação de combate onde a lógica de programação encontra o universo de Shrek. O objetivo é simples: sobreviver ao ataque de um Dragão usando estratégia a partir de um deck de habilidades poderosas.
+Num lugar tão, tão distante, a paz de um pântano bucólico foi interrompida por perigos diversos. Este projeto é uma simulação de combate onde a lógica de programação encontra o universo de Shrek. O objetivo é simples: sobreviver ao ataque de um Dragão usando estratégia a partir de um deck de habilidades poderosas. 
 
 
 

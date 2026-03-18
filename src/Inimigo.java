@@ -9,11 +9,10 @@ public class Inimigo extends  Entidade {
     }
 
 @Override
-    public CartaDano encontraCarta(String nomeCarta) {
+    public Carta encontraCarta(String nomeCarta) {
         return this.carta;
     }
 
-@Override
     public void adiciona_card(CartaDano carta) {
        this.carta = carta;
     }

@@ -2,7 +2,10 @@ import java.util.ArrayList;
 
 public class Heroi extends Entidade {
     private int energia;
-    private ArrayList<CartaDano> maoJogador; 
+    private ArrayList<Carta> maoJogador; 
+    public static final String RESET = "\u001B[0m";
+    public static final String AZUL = "\u001B[34m";
+    public static final String NEGRITO = "\u001B[1m";
 
     public Heroi(String nome, int vida, int escudo, int energia) {
         this.nome = nome;
@@ -58,8 +61,8 @@ public class Heroi extends Entidade {
         }
     }
 
-@Override
-    public void adiciona_card(CartaDano carta) {
+
+    public void adiciona_card(Carta carta) {
         this.maoJogador.add(carta);
 }
 
@@ -87,16 +90,31 @@ public class Heroi extends Entidade {
 
     public void imprimeCartas() {
         for (int i = 0; i < this.maoJogador.size(); i++) {
-            System.out.println(i + "-" + this.maoJogador.get(i).acessoNome() + " -  " + this.maoJogador.get(i).acessoDescricao());
+            System.out.println( NEGRITO + i + RESET +  "-" + AZUL + this.maoJogador.get(i).acessoNome() + RESET + " -  " + this.maoJogador.get(i).acessoDescricao());
         }
     }
 
-    public ArrayList<CartaDano> getMaoJogador() {
+    public ArrayList<Carta> getMaoJogador() {
         return this.maoJogador;
     }
 
-    
-    public void resetaMaoJogador() {
-        this.maoJogador = new ArrayList<>();
+    public void removeCartaMaoJogador(Baralho baralho, int i) {
+        Carta carta = this.maoJogador.remove(i);
+        baralho.adicionaPilhaDescarte(carta);
+    }
+
+    public void resetaMaoJogador(Baralho baralho) {
+        int tamanho = this.maoJogador.size();
+
+        while (tamanho > 0) {
+            tamanho--;
+            baralho.adicionaPilhaDescarte(this.maoJogador.remove(tamanho));
+        } 
+    }
+
+    public boolean  maoVazia() {
+        if (this.maoJogador.size() == 0)
+            return true;
+        return false;
     }
 }

@@ -15,6 +15,5 @@ public abstract  class Entidade {
 
     public  abstract Carta encontraCarta(String nomeCarta);
     
-    public abstract void adiciona_card(CartaDano carta);
 
 }   
