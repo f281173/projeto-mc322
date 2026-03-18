@@ -6,13 +6,14 @@
 
 
 ## Visão Geral
-Num lugar tão, tão distante, a paz de um pântano bucólico foi interrompida por perigos diversos. Este projeto é uma simulação de combate onde a lógica de programação encontra o universo de Shrek. O objetivo é simples: sobreviver ao ataque de um Dragão usando estratégia a partir de um deck de habilidades poderosas. 
-
+Num lugar tão, tão distante, a paz de um pântano bucólico foi interrompida por perigos diversos. Este projeto é uma simulação de combate onde a lógica de programação encontra o universo de Shrek. O objetivo é simples: sobreviver ao ataque de um Dragão montando estratégias a partir de um baralho de habilidades e gerenciando seus recursos com sabedoria.
 
 
 **Funcionalidades:**
 * **Sistema de turnos:** O jogador e o inimigo alternam ações até que a vida de um chegue a zero.
+* **Sistema de Fases:** O turno do jogador é dividido entre "Fase de Compra" e "Fase de Ação", trazendo mecânicas de deckbuilding e card games.
 * **Gerenciamento de Energia:** O herói possui uma quantidade limitada de energia por turno para usar cartas.
+* **Baralho e Mão Dinâmicos:** As cartas são compradas de um baralho, utilizadas a partir da mão do jogador e embaralhadas novamente ao fim do turno.
 * **Deck de Cartas:** Cartas de dano com diferentes custos e potências.
 * **Mecânica de Escudo:** Proteção que absorve o dano recebido e reseta ao final de cada rodada.
 * **Interface via Console:** Interação interativa utilizando a classe Scanner.
