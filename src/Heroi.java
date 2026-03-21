@@ -7,11 +7,12 @@ public class Heroi extends Entidade {
     public static final String AZUL = "\u001B[34m";
     public static final String NEGRITO = "\u001B[1m";
 
-    public Heroi(String nome, int vida, int escudo, int energia) {
+    public Heroi(String nome, int vida, int escudo, int energia, int vida_inicial) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
         this.energia = energia;
+        this.vida_inicial = vida_inicial;
         this.maoJogador = new ArrayList<>();
     }
 
@@ -84,7 +85,8 @@ public class Heroi extends Entidade {
         return this.nome;
     }
 
-    public int acessoVida() {
+@Override
+    public int acesso_vida() {
         return this.vida;
     }
 
@@ -117,4 +119,10 @@ public class Heroi extends Entidade {
             return true;
         return false;
     }
+
+@Override
+    public int acesso_vidainicial(){
+        return this.vida_inicial;
+    }
+
 }

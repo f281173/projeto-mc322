@@ -2,10 +2,11 @@ public class Inimigo extends  Entidade {
     private CartaDano carta;
 
 
-    public Inimigo(String nome, int vida, int escudo) {
+    public Inimigo(String nome, int vida, int escudo, int vida_inicial) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
+        this.vida_inicial = vida_inicial;
     }
 
 @Override
@@ -63,10 +64,15 @@ public class Inimigo extends  Entidade {
         return this.nome;
     }
 
-    public int acessoVida() {
+@Override
+    public int acesso_vida() {
         return this.vida;
     }
     
+    @Override
+    public int acesso_vidainicial(){
+        return this.vida_inicial;
+    }
 }
 
 
