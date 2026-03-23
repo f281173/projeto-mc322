@@ -1,10 +1,17 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
+
+/**
+ * Classe responsável por representar os adversários do jogo.
+ * Herda de Entidade e possui uma mecânica de combate automática baseada 
+ * em um baralho pré-definido.
+ */
+
 public class Inimigo extends  Entidade {
 
     private ArrayList<Carta> deck_inimigo; 
-    private Carta ultimaCartaUsada;
+    private Carta ultimaCartaUsada;  
 
     public Inimigo(String nome, int vida, int escudo, int vida_inicial, int velocidade, boolean turno) {
         this.nome = nome;
@@ -49,6 +56,7 @@ public class Inimigo extends  Entidade {
 
 
 
+//Pega a última carta, analisa e usa. Depois volta pro deck
     public void atacar(Heroi personagem) {
         if (this.deck_inimigo.size() > 0) {
             this.ultimaCartaUsada = this.deck_inimigo.remove(0);
@@ -66,7 +74,7 @@ public class Inimigo extends  Entidade {
     }
 
 
-
+//Pega o valor da última carta usada, se for do tipo dano.
     public int acessoDano() {
          if (this.ultimaCartaUsada != null && this.ultimaCartaUsada.acessopcaocarta() == 0) {
             CartaDano cartadano = (CartaDano) this.ultimaCartaUsada;
@@ -114,6 +122,7 @@ public class Inimigo extends  Entidade {
     }
 
 
+//Subsitui o deck atual do inimigo por uma lista de cartas definidas, que estão em Dados.
     public void transforma_Deck(ArrayList<Carta> cartas) {
         this.deck_inimigo = cartas;
     }
@@ -127,7 +136,7 @@ public class Inimigo extends  Entidade {
     public boolean acessoturno() { 
     return this.turno; }
 
-
+//Olha se já atacou
 @Override
     public void verificaseAtacou(boolean status){
             this.turno = status; }

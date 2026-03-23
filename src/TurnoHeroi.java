@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Classe responsável por gerenciar a interação do jogador durante o turno de um Herói.
+ * Divide-se em duas etapas principais: Fase de Compra (Loja) e Fase de Ação (Combate).
+ */
+
+
 public class TurnoHeroi {
     
     public static final String RESET = "\u001B[0m";
@@ -12,6 +18,7 @@ public class TurnoHeroi {
     public static final String CIANO = "\u001B[36m";
 
     
+//Turno de um herói específico
     public void jogar(Heroi player, ArrayList<Heroi> herois,  ArrayList<Inimigo> inimigos, Prints tela, Baralho deck, Scanner sc){
         
         
@@ -30,6 +37,8 @@ public class TurnoHeroi {
             }
         }
 
+    //----------------------------FASE DE COMPRA ----------------------------------
+
         while (opcaoCompra != 2 && temInimigoVivo && cartasCompradas < limiteCompra) {
             
             tela.status_batalha(player, herois, inimigos);
@@ -41,7 +50,9 @@ public class TurnoHeroi {
             if (opcaoCompra == 1) {
             deck.imprimePilhaCompra();
             int i = sc.nextInt();
-            if (deck.tamanhoPilha() < i ){
+
+
+            if (i < 0 || deck.tamanhoPilha() <= i ){
                 System.out.println(VERMELHO + "Opção inválida!" + RESET);
 
             } else{
@@ -56,6 +67,11 @@ public class TurnoHeroi {
 
         deck.devolverCartasNaoCompradas();
 
+
+
+
+    //---------------------------FASE DE AÇÃO -----------------------------------------
+        
         int opcao = 0;
         while (opcao != 3) {
 
@@ -79,12 +95,13 @@ public class TurnoHeroi {
                 int i = sc.nextInt();
                 ArrayList<Carta> vetor = player.getMaoJogador();
 
-                if (i>=0 && player.maoVazia() == false){
+                if (i>=0 && i < vetor.size() && player.maoVazia() == false){
                 Carta carta_escolhida = vetor.get(i);
                 int custo = carta_escolhida.acessoCusto();
         
                 if (energia >= custo) {
                     
+                    //Verifica o tipo de carta
                     if (carta_escolhida.acessopcaocarta() == 0){
 
                         System.out.println(VERMELHO + "\nEscolha o alvo do seu ataque:" + RESET);
@@ -95,10 +112,10 @@ public class TurnoHeroi {
                             }
 
                        System.out.print(NEGRITO + "Alvo: " + RESET);
-                        int alvoIndex = sc.nextInt(); 
+                        int alvo_escolhido = sc.nextInt(); 
 
-                        if (alvoIndex >= 0 && alvoIndex < inimigos.size() && inimigos.get(alvoIndex).estaVivo()) {
-                                Inimigo alvo = inimigos.get(alvoIndex);
+                        if (alvo_escolhido >= 0 && alvo_escolhido < inimigos.size() && inimigos.get(alvo_escolhido).estaVivo()) {
+                                Inimigo alvo = inimigos.get(alvo_escolhido);
                                 carta_escolhida.usar(alvo, deck);
                                 
                                 player.removeCartaMaoJogador(deck, i);
@@ -127,11 +144,10 @@ public class TurnoHeroi {
 
                    
             
-            
+            //Acaba o turno
             else if (opcao == 3) {
                 player.resetaMaoJogador(deck);
-               //deck.resetaBaralho();
-                //deck.embaralhaBaralho();
+               
                 break; 
             }
 

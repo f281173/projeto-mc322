@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Classe responsável por executar o turno do inimigo
+ * Avalia o campo de batalha, escolhe um alvo  e executa a ação da carta do topo.
+ */
+
+
 public class TurnoVilao {
     public static final String NEGRITO = "\u001B[1m";
     public static final String VERMELHO = "\u001B[31m";
@@ -8,7 +14,7 @@ public class TurnoVilao {
     public static final String AZUL = "\u001B[34m";
 
 
-
+//Executa o turno do personagem e ataca um herói aleatoriamente
     public void jogar(Inimigo enemy, ArrayList<Heroi> herois){
         
         System.out.println("\n" + VERMELHO + NEGRITO + "================== TURNO DO INIMIGO ==================" + RESET);

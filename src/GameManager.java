@@ -1,8 +1,17 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+
+/**
+ * Classe  do controle do jogo
+ * Responsável por controlar a preparação da partida, carregar os dados,
+ * gerenciar os turnos e manter o loop principal da batalha funcionando 
+ * até que um dos lados seja completamente derrotado.
+ */
+
 public class GameManager {
 
 
+//Prepara a partida, escolhendo a dificuldade e equipe
     public void prepararPartida(Scanner sc, Prints tela) {
 
         tela.comeco();
@@ -39,14 +48,15 @@ public class GameManager {
 
 
 
-
+//Partida em si, gerencia os turnos
     private void iniciarBatalha(Jogador jogador, Oponente oponente, Scanner sc, Prints tela, Baralho deckGeral) {
 
-
-        ArrayList<Entidade> ordemTurno = new ArrayList<>();
+        //Junta os escolhidos dos heróis e vilões para decidir a ordem do turno
+        ArrayList<Entidade> ordemTurno = new ArrayList<>(); 
         ordemTurno.addAll(jogador.getHeroisEscolhidos());
         ordemTurno.addAll(oponente.getInimigosEscolhidos());
 
+        //Olha a velocidade
         for (int i = 0; i < ordemTurno.size(); i++) {
             for (int j = 0; j < ordemTurno.size() - 1 - i; j++) {
                 
@@ -63,8 +73,12 @@ public class GameManager {
         TurnoHeroi turnoHeroi = new TurnoHeroi();
         TurnoVilao turnoVilao = new TurnoVilao();
 
+
+//--------------------BATALHA--------------------------------------------------
+
         while (jogador.temHeroisVivos() && oponente.temInimigosVivos()) {
             
+            //Olha quem já jogou
             for (Entidade entidades : ordemTurno) { 
                 entidades.verificaseAtacou(false); 
             }
@@ -91,7 +105,7 @@ public class GameManager {
                     entidadeAtual.verificaseAtacou(true);
                 }
 
-
+                //Vê se algum grupo já foi de base
                 if (!jogador.temHeroisVivos() || !oponente.temInimigosVivos()) { 
                     break; 
                 }

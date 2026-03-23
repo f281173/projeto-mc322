@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * Classe responsável por representar os Heróis controlados pelo jogador.
+ * Herda as características básicas de Entidade, mas adiciona mecânicas 
+ * exclusivas de gerenciamento de Energia e uma Mão de Cartas individual.
+ */
 
 public class Heroi extends Entidade {
     private int energia;
@@ -7,6 +12,7 @@ public class Heroi extends Entidade {
     public static final String RESET = "\u001B[0m";
     public static final String AZUL = "\u001B[34m";
     public static final String NEGRITO = "\u001B[1m";
+
 
     public Heroi(String nome, int vida, int escudo, int energia, int vida_inicial, int velocidade, boolean turno) {
         this.nome = nome;
@@ -19,6 +25,9 @@ public class Heroi extends Entidade {
         this.maoJogador = new ArrayList<>();
     }
 
+
+    
+//Busca uma carta na mão do jogador pelo nome e retorna o seu índice (posição).
     public int encontraNome(String nomeCarta) {
         int i = 0;
 
@@ -30,12 +39,14 @@ public class Heroi extends Entidade {
         return -1;
     }
 
-
+ //Utiliza o método encontraNome para buscar e retornar o objeto Carta exato que está na mão.
     public Carta encontraCarta(String nomeCarta) {
         int i = encontraNome(nomeCarta);
         Carta carta = this.maoJogador.get(i);
         return carta;
     }
+
+
 
 @Override    
     public void recebeDano(Entidade personagem, CartaDano carta) {
@@ -56,6 +67,7 @@ public class Heroi extends Entidade {
         this.escudo = cartaEscudo.acessoEscudoGanho();
     }
 
+
 @Override    
     public boolean estaVivo() {
         if (this.vida <= 0) {
@@ -66,6 +78,7 @@ public class Heroi extends Entidade {
     }
 
 
+//Adiciona uma carta recém-comprada da loja pra mão do herói.
     public void adiciona_card(Carta carta) {
         this.maoJogador.add(carta);
 }
@@ -103,11 +116,13 @@ public class Heroi extends Entidade {
         return this.maoJogador;
     }
 
+//Remove da mão e bota numa pilha de descarte
     public void removeCartaMaoJogador(Baralho baralho, int i) {
         Carta carta = this.maoJogador.remove(i);
         baralho.adicionaPilhaDescarte(carta);
     }
 
+//Limpa a mão do herói, com aquelas q ele n usou. Manda pra pilha de descarte
     public void resetaMaoJogador(Baralho baralho) {
         int tamanho = this.maoJogador.size();
 
@@ -116,6 +131,7 @@ public class Heroi extends Entidade {
             baralho.adicionaPilhaDescarte(this.maoJogador.remove(tamanho));
         } 
     }
+
 
     public boolean  maoVazia() {
         if (this.maoJogador.size() == 0)
@@ -133,6 +149,7 @@ public class Heroi extends Entidade {
     public int acessoVelocidade() { 
         return this.velocidade; }
 
+//Pra ver se já jogou ou não naquela rodada     
 @Override
     public boolean acessoturno() { 
     return this.turno; }

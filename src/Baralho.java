@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/**
+ * Classe responsável por gerenciar a economia de cartas do jogo.
+ * Controla o baralho principal de onde as cartas são puxadas, a "loja", 
+ * apresentada ao jogador, e a pilha de descarte para onde as cartas usadas vão.
+ */
 
 public class Baralho {
     private ArrayList<Carta> baralho; 
@@ -22,6 +26,7 @@ public class Baralho {
     }
 
     
+//Prepara a 'lista de compra', caso o baralho esteja vazio,  reseta e faz de novo. 
     public void criarPilhaCompra(int tamanho) {
         embaralhaBaralho();
         for(int i = 0; i < tamanho; i++) {
@@ -39,11 +44,13 @@ public class Baralho {
         return this.pilhaCompra.size();
     }
 
-    /* adiciona uma por uma cada carta do baralho com o json*/
+// Insere uma nova carta no baralho
     public void adicionaBaralho(Carta carta) {
         this.baralho.add(carta);
     }
 
+
+//Pega as cartas do descarte e devolve ao baralho principal
     public void resetaBaralho() {
         int tamanho = this.pilhaCompra.size();
 
@@ -80,7 +87,7 @@ public class Baralho {
     }
     
 
-    
+//Pega as as cartas não compradas e volta ao baralho geral    
     public void devolverCartasNaoCompradas() {
         
         this.baralho.addAll(this.pilhaCompra);
