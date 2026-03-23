@@ -11,18 +11,28 @@ public class TurnoHeroi {
     public static final String AZUL = "\u001B[34m";
     public static final String CIANO = "\u001B[36m";
 
-    public void jogar(Heroi player, Inimigo enemy, Prints tela, Baralho deck, Scanner sc){
+    
+    public void jogar(Heroi player, ArrayList<Heroi> herois,  ArrayList<Inimigo> inimigos, Prints tela, Baralho deck, Scanner sc){
         
-        int energia = player.acessoEnergia(); // energia inicial do personagem heroi.
+        
+        int energia = player.acessoEnergia(); 
         player.resetarEscudo();
         int opcaoCompra = 0;
         int cartasCompradas = 0;
-        int limiteCompra = 4;
-        deck.criarPilhaCompra(8);
+        int limiteCompra = 3;
+        deck.criarPilhaCompra(6);
 
-        while (opcaoCompra != 2 && enemy.estaVivo() && cartasCompradas < limiteCompra) {
+        boolean temInimigoVivo = false;
+        for (Inimigo ini : inimigos) {
+            if (ini.estaVivo()) {
+                temInimigoVivo = true;
+                break;
+            }
+        }
+
+        while (opcaoCompra != 2 && temInimigoVivo && cartasCompradas < limiteCompra) {
             
-            tela.status_batalha(player, enemy);
+            tela.status_batalha(player, herois, inimigos);
             tela.energia(energia);
             tela.fase_compra(limiteCompra, cartasCompradas);
 
@@ -44,12 +54,12 @@ public class TurnoHeroi {
             }
         }
 
-
+        deck.devolverCartasNaoCompradas();
 
         int opcao = 0;
-        while (opcao != 3 && enemy.estaVivo()) {
+        while (opcao != 3) {
 
-            tela.status_batalha(player, enemy);
+            tela.status_batalha(player, herois,  inimigos); 
             tela.energia(energia);
 
             tela.fase_batalha();
@@ -76,36 +86,52 @@ public class TurnoHeroi {
                 if (energia >= custo) {
                     
                     if (carta_escolhida.acessopcaocarta() == 0){
-                    carta_escolhida.usar(enemy, deck);
-                    player.removeCartaMaoJogador(deck, i);
-                    energia -= custo;
-                    System.out.println(VERMELHO + "\n⚔️  Você usou " + carta_escolhida.acessoNome() + " e causou dano!" + RESET);
+
+                        System.out.println(VERMELHO + "\nEscolha o alvo do seu ataque:" + RESET);
+                            for (int j = 0; j < inimigos.size(); j++) {
+                                if (inimigos.get(j).estaVivo()) {
+                                    System.out.println(j + " - " + inimigos.get(j).acessoNome() + " (Vida: " + inimigos.get(j).acesso_vida() + ")");
+                                }
+                            }
+
+                       System.out.print(NEGRITO + "Alvo: " + RESET);
+                        int alvoIndex = sc.nextInt(); 
+
+                        if (alvoIndex >= 0 && alvoIndex < inimigos.size() && inimigos.get(alvoIndex).estaVivo()) {
+                                Inimigo alvo = inimigos.get(alvoIndex);
+                                carta_escolhida.usar(alvo, deck);
+                                
+                                player.removeCartaMaoJogador(deck, i);
+                                energia -= custo;
+                                System.out.println(VERMELHO + "\n⚔️ Você usou " + carta_escolhida.acessoNome() + " no " + alvo.acessoNome() + " e causou dano!" + RESET);
+                            } else {
+                                System.out.println(VERMELHO + "Alvo inválido!" + RESET);
+                            }
+
+
+                        } else {
+                            carta_escolhida.usar(player, deck);
+                            player.removeCartaMaoJogador(deck, i);
+                            energia -= custo;
+                            System.out.println(AZUL + "\n🛡️ Você ativou " + carta_escolhida.acessoNome() + " e ganhou escudo!" + RESET);
+                        }
 
                     } else {
-                    custo = carta_escolhida.acessoCusto();
-                    if (energia >= custo) {
-                        carta_escolhida.usar(player, deck);
-                        player.removeCartaMaoJogador(deck, i);
-                        energia -= custo;
-                        System.out.println(AZUL + "\n🛡️  Você ativou " + carta_escolhida.acessoNome() + " e ganhou escudo!" + RESET);
-                    } else {
-                        System.out.println(NEGRITO + VERMELHO + "\n⚠️  VOCÊ NÃO TEM MAIS ENERGIA!" + RESET);
-                    }
+                        System.out.println(NEGRITO + VERMELHO + "\n⚠️ VOCÊ NÃO TEM MAIS ENERGIA!" + RESET);
                     }
                     
-
                 } else {
-                    System.out.println(NEGRITO + VERMELHO + "\n⚠️  VOCÊ NÃO TEM MAIS ENERGIA!" + RESET);
-                }
-                } else{
                     System.out.println(VERMELHO + "\nOpção de carta inválida!" + RESET);
                 }
-            }
+        }
+
+                   
+            
             
             else if (opcao == 3) {
                 player.resetaMaoJogador(deck);
-                deck.resetaBaralho();
-                deck.embaralhaBaralho();
+               //deck.resetaBaralho();
+                //deck.embaralhaBaralho();
                 break; 
             }
 
@@ -117,7 +143,7 @@ public class TurnoHeroi {
 
 
         }
-    }
+}
 
 
 

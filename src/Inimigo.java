@@ -1,21 +1,29 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Inimigo extends  Entidade {
-    private CartaDano carta;
 
+    private ArrayList<Carta> deck_inimigo; 
+    private Carta ultimaCartaUsada;
 
-    public Inimigo(String nome, int vida, int escudo, int vida_inicial) {
+    public Inimigo(String nome, int vida, int escudo, int vida_inicial, int velocidade, boolean turno) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
         this.vida_inicial = vida_inicial;
+        this.velocidade = velocidade;
+        this.turno = turno;
+        this.deck_inimigo = new ArrayList<>();
     }
 
-@Override
-    public Carta encontraCarta(String nomeCarta) {
-        return this.carta;
+
+
+    public void adicionaCard(Carta carta) {
+       this.deck_inimigo.add(carta);
     }
 
-    public void adicionaCard(CartaDano carta) {
-       this.carta = carta;
+    public void embaralhaBaralho() {
+        Collections.shuffle(this.deck_inimigo);
     }
 
 @Override
@@ -39,18 +47,49 @@ public class Inimigo extends  Entidade {
         return false;
     }
 
+
+
     public void atacar(Heroi personagem) {
-        personagem.recebeDano(this, this.carta);
+        if (this.deck_inimigo.size() > 0) {
+            this.ultimaCartaUsada = this.deck_inimigo.remove(0);
+
+             if (this.ultimaCartaUsada.acessopcaocarta() == 0) {
+                CartaDano cartadano = (CartaDano) this.ultimaCartaUsada;
+                personagem.recebeDano(this, cartadano);
+            } else {
+                CartaEscudo cartaescudo = (CartaEscudo) this.ultimaCartaUsada;
+                this.ganhaEscudo(cartaescudo);
+            }
+            this.deck_inimigo.add(this.ultimaCartaUsada);
+        }
         
     }
 
+
+
     public int acessoDano() {
-        return this.carta.acessoCartaDanoDano();
+         if (this.ultimaCartaUsada != null && this.ultimaCartaUsada.acessopcaocarta() == 0) {
+            CartaDano cartadano = (CartaDano) this.ultimaCartaUsada;
+            return cartadano.acessoCartaDanoDano();
+        }
+
+        return 0;
     }
+
+
+    public String acessoNome_Carta() {
+        return this.ultimaCartaUsada.acessoNome();
+    }
+
+
+    public int acessotipo_carta() {
+        return this.ultimaCartaUsada.acessopcaocarta();
+    } 
+        
 
 @Override
     public void ganhaEscudo(CartaEscudo cartaEscudo) {
-        this.escudo += 0;
+        this.escudo = cartaEscudo.acessoEscudoGanho(); 
     }
 
 
@@ -69,10 +108,29 @@ public class Inimigo extends  Entidade {
         return this.vida;
     }
     
-    @Override
+@Override
     public int acesso_vidainicial(){
         return this.vida_inicial;
     }
+
+
+    public void transforma_Deck(ArrayList<Carta> cartas) {
+        this.deck_inimigo = cartas;
+    }
+
+
+@Override
+    public int acessoVelocidade() { 
+        return this.velocidade; }
+
+@Override
+    public boolean acessoturno() { 
+    return this.turno; }
+
+
+@Override
+    public void verificaseAtacou(boolean status){
+            this.turno = status; }
 }
 
 

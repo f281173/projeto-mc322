@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 public class Prints {
     
     public static final String RESET = "\u001B[0m";
@@ -13,23 +16,18 @@ public class Prints {
         System.out.println(NEGRITO  + "===========================================================" + RESET);
         System.out.println(NEGRITO + CIANO + "           BEM-VINDO AO JOGO DE RPG DO SHREK !!            " + RESET);
         System.out.println(NEGRITO + "===========================================================" + RESET);
-        System.out.println("Use suas cartas para destruir o " + VERMELHO + NEGRITO + "Dragão!" + RESET + "\n");
+        
     }
 
 
 
-    public void status_batalha(Entidade player, Entidade enemy){
+    public void status_batalha(Heroi heroiAtual, ArrayList<Heroi> herois, ArrayList<Inimigo> inimigos){
         System.out.println("\n" + NEGRITO + "=================== STATUS DA BATALHA ===================" + RESET);
       
-        System.out.println(CIANO + NEGRITO + player.acessoNome() + RESET + " " 
-            + VERDE + "[VIVO] " + player.acesso_vida() + "/" + player.acesso_vidainicial() + RESET + " de vida" + "  | "
-            + AZUL + "🛡️  " + player.acessoEscudo() +  RESET + " de escudo");
-
+        imprime_herois(herois, heroiAtual);
         System.out.println(NEGRITO + "                           vs" + RESET);
+        imprime_inimigos_vivos(inimigos);
 
-        System.out.println(VERMELHO + NEGRITO + enemy.acessoNome() + RESET + " " 
-            + VERDE + "[VIVO] " + enemy.acesso_vida() + "/" + enemy.acesso_vidainicial() + RESET + " de vida" + "  | "
-            + AZUL + "🛡️  " + enemy.acessoEscudo()  + RESET + " de escudo");
         System.out.println(NEGRITO + "=========================================================" + RESET);
     }
 
@@ -39,8 +37,36 @@ public class Prints {
     }
     
     
+    public void imprime_inimigos_vivos(ArrayList<Inimigo> inimigos) {
+        for (Inimigo enemy : inimigos) {
+            if (enemy.estaVivo()) {
+                System.out.println(VERMELHO + NEGRITO + enemy.acessoNome() + RESET + " " 
+                    + VERDE + "[VIVO] " + enemy.acesso_vida() + "/" + enemy.acesso_vidainicial() + RESET + " de vida" + "  | "
+                    + AZUL + "🛡️  " + enemy.acessoEscudo()  + RESET + " de escudo");
+            } else {
+                System.out.println(VERMELHO + NEGRITO + enemy.acessoNome() + RESET + " " 
+                    + VERMELHO + "[MORTO] 💀" + RESET);
+            }
+        }
+    }
 
 
+    public void imprime_herois(ArrayList<Heroi> herois, Heroi heroiAtual) {
+        for (Heroi h : herois) {
+            
+            String destaque = (h == heroiAtual) ? AMARELO + " ⬅️ [SEU TURNO]" + RESET : "";
+            
+            if (h.estaVivo()) {
+                System.out.println(CIANO + NEGRITO + h.acessoNome() + destaque + RESET + " " 
+                    + VERDE + "[VIVO] " + h.acesso_vida() + "/" + h.acesso_vidainicial() + RESET + " de vida  | "
+                    + AZUL + "🛡️  " + h.acessoEscudo() +  RESET + " de escudo");
+            } else {
+            
+                System.out.println(CIANO + NEGRITO + h.acessoNome() + RESET + " " 
+                    + VERMELHO + "[MORTO] 💀" + RESET);
+            }
+        }
+    }
 
     public void fase_compra(int limiteCompra, int cartasCompradas){
         System.out.println(NEGRITO + "\n--- FASE DE COMPRA ---" + RESET);
@@ -59,16 +85,25 @@ public class Prints {
     }
 
 
-    public void fim_de_jogo(Heroi player){
-        System.out.println("\n" + NEGRITO + "==================== FIM DE JOGO ====================" + RESET);
-        if (player.estaVivo()) {
-          System.out.println(NEGRITO + VERDE + "🎉 Parabéns, você ganhou !! \uD83D\uDE0A" + RESET);
+    public void fim_de_jogo(Jogador player){
+        if (!player.temHeroisVivos()) {
+             System.out.println(Prints.NEGRITO + Prints.VERMELHO + "\n💀 BRUTAL!!! SUA EQUIPE FOI DERROTADA!" + Prints.RESET);
         } else {
-          System.out.println(NEGRITO + VERMELHO + "💀 Você foi derrotado ! \uD83D\uDE35" + RESET);
+             System.out.println(Prints.NEGRITO + Prints.VERDE + "\n🎉  PARABÉNS!!!   SUA EQUIPE VENCEU!" + Prints.RESET);
         }
-        System.out.println(NEGRITO + "=====================================================" + RESET);
       }
     
 
+      
+      public void dificuldade(){
+        System.out.println("\n" + Prints.NEGRITO + "=================== CONFIGURAÇÃO DA PARTIDA ===================" + Prints.RESET);
+        System.out.println("Escolha a dificuldade da batalha:");
+        System.out.println(Prints.VERDE + "1 - Fácil (1 Inimigo)" + Prints.RESET);
+        System.out.println(Prints.AMARELO + "2 - Médio (2 Inimigos)" + Prints.RESET);
+        System.out.println(Prints.VERMELHO + "3 - Difícil (3 Inimigos)" + Prints.RESET);
+        System.out.print(Prints.NEGRITO + "\nOpção: " + Prints.RESET);
+      }
 
+
+      
 }

@@ -25,6 +25,10 @@ public class Baralho {
     public void criarPilhaCompra(int tamanho) {
         embaralhaBaralho();
         for(int i = 0; i < tamanho; i++) {
+            if (this.baralho.isEmpty()) {
+              this.resetaBaralho(); 
+            }
+            
             Carta carta = this.baralho.remove(this.baralho.size() - 1);
             adicionaPilhaCompra(carta);
         }
@@ -75,6 +79,12 @@ public class Baralho {
         this.pilhaCompra.add(carta);
     }
     
+
     
+    public void devolverCartasNaoCompradas() {
+        
+        this.baralho.addAll(this.pilhaCompra);
+        this.pilhaCompra.clear();
+    }
     
 }
