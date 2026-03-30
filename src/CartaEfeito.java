@@ -1,12 +1,14 @@
 public class CartaEfeito extends Carta{
-    protected Efeito efeito;
+    protected TiposEfeitos tipo;
+    protected int acumulos;
 
-    public CartaEfeito(String nome, String descricao, int custo, int opcaoCarta, Efeito efeito) {
+    public CartaEfeito(String nome, String descricao, int custo, int opcaoCarta, TiposEfeitos tipo, int acumulos) {
         this.nome = nome;
         this.descricao = descricao;
         this.custo = custo;
         this.opcaoCarta = opcaoCarta;
-        this.efeito = efeito;
+        this.tipo = tipo;
+        this.acumulos = acumulos;
     }
 
     @Override
@@ -21,10 +23,8 @@ public class CartaEfeito extends Carta{
 
     @Override
     public void  usar(Entidade personagem, Baralho baralho) {
-        this.efeito.setDono(personagem);
-        personagem.aplicarEfeito(efeito, efeito.getAcumulos());
+        personagem.aplicarEfeito(this.tipo, this.acumulos);
         baralho.adicionaPilhaDescarte(this);
-
     }
 
     @Override
@@ -37,7 +37,12 @@ public class CartaEfeito extends Carta{
         return this.opcaoCarta;
     }
 
-    public Efeito getEfeito() {
-        return this.efeito;
+    public TiposEfeitos getTipoEfeito() {
+        return this.tipo;
     }
+
+    public int getAcumulo() {
+        return this.acumulos;
+    }
+
 }

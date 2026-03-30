@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Classe responsável por representar os Heróis controlados pelo jogador.
@@ -22,8 +23,15 @@ public class Heroi extends Entidade {
         this.velocidade = velocidade;
         this.turno = turno;
         this.maoJogador = new ArrayList<>();
-        this.listaEfeitos = new ArrayList<>();
         this.gm = gm;
+        this.inicializaMap();
+    }
+
+    public void inicializaMap() { // poderia estar em entidade
+        this.mapEfeitos = new HashMap<>();
+
+        for (TiposEfeitos tipo: TiposEfeitos.values())
+            this.mapEfeitos.put(tipo, null);
     }
 
     // Busca uma carta na mão do jogador pelo nome e retorna o seu índice (posição).
@@ -58,6 +66,15 @@ public class Heroi extends Entidade {
             this.vida -= danoRestante;
         }
 
+    }
+
+    @Override
+    public void recebeDanoEfeito(int dano) {
+        if (this.vida >= dano) {
+            this.vida -= dano;
+        } else {
+            this.vida = 0;
+        }
     }
 
     @Override
@@ -157,21 +174,22 @@ public class Heroi extends Entidade {
     }
 
     @Override
-    public void aplicarEfeito(Efeito efeito, int acumulos) {
-        int indice = this.listaEfeitos.indexOf(efeito);
+    public void aplicarEfeito(TiposEfeitos tipo, int acumulos) {
+        Efeito valor = this.mapEfeitos.get(tipo);
 
         /* significa que ainda não existe esse efeito nessa entidade */
-        if (indice == -1) {
-            this.listaEfeitos.add(efeito);
-            this.gm.inscrever(efeito, efeito.tipoDeEstado());
+        if (valor == null) {
+            Efeito novoEfeito = Efeito.criaEfeito(tipo, acumulos, this.gm);
+            novoEfeito.setDono(this);
+            this.mapEfeitos.put(tipo, novoEfeito);
+            this.gm.inscrever(novoEfeito, novoEfeito.tipoDeEstado());
         } else {
-            Efeito efeitoExistente = this.listaEfeitos.get(indice);
-            efeitoExistente.aumentaAcumulos(acumulos);
+            valor.aumentaAcumulos(acumulos);
         }
     }
 
     @Override
-    public void terminaEfeito(Efeito efeito) {
-        this.listaEfeitos.remove(efeito);
+    public void terminaEfeito(TiposEfeitos tipo) {
+        this.mapEfeitos.put(tipo, null);
     }
 }
