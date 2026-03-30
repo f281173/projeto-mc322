@@ -1,22 +1,33 @@
 import java.util.ArrayList;
 
 public class Dados {
+    private static GameManager gm;
+    private static ArrayList<Efeito> efeitos = new ArrayList<>();
+
 
 
     public static ArrayList<Heroi> carregarHerois() {
         ArrayList<Heroi> herois = new ArrayList<>();
-        herois.add(new Heroi("Shrek", 100, 20, 6, 100, 20, true)); 
-        herois.add(new Heroi("Burro", 80, 10, 7, 80, 50, true)); 
-        herois.add(new Heroi("Gato de Botas", 70, 15, 5, 60, 80, true)); 
-        herois.add(new Heroi("Fiona", 90, 25, 5, 90, 40, true));
+        herois.add(new Heroi("Shrek", 100, 20, 6, 100, 20, true, gm)); 
+        herois.add(new Heroi("Burro", 80, 10, 7, 80, 50, true, gm)); 
+        herois.add(new Heroi("Gato de Botas", 70, 15, 5, 60, 80, true, gm)); 
+        herois.add(new Heroi("Fiona", 90, 25, 5, 90, 40, true, gm));
         return herois;
     }
 
+    /*vamos criar efeitos para o jogo*/
+    public static void carregaEfeitos() {
+        efeitos.add(new EfeitoVeneno("planta venenosa", 3, "Planta que quando ingerida causa incômodo total", gm));
+        efeitos.add(new EfeitoVeneno("Veneno", 3, "veneno causador de dano", gm));
+        efeitos.add(new EfeitoVeneno("Veneno", 50, "Gargalhada que gera dano", gm));
+    }
 
 
     // Retorna o baralho oficial da loja para os Heróis comprarem
     public static Baralho carregarBaralhoGeral() {
         Baralho deck = new Baralho();
+        carregaEfeitos();
+        
         deck.adicionaBaralho(new CartaDano("Bola de Fogo", "Custa 2 de energia e causa 15 de dano", 2, 15, 0));
         deck.adicionaBaralho(new CartaDano("Corte de Espada", "Custa 1 de energia e causa 10 de dano",  1, 10, 0));
         deck.adicionaBaralho(new CartaDano("Soco do ogro", "Custa 3 de energia e causa 30 de dano",  3, 30, 0));
@@ -40,44 +51,50 @@ public class Dados {
         deck.adicionaBaralho(new CartaEscudo("Panela de Lama", "Custa 2 de energia e recebe 20 de escudo", 2, 20, 1));
         deck.adicionaBaralho(new CartaEscudo("Muralha do Castelo do Dragão", "Custa 5 de energia e recebe 60 de escudo", 5, 45, 1));
 
+        deck.adicionaBaralho(new CartaEfeito("Carta efeito 1", "testar custo 5", 5, 2, efeitos.get(0)));
+        deck.adicionaBaralho(new CartaEfeito("Carta efeito 2", "testar custo 3", 3, 2, efeitos.get(1)));
         return deck;
     }
 
     
    public static ArrayList<Inimigo> carregarInimigos() {
         ArrayList<Inimigo> inimigos = new ArrayList<>();
+        carregaEfeitos();
 
         
-        Inimigo dragao = new Inimigo("Dragão", 100, 40, 100, 10, true); 
+        Inimigo dragao = new Inimigo("Dragão", 100, 40, 100, 10, true, gm); 
         ArrayList<Carta> deckDragao = new ArrayList<>();
         deckDragao.add(new CartaDano("Baforada de Fogo", "Causa 45 de dano", 0, 45, 0));
         deckDragao.add(new CartaDano("Mordida Feroz", "Causa 15 de dano", 0, 15, 0));
         deckDragao.add(new CartaEscudo("Escamas Duras", "Ganha 15 de escudo", 0, 15, 1));
-        dragao.transforma_Deck(deckDragao); 
+        dragao.transformaDeck(deckDragao); 
         inimigos.add(dragao);
 
         
-        Inimigo farquaad = new Inimigo("Lord Farquaad", 60, 30, 60, 30, true);
+        Inimigo farquaad = new Inimigo("Lord Farquaad", 60, 30, 60, 30, true, gm);
         ArrayList<Carta> deckFarquaad = new ArrayList<>();
         deckFarquaad.add(new CartaDano("Ordem de Execução", "Causa 20 de dano", 0, 20, 0));
         deckFarquaad.add(new CartaDano("Golpe Baixo", "Causa 30 de dano", 0, 30, 0));
         deckFarquaad.add(new CartaEscudo("Esconder atrás dos guardas", "Ganha 30 de escudo", 0, 30, 1));
-        farquaad.transforma_Deck(deckFarquaad);
+        deckFarquaad.add(new CartaEfeito("Gargalhada suprema", "O Lord Gargalha durante uma série de turnos e causa dano", 3, 2, efeitos.get(2)));
+        farquaad.transformaDeck(deckFarquaad);
         inimigos.add(farquaad);
 
         
-        Inimigo fada = new Inimigo("Fada Madrinha", 90, 20, 90, 60, true);
+        Inimigo fada = new Inimigo("Fada Madrinha", 90, 20, 90, 60, true, gm);
         ArrayList<Carta> deckFada = new ArrayList<>();
         deckFada.add(new CartaDano("Raio Mágico", "Causa 30 de dano", 0, 30, 0));
         deckFada.add(new CartaDano("Poção Explosiva", "Causa 10 de dano", 0, 10, 0));
         deckFada.add(new CartaEscudo("Bolha de Sabão", "Ganha 25 de escudo", 0, 25, 1));
-        fada.transforma_Deck(deckFada);
+        fada.transformaDeck(deckFada);
         inimigos.add(fada);
 
         return inimigos;
     }
 
-
+    public static void setGm(GameManager gm) {
+        Dados.gm = gm;
+    }
 
 
 }

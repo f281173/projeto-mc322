@@ -2,18 +2,18 @@
 public class CartaDano extends Carta{
     private int danoCarta;
 
-    public CartaDano(String nome, String descricao, int custo, int dano, int opcao_carta) {
+    public CartaDano(String nome, String descricao, int custo, int dano, int opcaoCarta) {
         this.nome = nome;
         this.descricao = descricao;
         this.custo = custo;
         this.danoCarta = dano;
-        this.opcao_carta = opcao_carta;
+        this.opcaoCarta = opcaoCarta;
 
     }
 
 @Override
     public void usar(Entidade vilao, Baralho baralho) {
-        vilao.recebeDano(vilao, this);
+        vilao.recebeDano(this.acessoCartaDanoDano());
         baralho.adicionaPilhaDescarte(this);
     }
  
@@ -38,8 +38,8 @@ public class CartaDano extends Carta{
         return this.descricao;}
 
 @Override
-    public int acessopcaocarta(){
-        return this.opcao_carta;
+    public int getOpcaoCarta(){
+        return this.opcaoCarta;
     }
 
 

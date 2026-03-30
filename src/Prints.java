@@ -24,9 +24,9 @@ public class Prints {
     public void status_batalha(Heroi heroiAtual, ArrayList<Heroi> herois, ArrayList<Inimigo> inimigos){
         System.out.println("\n" + NEGRITO + "=================== STATUS DA BATALHA ===================" + RESET);
       
-        imprime_herois(herois, heroiAtual);
+        imprimeHerois(herois, heroiAtual);
         System.out.println(NEGRITO + "                           vs" + RESET);
-        imprime_inimigos_vivos(inimigos);
+        imprimeInimigosVivos(inimigos);
 
         System.out.println(NEGRITO + "=========================================================" + RESET);
     }
@@ -37,11 +37,11 @@ public class Prints {
     }
     
     
-    public void imprime_inimigos_vivos(ArrayList<Inimigo> inimigos) {
+    public void imprimeInimigosVivos(ArrayList<Inimigo> inimigos) {
         for (Inimigo enemy : inimigos) {
             if (enemy.estaVivo()) {
                 System.out.println(VERMELHO + NEGRITO + enemy.acessoNome() + RESET + " " 
-                    + VERDE + "[VIVO] " + enemy.acesso_vida() + "/" + enemy.acesso_vidainicial() + RESET + " de vida" + "  | "
+                    + VERDE + "[VIVO] " + enemy.acesso_vida() + "/" + enemy.getVidaInicial() + RESET + " de vida" + "  | "
                     + AZUL + "🛡️  " + enemy.acessoEscudo()  + RESET + " de escudo");
             } else {
                 System.out.println(VERMELHO + NEGRITO + enemy.acessoNome() + RESET + " " 
@@ -51,14 +51,14 @@ public class Prints {
     }
 
 
-    public void imprime_herois(ArrayList<Heroi> herois, Heroi heroiAtual) {
+    public void imprimeHerois(ArrayList<Heroi> herois, Heroi heroiAtual) {
         for (Heroi h : herois) {
             
             String destaque = (h == heroiAtual) ? AMARELO + " ⬅️ [SEU TURNO]" + RESET : "";
             
             if (h.estaVivo()) {
                 System.out.println(CIANO + NEGRITO + h.acessoNome() + destaque + RESET + " " 
-                    + VERDE + "[VIVO] " + h.acesso_vida() + "/" + h.acesso_vidainicial() + RESET + " de vida  | "
+                    + VERDE + "[VIVO] " + h.acesso_vida() + "/" + h.getVidaInicial() + RESET + " de vida  | "
                     + AZUL + "🛡️  " + h.acessoEscudo() +  RESET + " de escudo");
             } else {
             
@@ -68,7 +68,7 @@ public class Prints {
         }
     }
 
-    public void fase_compra(int limiteCompra, int cartasCompradas){
+    public void faseCompra(int limiteCompra, int cartasCompradas){
         System.out.println(NEGRITO + "\n--- FASE DE COMPRA ---" + RESET);
         System.out.println("Você pode comprar mais " + (limiteCompra - cartasCompradas) + " carta(s).");
         System.out.println("1 - Comprar carta");
@@ -77,7 +77,7 @@ public class Prints {
     }
 
 
-    public void fase_batalha(){
+    public void faseBatalha(){
         System.out.println("1 - Ver mão");
         System.out.println("2 - Usar Cartas");
         System.out.println("3 - Encerrar Turno");
@@ -85,7 +85,7 @@ public class Prints {
     }
 
 
-    public void fim_de_jogo(Jogador player, Musica dj){
+    public void fimDeJogo(Jogador player, Musica dj){
         if (!player.temHeroisVivos()) {
             dj.tocarMusica("../sons/I_need_sleep.wav");
             System.out.println(Prints.NEGRITO + Prints.VERMELHO + "\n💀 BRUTAL!!! SUA EQUIPE FOI DERROTADA!" + Prints.RESET);

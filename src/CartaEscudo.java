@@ -2,12 +2,12 @@ public class CartaEscudo extends  Carta{
     private int escudoGanho;
     
 
-    public CartaEscudo(String nome, String descricao,  int custo, int escudoGanho, int opcao_carta) {
+    public CartaEscudo(String nome, String descricao,  int custo, int escudoGanho, int opcaoCarta) {
         this.nome = nome;
         this.descricao = descricao;
         this.custo = custo;
         this.escudoGanho = escudoGanho;
-        this.opcao_carta = opcao_carta;
+        this.opcaoCarta = opcaoCarta;
     }
 
     
@@ -40,8 +40,8 @@ public class CartaEscudo extends  Carta{
         return this.descricao;}
 
 @Override
-    public int acessopcaocarta(){
-        return this.opcao_carta;
+    public int getOpcaoCarta(){
+        return this.opcaoCarta;
     }
 
 

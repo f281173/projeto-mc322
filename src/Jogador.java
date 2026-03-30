@@ -33,7 +33,7 @@ public class Jogador {
         System.out.println("Heróis Disponíveis:");
         for (int i = 0; i < todosHerois.size(); i++) {
             System.out.println("[" + i + "] " + CIANO + todosHerois.get(i).acessoNome() + RESET 
-            + " - Vida: " + todosHerois.get(i).acesso_vidainicial() 
+            + " - Vida: " + todosHerois.get(i).getVidaInicial() 
             + " - Energia: " + todosHerois.get(i).acessoEnergia() 
             + " - Escudo: "  + todosHerois.get(i).acessoEscudo() 
             + " - Velocidade: " + todosHerois.get(i).acessoVelocidade()  );

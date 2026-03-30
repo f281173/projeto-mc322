@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
 
 /**
  * Classe  do controle do jogo
@@ -8,8 +9,44 @@ import java.util.Scanner;
  * até que um dos lados seja completamente derrotado.
  */
 
-public class GameManager {
+public class GameManager implements Publisher {
+    /*Um hashMap com as chaves sendo os dicionários de estados e os valores lista de subscribers*/
+    private HashMap<Estados, ArrayList<Subscriber>> efeitosAtivos;
     Musica dj = new Musica();
+
+    public GameManager() {
+        this.inicializaEfeitosAtivos();
+    }
+
+    public void inicializaEfeitosAtivos() {
+        this.efeitosAtivos = new HashMap<>();
+
+        for (Estados state: Estados.values())
+            this.efeitosAtivos.put(state, new ArrayList<Subscriber>());
+    }
+
+    /*implementação da interface do Publish */
+    @Override
+    public void inscrever(Subscriber observador, Estados state) {
+        this.efeitosAtivos.get(state).add(observador);
+    }
+    
+    @Override
+    public void desinscrever(Subscriber observador, Estados state) {
+        this.efeitosAtivos.get(state).remove(observador);
+    }
+
+    @Override
+    public void notificar(Entidade observador, Estados state) {
+        ArrayList<Subscriber> inscritos = this.efeitosAtivos.get(state);
+        ArrayList<Subscriber> copiaInscritos = new ArrayList<>(inscritos);
+
+        for (Subscriber efeito: copiaInscritos) {
+            if (efeito.getDono() == observador) {
+                efeito.serNotificado(state);
+            }
+        }
+    }
 
 //Prepara a partida, escolhendo a dificuldade e equipe
     public void prepararPartida(Scanner sc, Prints tela) {
@@ -72,8 +109,8 @@ public class GameManager {
             }
         }
 
-        TurnoHeroi turnoHeroi = new TurnoHeroi();
-        TurnoVilao turnoVilao = new TurnoVilao();
+        TurnoHeroi turnoHeroi = new TurnoHeroi(this);
+        TurnoVilao turnoVilao = new TurnoVilao(this);
 
 
 //--------------------BATALHA--------------------------------------------------
@@ -116,7 +153,7 @@ public class GameManager {
         
  
 
-        tela.fim_de_jogo(jogador, dj);
+        tela.fimDeJogo(jogador, dj);
         
     }
 }

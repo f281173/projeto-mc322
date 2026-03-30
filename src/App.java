@@ -7,6 +7,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
         Prints tela = new Prints();
         GameManager gm = new GameManager();
+        Dados.setGm(gm);
         boolean jogarNovamente = true;
         
 

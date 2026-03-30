@@ -2,7 +2,7 @@ public abstract class Carta {
     protected  String nome;
     protected String descricao;
     protected  int custo;
-    protected int opcao_carta;
+    protected int opcaoCarta;
 
     public  abstract String acessoNome();
 
@@ -12,7 +12,7 @@ public abstract class Carta {
 
     public abstract String acessoDescricao();
 
-    public abstract int acessopcaocarta();
+    public abstract int getOpcaoCarta();
     
     
 }
