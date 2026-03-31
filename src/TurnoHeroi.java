@@ -28,7 +28,7 @@ public class TurnoHeroi {
             Scanner sc) {
 
         int energia = player.getEnergia();
-        player.resetarEscudo();
+        player.zeraEscudo();
         int opcaoCompra = 0;
         int cartasCompradas = 0;
         int limiteCompra = 3;

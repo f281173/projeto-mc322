@@ -11,7 +11,7 @@ public class CartaEscudo extends Carta {
 
     @Override
     public void usar(Entidade personagem, Baralho baralho) {
-        personagem.ganhaEscudo(this);
+        personagem.ganhaEscudo(this.getEscudoGanho());
         this.personagem = null;
         baralho.adicionaPilhaDescarte(this);
     }

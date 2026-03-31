@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class Heroi extends Entidade {
     private int energia;
     private ArrayList<Carta> maoJogador;
+    private ArrayList<Carta> baralhoPessoal;
     public static final String RESET = "\u001B[0m";
     public static final String AZUL = "\u001B[34m";
     public static final String NEGRITO = "\u001B[1m";
@@ -36,7 +37,7 @@ public class Heroi extends Entidade {
     }
 
     // Busca uma carta na mão do jogador pelo nome e retorna o seu índice (posição).
-    public int encontraNome(String nomeCarta) {
+    public int encontraNome(String nomeCarta) { // essa função não pode estar aqui
         int i = 0;
 
         while (i < this.maoJogador.size()) {
@@ -78,8 +79,13 @@ public class Heroi extends Entidade {
     }
 
     @Override
-    public void ganhaEscudo(CartaEscudo cartaEscudo) {
-        this.escudo = cartaEscudo.getEscudoGanho();
+    public void ganhaEscudo(int valorEscudo) { 
+        this.escudo += valorEscudo;
+    }
+
+    @Override
+    public void zeraEscudo() {
+        this.escudo = 0;
     }
 
     @Override
@@ -103,10 +109,6 @@ public class Heroi extends Entidade {
 
     public int getEnergia() {
         return this.energia;
-    }
-
-    public void resetarEscudo() {
-        this.escudo = 0;
     }
 
     @Override
@@ -146,6 +148,7 @@ public class Heroi extends Entidade {
         }
     }
 
+    /*essa lógica não precisa estar aqui e sim na mão */
     public boolean maoVazia() {
         if (this.maoJogador.size() == 0)
             return true;

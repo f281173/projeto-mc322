@@ -5,11 +5,11 @@ public abstract class Entidade {
     protected int vida;
     protected int escudo;
     protected int vidaInicial;
-    protected int velocidade;
     protected boolean hasEfeitoFraqueza = false;
     protected boolean turno;
     protected HashMap<TiposEfeitos, Efeito> mapEfeitos;
     protected GameManager gm;
+    protected int velocidade;
 
     /* método para gerar o dano partindo de uma carta de dano */
     public abstract void recebeDano(int dano);
@@ -21,7 +21,9 @@ public abstract class Entidade {
 
     public abstract int getEscudo();
 
-    public abstract void ganhaEscudo(CartaEscudo cartaEscudo);
+    public abstract void ganhaEscudo(int valorEscudo);
+
+    public abstract void zeraEscudo(); 
 
     public abstract String getNome();
 
