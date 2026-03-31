@@ -174,12 +174,12 @@ public class Heroi extends Entidade {
     }
 
     @Override
-    public void aplicarEfeito(TiposEfeitos tipo, int acumulos) {
+    public void aplicarEfeito(TiposEfeitos tipo, int acumulos, int dano) {
         Efeito valor = this.mapEfeitos.get(tipo);
 
         /* significa que ainda não existe esse efeito nessa entidade */
         if (valor == null) {
-            Efeito novoEfeito = Efeito.criaEfeito(tipo, acumulos, this.gm);
+            Efeito novoEfeito = Efeito.criaEfeito(tipo, acumulos, this.gm, dano);
             novoEfeito.setDono(this);
             this.mapEfeitos.put(tipo, novoEfeito);
 
@@ -192,7 +192,8 @@ public class Heroi extends Entidade {
                 this.gm.inscrever(novoEfeito, Estados.FIM_DE_TURNO);
 
             } else if (tipo == TiposEfeitos.FORCA) {
-                // implementação do tipo força
+                this.gm.inscrever(novoEfeito, Estados.ATAQUE);
+                this.gm.inscrever(novoEfeito, Estados.FIM_DE_TURNO);
             }
 
         } else {
@@ -212,4 +213,27 @@ public class Heroi extends Entidade {
     public boolean getHasEfeitoFraqueza() {
         return this.hasEfeitoFraqueza;
     }
+
+    public void setHasEfeitoForca(boolean valor) {
+        this.hasEfeitoForca = valor;
+    }
+
+    public boolean getHasEfeitoForca() {
+        return this.hasEfeitoForca;
+    }
+
+
+    public String statusEfeitos() {
+        String status = "";
+        for (TiposEfeitos tipo : TiposEfeitos.values()) {
+            Efeito efeito = this.mapEfeitos.get(tipo);
+            if (efeito != null && efeito.getAcumulos() > 0) {
+                status += Prints.AMARELO + "[" + tipo.name() + ": " + efeito.getAcumulos() + "] " + Prints.RESET;
+            }
+        }
+        return status;
+    }
+
+    
+
 }

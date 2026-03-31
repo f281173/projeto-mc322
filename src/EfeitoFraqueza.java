@@ -4,8 +4,8 @@
  */
 public class EfeitoFraqueza extends Efeito {
 
-    public EfeitoFraqueza(int acumulos, GameManager gm) {
-        super(acumulos, gm);
+    public EfeitoFraqueza(int acumulos, GameManager gm, int dano) {
+        super(acumulos, gm, dano);
         this.nome = "Efeito Fraqueza";
     }
 

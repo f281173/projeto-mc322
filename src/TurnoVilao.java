@@ -42,24 +42,35 @@ public class TurnoVilao {
             Random gerador = new Random();
             Heroi alvo = heroisVivos.get(gerador.nextInt(heroisVivos.size()));
 
-            enemy.atacar(alvo);
+            enemy.atacar(alvo, heroisVivos);
+            
 
             if (enemy.getTipoCarta() == 0) {
-
+                if (enemy.getUltimaCarta() instanceof CartaDanoArea) {
+                 System.out.println(VERMELHO + "💥 É UM ATAQUE EM ÁREA! Toda a sua equipe tomou " + enemy.getDano() + " de dano!" + RESET);
+            } else{
                 System.out.println(enemy.getNome() + " usou '" + enemy.getNomeCarta() + "' e causou " + VERMELHO
-                        + enemy.getDano() + RESET + " de dano no " + alvo.getNome() + "!");
+                        + enemy.getDano() + RESET + " de dano no " + alvo.getNome() + "!");}
 
             } else if (enemy.getTipoCarta() == 1) {
                 System.out.println(enemy.getNome() + " usou '" + enemy.getNomeCarta() + "' e ganhou " + AZUL
                         + enemy.getEscudo() + RESET + " de escudo!");
 
             } else if (enemy.getTipoCarta() == 2) {
-                System.out.println(enemy.getNome() + " usou '" + enemy.getNomeCarta() + AZUL + " ativou o efeito");
-            }
+                Carta ultima = enemy.getUltimaCarta();
+                CartaEfeito carta_efeito = (CartaEfeito) ultima;
+
+                TiposEfeitos tipo = carta_efeito.getTipoEfeito();
+                int turnos = carta_efeito.getAcumulo();
+
+                System.out.println(enemy.getNome() + " usou '" + enemy.getNomeCarta() +  " e aplicou um efeito de " + tipo + " em " + alvo.getNome() +  " que durará " + turnos + " turnos!" + RESET);
         }
+
         /* tenho que publicar que o turno do inimigo terminou */
         gm.notificar(enemy, Estados.FIM_DE_TURNO);
 
         System.out.println(VERMELHO + NEGRITO + "======================================================\n" + RESET);
     }
+}
+
 }

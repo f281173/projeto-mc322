@@ -7,6 +7,7 @@ public abstract class Entidade {
     protected int vidaInicial;
     protected int velocidade;
     protected boolean hasEfeitoFraqueza = false;
+    protected boolean hasEfeitoForca = false;
     protected boolean turno;
     protected HashMap<TiposEfeitos, Efeito> mapEfeitos;
     protected GameManager gm;
@@ -35,7 +36,7 @@ public abstract class Entidade {
 
     public abstract void verificaseAtacou(boolean status);
 
-    public abstract void aplicarEfeito(TiposEfeitos tipo, int acumulos);
+    public abstract void aplicarEfeito(TiposEfeitos tipo, int acumulos, int dano);
 
     /* retira o efeito da lista de efeitos daquela entidade */
     public abstract void terminaEfeito(TiposEfeitos tipo);
@@ -43,5 +44,12 @@ public abstract class Entidade {
     public abstract void setHasEfeitoFraqueza(boolean valor);
 
     public abstract boolean getHasEfeitoFraqueza();
+
+    public abstract void setHasEfeitoForca(boolean valor);
+
+    public abstract boolean getHasEfeitoForca();
+
+    public abstract String statusEfeitos();
+    
 
 }

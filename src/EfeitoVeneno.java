@@ -5,8 +5,8 @@
  */
 public class EfeitoVeneno extends Efeito {
 
-    public EfeitoVeneno(int acumulos, GameManager gm) {
-        super(acumulos, gm);
+    public EfeitoVeneno(int acumulos, GameManager gm, int dano) {
+        super(acumulos, gm, dano);
         this.nome = "Efeito Veneno";
     }
 
@@ -22,8 +22,7 @@ public class EfeitoVeneno extends Efeito {
 
     @Override
     public void acaoEfeito() {
-        this.getDono().recebeDanoEfeito(acumulos);
-        System.out.println(this.getDono().getNome() + " sofreu o efeito de veneno: " + this.nome
-                + " com um dano sofrido de " + this.acumulos);
+        this.getDono().recebeDanoEfeito(this.dano); 
+        System.out.println(this.getDono().getNome() + " sofreu o efeito de veneno: " + this.nome + " causando " + this.dano + " de dano!");
     }
 }
