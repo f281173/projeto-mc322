@@ -1,4 +1,4 @@
-public class CartaEfeito extends Carta{
+public class CartaEfeito extends Carta {
     protected TiposEfeitos tipo;
     protected int acumulos;
 
@@ -13,23 +13,23 @@ public class CartaEfeito extends Carta{
 
     @Override
     public String getNome() {
-    return this.nome;
+        return this.nome;
     }
 
     @Override
-    public  int getCusto() {
+    public int getCusto() {
         return this.custo;
     }
 
     @Override
-    public void  usar(Entidade personagem, Baralho baralho) {
+    public void usar(Entidade personagem, Baralho baralho) {
         personagem.aplicarEfeito(this.tipo, this.acumulos);
         this.personagem = null;
         baralho.adicionaPilhaDescarte(this);
     }
 
     @Override
-    public String acessoDescricao() {
+    public String getDescricao() {
         return this.descricao;
     }
 
@@ -44,6 +44,19 @@ public class CartaEfeito extends Carta{
 
     public int getAcumulo() {
         return this.acumulos;
+    }
+
+    public void explicaEfeito(TiposEfeitos tipo) {
+        if (tipo == TiposEfeitos.VENENO) {
+            System.out.print(
+                    "\nO efeito Veneno gera um dano de dimensão igual ao seu acúmulo e a cada inicio de turno o acúmulo cai em uma unidade.O efeito tem validade até acúmulo atingir zero\n");
+
+        } else if (tipo == TiposEfeitos.FRAQUEZA) {
+            System.out.print(
+                    "\nO efeito Fraqueza reduz a força do oponente em 25%. Tem duração equivalente a quantidade de acúmulos que vão sendo subtraídos a cada final de turno\n");
+        }
+        System.out.println("APLICAR CARTAS DO MESMO TIPO DE EFEITO TEM COMO RESULTADO A SOMA DOS ACÚMULOS");
+
     }
 
 }

@@ -115,7 +115,7 @@ public class Inimigo extends Entidade {
 
     @Override
     public void ganhaEscudo(CartaEscudo cartaEscudo) {
-        this.escudo = cartaEscudo.acessoEscudoGanho();
+        this.escudo = cartaEscudo.getEscudoGanho();
     }
 
     @Override

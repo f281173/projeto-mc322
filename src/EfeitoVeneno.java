@@ -23,6 +23,7 @@ public class EfeitoVeneno extends Efeito {
     @Override
     public void acaoEfeito() {
         this.getDono().recebeDanoEfeito(acumulos);
-        System.out.println(this.getDono().getNome() + " sofreu o efeito de veneno: " + this.nome+ " com um dano sofrido de " + this.acumulos);
+        System.out.println(this.getDono().getNome() + " sofreu o efeito de veneno: " + this.nome
+                + " com um dano sofrido de " + this.acumulos);
     }
 }

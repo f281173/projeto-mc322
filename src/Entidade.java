@@ -11,10 +11,10 @@ public abstract class Entidade {
     protected HashMap<TiposEfeitos, Efeito> mapEfeitos;
     protected GameManager gm;
 
-    /*método para gerar o dano partindo de uma carta de dano */
+    /* método para gerar o dano partindo de uma carta de dano */
     public abstract void recebeDano(int dano);
 
-    /*método para gerar o dano partindo de uma carta de Efeito */
+    /* método para gerar o dano partindo de uma carta de Efeito */
     public abstract void recebeDanoEfeito(int dano);
 
     public abstract boolean estaVivo();
@@ -37,12 +37,11 @@ public abstract class Entidade {
 
     public abstract void aplicarEfeito(TiposEfeitos tipo, int acumulos);
 
-    /*retira o efeito da lista de efeitos daquela entidade*/
+    /* retira o efeito da lista de efeitos daquela entidade */
     public abstract void terminaEfeito(TiposEfeitos tipo);
 
     public abstract void setHasEfeitoFraqueza(boolean valor);
 
     public abstract boolean getHasEfeitoFraqueza();
-
 
 }

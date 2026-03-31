@@ -114,7 +114,8 @@ public class Dados {
                 deckFada.add(new CartaDano("Poção Explosiva", "Causa 10 de dano", 0, 10, 0));
                 deckFada.add(new CartaEscudo("Bolha de Sabão", "Ganha 25 de escudo", 0, 25, 1));
                 deckFada.add(new CartaEfeito("Feitiço da fada",
-                                "A fada usa o seu feitiço durante uma série de turnos e causa dano", 3, 2, TiposEfeitos.VENENO,
+                                "A fada usa o seu feitiço durante uma série de turnos e causa dano", 3, 2,
+                                TiposEfeitos.VENENO,
                                 10));
                 deckFada.add(new CartaEfeito("Choro do Biscoito",
                                 "Custa 3 de energia. Aplica 25% de Fraqueza. 'Não os meus botões de goma!' Corta o coração do inimigo.",

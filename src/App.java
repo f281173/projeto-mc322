@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 public class App {
 
     public static void main(String[] args) {
@@ -9,9 +8,8 @@ public class App {
         GameManager gm = new GameManager();
         Dados.setGm(gm);
         boolean jogarNovamente = true;
-        
 
-        while (jogarNovamente){
+        while (jogarNovamente) {
             gm.prepararPartida(sc, tela);
 
             tela.jogarNovamente();
@@ -22,10 +20,9 @@ public class App {
                 System.out.println(Prints.VERDE + "\nObrigado! Até a próxima aventura." + Prints.RESET);
             } else {
                 System.out.println(Prints.CIANO + "\nReiniciando... Vamos lá!\n" + Prints.RESET);
-                
-        }
-        
+
+            }
+
         }
     }
-} 
-    
+}

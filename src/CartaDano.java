@@ -1,5 +1,5 @@
 
-public class CartaDano extends Carta{
+public class CartaDano extends Carta {
     private int danoCarta;
 
     public CartaDano(String nome, String descricao, int custo, int dano, int opcaoCarta) {
@@ -10,41 +10,40 @@ public class CartaDano extends Carta{
         this.opcaoCarta = opcaoCarta;
     }
 
-@Override
+    @Override
     public void usar(Entidade vilao, Baralho baralho) {
         vilao.recebeDano(this.acessoCartaDanoDano());
         baralho.adicionaPilhaDescarte(this);
         this.personagem = null;
     }
- 
-@Override
+
+    @Override
     public String getNome() {
         return this.nome;
     }
-
 
     public int acessoCartaDanoDano() {
         if (this.personagem.getHasEfeitoFraqueza()) {
             this.personagem.setHasEfeitoFraqueza(false);
             return (int) (this.danoCarta * 0.75);
-            
+
         } else {
             return this.danoCarta;
         }
     }
 
-@Override
+    @Override
     public int getCusto() {
         return this.custo;
     }
 
-    
-@Override
-    public String acessoDescricao(){
-        return this.descricao;}
+    @Override
+    public String getDescricao() {
+        return this.descricao;
+    }
 
-@Override
-    public int getOpcaoCarta(){
+    @Override
+    public int getOpcaoCarta() {
         return this.opcaoCarta;
     }
 

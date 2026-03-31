@@ -3,12 +3,12 @@ import java.util.Collections;
 
 /**
  * Classe responsável por gerenciar a economia de cartas do jogo.
- * Controla o baralho principal de onde as cartas são puxadas, a "loja", 
+ * Controla o baralho principal de onde as cartas são puxadas, a "loja",
  * apresentada ao jogador, e a pilha de descarte para onde as cartas usadas vão.
  */
 
 public class Baralho {
-    private ArrayList<Carta> baralho; 
+    private ArrayList<Carta> baralho;
     private ArrayList<Carta> pilhaCompra;
     private ArrayList<Carta> pilhaDescarte;
     public static final String RESET = "\u001B[0m";
@@ -25,15 +25,15 @@ public class Baralho {
         Collections.shuffle(this.baralho);
     }
 
-    
-//Prepara a 'lista de compra', caso o baralho esteja vazio,  reseta e faz de novo. 
+    // Prepara a 'lista de compra', caso o baralho esteja vazio, reseta e faz de
+    // novo.
     public void criarPilhaCompra(int tamanho) {
         embaralhaBaralho();
-        for(int i = 0; i < tamanho; i++) {
+        for (int i = 0; i < tamanho; i++) {
             if (this.baralho.isEmpty()) {
-              this.resetaBaralho(); 
+                this.resetaBaralho();
             }
-            
+
             Carta carta = this.baralho.remove(this.baralho.size() - 1);
             adicionaPilhaCompra(carta);
         }
@@ -44,13 +44,12 @@ public class Baralho {
         return this.pilhaCompra.size();
     }
 
-// Insere uma nova carta no baralho
+    // Insere uma nova carta no baralho
     public void adicionaBaralho(Carta carta) {
         this.baralho.add(carta);
     }
 
-
-//Pega as cartas do descarte e devolve ao baralho principal
+    // Pega as cartas do descarte e devolve ao baralho principal
     public void resetaBaralho() {
         int tamanho = this.pilhaCompra.size();
 
@@ -74,8 +73,9 @@ public class Baralho {
     }
 
     public void imprimePilhaCompra() {
-        for(int i = 0; i < this.pilhaCompra.size(); i++) {
-            System.out.println(NEGRITO + i + RESET + "-" + AZUL + this.pilhaCompra.get(i).getNome() + RESET + " -  " + this.pilhaCompra.get(i).acessoDescricao());
+        for (int i = 0; i < this.pilhaCompra.size(); i++) {
+            System.out.println(NEGRITO + i + RESET + "-" + AZUL + this.pilhaCompra.get(i).getNome() + RESET + " -  "
+                    + this.pilhaCompra.get(i).getDescricao());
         }
     }
 
@@ -86,11 +86,10 @@ public class Baralho {
     public void adicionaPilhaCompra(Carta carta) {
         this.pilhaCompra.add(carta);
     }
-    
 
-//Pega as as cartas não compradas e volta ao baralho geral    
+    // Pega as as cartas não compradas e volta ao baralho geral
     public void devolverCartasNaoCompradas() {
-        
+
         this.baralho.addAll(this.pilhaCompra);
         this.pilhaCompra.clear();
     }
@@ -98,5 +97,5 @@ public class Baralho {
     public ArrayList<Carta> getBaralho() {
         return this.baralho;
     }
-    
+
 }

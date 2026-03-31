@@ -14,7 +14,8 @@ public class Heroi extends Entidade {
     public static final String AZUL = "\u001B[34m";
     public static final String NEGRITO = "\u001B[1m";
 
-    public Heroi(String nome, int vida, int escudo, int energia, int vidaInicial, int velocidade, boolean turno, GameManager gm) {
+    public Heroi(String nome, int vida, int escudo, int energia, int vidaInicial, int velocidade, boolean turno,
+            GameManager gm) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
@@ -30,7 +31,7 @@ public class Heroi extends Entidade {
     public void inicializaMap() { // poderia estar em entidade
         this.mapEfeitos = new HashMap<>();
 
-        for (TiposEfeitos tipo: TiposEfeitos.values())
+        for (TiposEfeitos tipo : TiposEfeitos.values())
             this.mapEfeitos.put(tipo, null);
     }
 
@@ -78,7 +79,7 @@ public class Heroi extends Entidade {
 
     @Override
     public void ganhaEscudo(CartaEscudo cartaEscudo) {
-        this.escudo = cartaEscudo.acessoEscudoGanho();
+        this.escudo = cartaEscudo.getEscudoGanho();
     }
 
     @Override
@@ -121,7 +122,7 @@ public class Heroi extends Entidade {
     public void imprimeCartas() {
         for (int i = 0; i < this.maoJogador.size(); i++) {
             System.out.println(NEGRITO + i + RESET + "-" + AZUL + this.maoJogador.get(i).getNome() + RESET + " -  "
-                    + this.maoJogador.get(i).acessoDescricao());
+                    + this.maoJogador.get(i).getDescricao());
         }
     }
 
@@ -182,7 +183,7 @@ public class Heroi extends Entidade {
             novoEfeito.setDono(this);
             this.mapEfeitos.put(tipo, novoEfeito);
 
-            /*preciso inscrever cada efeito do modo correto */
+            /* preciso inscrever cada efeito do modo correto */
             if (tipo == TiposEfeitos.VENENO) {
                 this.gm.inscrever(novoEfeito, Estados.INICIO_DE_TURNO);
 

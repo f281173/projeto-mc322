@@ -50,7 +50,7 @@ public abstract class Efeito implements Subscriber {
 
     public abstract void acaoEfeito();
 
-    /*Nosso padrão para criar qualquer tipo de efeito */
+    /* Nosso padrão para criar qualquer tipo de efeito */
     public static Efeito criaEfeito(TiposEfeitos tipo, int acumulos, GameManager gm) {
         if (tipo == TiposEfeitos.VENENO) {
             return new EfeitoVeneno(acumulos, gm);

@@ -108,10 +108,10 @@ public class TurnoHeroi {
 
                         // Verifica o tipo de carta
                         if (cartaEscolhida.getOpcaoCarta() == 0) {
-                            /*tenho que publicar que heroi vai atacar */
+                            /* tenho que publicar que heroi vai atacar */
                             gm.notificar(player, Estados.ATAQUE);
 
-                            System.out.println(VERMELHO + "\nEscolha o alvo do seu ataque:" + RESET);
+                            System.out.println(VERMELHO + "\nEscolha o alvo do seu ataque: " + RESET);
                             for (int j = 0; j < inimigos.size(); j++) {
                                 if (inimigos.get(j).estaVivo()) {
                                     System.out.println(j + " - " + inimigos.get(j).getNome() + " (Vida: "
@@ -130,7 +130,7 @@ public class TurnoHeroi {
                                 player.removeCartaMaoJogador(deck, i);
                                 energia -= custo;
                                 System.out.println(VERMELHO + "\n⚔️ Você usou " + cartaEscolhida.getNome() + " no "
-                                        + alvo.getNome() + " e causou dano!" + RESET);
+                                        + alvo.getNome() + " e causou dano! " + RESET);
                             } else {
                                 System.out.println(VERMELHO + "Alvo inválido!" + RESET);
                             }
@@ -142,8 +142,9 @@ public class TurnoHeroi {
                             System.out.println(AZUL + "\n🛡️ Você ativou " + cartaEscolhida.getNome()
                                     + " e ganhou escudo!" + RESET);
 
-                        } else if (cartaEscolhida.getOpcaoCarta() == 2) { // MODIFIQUEI ESSE TRECHO DE CÓDIGO !!!!
-                            System.out.println(VERMELHO + "\nEscolha o alvo para aplicar o efeito:" + RESET);
+                        } else if (cartaEscolhida.getOpcaoCarta() == 2) {
+                            CartaEfeito carta = (CartaEfeito) cartaEscolhida;
+                            System.out.println(VERMELHO + "\nEscolha o alvo para aplicar o efeito: " + RESET);
                             for (int j = 0; j < inimigos.size(); j++) {
                                 if (inimigos.get(j).estaVivo()) {
                                     System.out.println(j + " - " + inimigos.get(j).getNome() + " (Vida: "
@@ -160,8 +161,9 @@ public class TurnoHeroi {
                                 cartaEscolhida.usar(alvo, deck);
                                 player.removeCartaMaoJogador(deck, i);
                                 energia -= custo;
-                                System.out.println(AZUL + "\n Você ativou " + cartaEscolhida.getNome()
-                                        + " e aplicou o efeito!" + RESET);
+                                System.out.println(AZUL + "\n Você ativou " + carta.getNome()
+                                        + " e aplicou o " + carta.getNome() + " : " + carta.descricao + RESET);
+                                carta.explicaEfeito(carta.tipo);
                             } else {
                                 System.out.println(VERMELHO + "Alvo inválido!" + RESET);
                             }
