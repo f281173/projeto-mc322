@@ -38,7 +38,7 @@ public class Prints {
                 System.out.println(VERMELHO + NEGRITO + enemy.getNome() + RESET + " "
                         + VERDE + "[VIVO] " + enemy.getVida() + "/" + enemy.getVidaInicial() + RESET + " de vida"
                         + "  | "
-                        + AZUL + "🛡️  " + enemy.getEscudo() + RESET + " de escudo");
+                        + AZUL + "🛡️  " + enemy.getEscudo() + RESET + " de escudo " + enemy.statusEfeitos());
             } else {
                 System.out.println(VERMELHO + NEGRITO + enemy.getNome() + RESET + " "
                         + VERMELHO + "[MORTO] 💀" + RESET);
@@ -54,7 +54,7 @@ public class Prints {
             if (h.estaVivo()) {
                 System.out.println(CIANO + NEGRITO + h.getNome() + destaque + RESET + " "
                         + VERDE + "[VIVO] " + h.getVida() + "/" + h.getVidaInicial() + RESET + " de vida  | "
-                        + AZUL + "🛡️  " + h.getEscudo() + RESET + " de escudo");
+                        + AZUL + "🛡️  " + h.getEscudo() + RESET + " de escudo " + h.statusEfeitos());
             } else {
 
                 System.out.println(CIANO + NEGRITO + h.getNome() + RESET + " "

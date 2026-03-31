@@ -53,8 +53,11 @@ public class CartaEfeito extends Carta {
 
         } else if (tipo == TiposEfeitos.FRAQUEZA) {
             System.out.print(
-                    "\nO efeito Fraqueza reduz a força do oponente em 25%. Tem duração equivalente a quantidade de acúmulos que vão sendo subtraídos a cada final de turno\n");
-        }
+                    "\nO efeito Fraqueza reduz a força da entidade em 25%. Tem duração equivalente a quantidade de acúmulos que vão sendo subtraídos a cada final de turno\n");
+        } else if (tipo == TiposEfeitos.FORCA) {
+            System.out.print(
+                    "\nO efeito Força aumenta a força da entidade em 25%. Tem duração equivalente a quantidade de acúmulos que vão sendo subtraídos a cada final de turno\n");
+            }
         System.out.println("APLICAR CARTAS DO MESMO TIPO DE EFEITO TEM COMO RESULTADO A SOMA DOS ACÚMULOS");
 
     }

@@ -25,8 +25,12 @@ public class CartaDano extends Carta {
     public int acessoCartaDanoDano() {
         if (this.personagem.getHasEfeitoFraqueza()) {
             this.personagem.setHasEfeitoFraqueza(false);
-            return (int) (this.danoCarta * 0.75);
+            return (int) (this.danoCarta * 0.75);}
 
+        if (this.personagem.getHasEfeitoForca()) {
+            this.personagem.setHasEfeitoForca(false);
+            return (int) (this.danoCarta * 1.25);
+        
         } else {
             return this.danoCarta;
         }
