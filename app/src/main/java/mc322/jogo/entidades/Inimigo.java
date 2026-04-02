@@ -94,7 +94,7 @@ public class Inimigo extends Entidade {
 
             } else if (this.ultimaCartaUsada.getOpcaoCarta() == 1) {
                 CartaEscudo cartaescudo = (CartaEscudo) this.ultimaCartaUsada;
-                this.ganhaEscudo(cartaescudo);
+                this.ganhaEscudo(cartaescudo.getEscudoGanho());
 
             } else if (this.ultimaCartaUsada.getOpcaoCarta() == 2) {
                 CartaEfeito cartaEfeito = (CartaEfeito) this.ultimaCartaUsada;
@@ -125,8 +125,13 @@ public class Inimigo extends Entidade {
     }
 
     @Override
-    public void ganhaEscudo(CartaEscudo cartaEscudo) {
-        this.escudo = cartaEscudo.getEscudoGanho();
+    public void ganhaEscudo(int valorEscudo) {
+        this.escudo += valorEscudo;
+    }
+
+    @Override
+    public void zeraEscudo() {
+        this.escudo = 0;
     }
 
     @Override
