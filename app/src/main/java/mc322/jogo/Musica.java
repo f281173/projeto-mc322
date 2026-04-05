@@ -1,6 +1,5 @@
 package mc322.jogo;
 
-import mc322.jogo.gerenciador.Prints;
 import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -25,12 +24,12 @@ public class Musica {
                 clipBackground.start();
                 clipBackground.loop(Clip.LOOP_CONTINUOUSLY);
             } else {
-                System.out.println(Prints.VERMELHO + "🎵 [Aviso] Arquivo não encontrado na pasta resources: /sons/"
-                        + nomeArquivo + Prints.RESET);
+                System.out.println(Cores.VERMELHO + "🎵 [Aviso] Arquivo não encontrado na pasta resources: /sons/"
+                        + nomeArquivo + Cores.RESET);
             }
 
         } catch (Exception e) {
-            System.out.println(Prints.VERMELHO + "🎵 [Erro] Falha ao tocar o áudio." + Prints.RESET);
+            System.out.println(Cores.VERMELHO + "🎵 [Erro] Falha ao tocar o áudio." + Cores.RESET);
             e.printStackTrace(); 
         }
     }

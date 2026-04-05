@@ -1,5 +1,6 @@
 package mc322.jogo.cartas;
 
+import mc322.jogo.Cores;
 import mc322.jogo.entidades.Heroi;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,9 +15,6 @@ public class Baralho {
     private ArrayList<Carta> baralho;
     private ArrayList<Carta> pilhaCompra;
     private ArrayList<Carta> pilhaDescarte;
-    public static final String RESET = "\u001B[0m";
-    public static final String AZUL = "\u001B[34m";
-    public static final String NEGRITO = "\u001B[1m";
 
     public Baralho() {
         this.baralho = new ArrayList<>();
@@ -72,12 +70,12 @@ public class Baralho {
     public void compraCarta(Heroi personagem, int i) {
         Carta carta = this.pilhaCompra.remove(i);
         carta.setPersonagem(personagem);
-        personagem.adicionaCard(carta);
+        personagem.recebeCarta(carta);;
     }
 
     public void imprimePilhaCompra() {
         for (int i = 0; i < this.pilhaCompra.size(); i++) {
-            System.out.println(NEGRITO + i + RESET + "-" + AZUL + this.pilhaCompra.get(i).getNome() + RESET + " -  "
+            System.out.println(Cores.NEGRITO + i + Cores.RESET + "-" + Cores.AZUL + this.pilhaCompra.get(i).getNome() + Cores.RESET + " -  "
                     + this.pilhaCompra.get(i).getDescricao());
         }
     }

@@ -31,7 +31,7 @@ public class Inimigo extends Entidade {
         this.vidaInicial = vidaInicial;
         this.velocidade = velocidade;
         this.turno = turno;
-        this.deckInimigo = new ArrayList<>();
+        this.deckInimigo = new ArrayList<>(); // isso aqui deveria ser na verdade um sistema de ações !!
         this.gm = gm;
         this.inicializaMap();
     }

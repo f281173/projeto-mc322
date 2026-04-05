@@ -3,7 +3,6 @@ package mc322.jogo.entidades;
 import mc322.jogo.gerenciador.GameManager;
 import mc322.jogo.efeitos.Efeito;
 import mc322.jogo.efeitos.TiposEfeitos;
-import mc322.jogo.cartas.CartaEscudo;
 import java.util.HashMap;
 
 public abstract class Entidade {

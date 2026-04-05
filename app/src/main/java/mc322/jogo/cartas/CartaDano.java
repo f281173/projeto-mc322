@@ -1,5 +1,6 @@
 package mc322.jogo.cartas;
 
+import mc322.jogo.RequisitoJogo;
 import mc322.jogo.entidades.Entidade;
 
 public class CartaDano extends Carta {
@@ -25,7 +26,7 @@ public class CartaDano extends Carta {
         return this.nome;
     }
 
-    public int acessoCartaDanoDano() {
+    public int acessoCartaDanoDano() { // preciso melhorar essa lógica !!
         if (this.personagem.getHasEfeitoFraqueza()) {
             this.personagem.setHasEfeitoFraqueza(false);
             return (int) (this.danoCarta * 0.75);
@@ -48,6 +49,11 @@ public class CartaDano extends Carta {
     @Override
     public int getOpcaoCarta() {
         return this.opcaoCarta;
+    }
+
+    @Override
+    public RequisitoJogo cartaRequisito() {
+        return RequisitoJogo.INIMIGO;
     }
 
 }

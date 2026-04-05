@@ -2,6 +2,8 @@ package mc322.jogo.gerenciador;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import mc322.jogo.Cores;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
 import mc322.jogo.observer.Estados;
@@ -14,11 +16,6 @@ import mc322.jogo.observer.Estados;
 public class TurnoVilao {
     private GameManager gm;
 
-    public static final String NEGRITO = "\u001B[1m";
-    public static final String VERMELHO = "\u001B[31m";
-    public static final String RESET = "\u001B[0m";
-    public static final String AZUL = "\u001B[34m";
-
     public TurnoVilao(GameManager gm) {
         this.gm = gm;
     }
@@ -27,12 +24,12 @@ public class TurnoVilao {
     public void jogar(Inimigo enemy, ArrayList<Heroi> herois) {
 
         System.out
-                .println("\n" + VERMELHO + NEGRITO + "================== TURNO DO INIMIGO ==================" + RESET);
+                .println("\n" + Cores.VERMELHO + Cores.NEGRITO + "================== TURNO DO INIMIGO ==================" + Cores.RESET);
 
         /* notificar a entidade que é inicio do turno */
         gm.notificar(enemy, Estados.INICIO_DE_TURNO);
 
-        System.out.println(VERMELHO + "O " + enemy.getNome() + " está atacando..." + RESET);
+        System.out.println(Cores.VERMELHO + "O " + enemy.getNome() + " está atacando..." + Cores.RESET);
 
         ArrayList<Heroi> heroisVivos = new ArrayList<>();
         for (Heroi h : herois) {
@@ -51,20 +48,20 @@ public class TurnoVilao {
 
             if (enemy.getTipoCarta() == 0) {
 
-                System.out.println(enemy.getNome() + " usou '" + enemy.getNomeCarta() + "' e causou " + VERMELHO
-                        + enemy.getDano() + RESET + " de dano no " + alvo.getNome() + "!");
+                System.out.println(enemy.getNome() + " usou '" + enemy.getNomeCarta() + "' e causou " + Cores.VERMELHO
+                        + enemy.getDano() + Cores.RESET + " de dano no " + alvo.getNome() + "!");
 
             } else if (enemy.getTipoCarta() == 1) {
-                System.out.println(enemy.getNome() + " usou '" + enemy.getNomeCarta() + "' e ganhou " + AZUL
-                        + enemy.getEscudo() + RESET + " de escudo!");
+                System.out.println(enemy.getNome() + " usou '" + enemy.getNomeCarta() + "' e ganhou " + Cores.AZUL
+                        + enemy.getEscudo() + Cores.RESET + " de escudo!");
 
             } else if (enemy.getTipoCarta() == 2) {
-                System.out.println(enemy.getNome() + " usou '" + enemy.getNomeCarta() + AZUL + " ativou o efeito");
+                System.out.println(enemy.getNome() + " usou '" + enemy.getNomeCarta() + Cores.AZUL + " ativou o efeito");
             }
         }
         /* tenho que publicar que o turno do inimigo terminou */
         gm.notificar(enemy, Estados.FIM_DE_TURNO);
 
-        System.out.println(VERMELHO + NEGRITO + "======================================================\n" + RESET);
+        System.out.println(Cores.VERMELHO + Cores.NEGRITO + "======================================================\n" + Cores.RESET);
     }
 }

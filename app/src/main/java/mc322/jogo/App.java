@@ -21,9 +21,9 @@ public class App {
 
             if (escolha != 1) {
                 jogarNovamente = false;
-                System.out.println(Prints.VERDE + "\nObrigado! Até a próxima aventura." + Prints.RESET);
+                System.out.println(Cores.VERDE + "\nObrigado! Até a próxima aventura." + Cores.RESET);
             } else {
-                System.out.println(Prints.CIANO + "\nReiniciando... Vamos lá!\n" + Prints.RESET);
+                System.out.println(Cores.CIANO + "\nReiniciando... Vamos lá!\n" + Cores.RESET);
 
             }
 

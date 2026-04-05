@@ -1,5 +1,7 @@
 package mc322.jogo.cartas;
 
+import mc322.jogo.RequisitoJogo;
+import mc322.jogo.efeitos.Efeito;
 import mc322.jogo.efeitos.TiposEfeitos;
 import mc322.jogo.entidades.Entidade;
 
@@ -7,12 +9,12 @@ public class CartaEfeito extends Carta {
     protected TiposEfeitos tipo;
     protected int acumulos;
 
-    public CartaEfeito(String nome, String descricao, int custo, int opcaoCarta, TiposEfeitos tipo, int acumulos) {
+    public CartaEfeito(String nome, String descricao, int custo, int opcaoCarta, Efeito efeito, int acumulos) {
         this.nome = nome;
         this.descricao = descricao;
         this.custo = custo;
         this.opcaoCarta = opcaoCarta;
-        this.tipo = tipo;
+            
         this.acumulos = acumulos;
     }
 
@@ -64,7 +66,12 @@ public class CartaEfeito extends Carta {
 
     }
 
-    public TiposEfeitos getTipo() {
+    public TiposEfeitos getTipo() { //essa função já existe (depois exclui !!!)
         return this.tipo;
+    }
+
+    @Override
+    public RequisitoJogo cartaRequisito() {
+        return RequisitoJogo.INIMIGO;
     }
 }

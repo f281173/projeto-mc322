@@ -1,10 +1,10 @@
 package mc322.jogo.entidades;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 
+import mc322.jogo.Dados;
 import mc322.jogo.cartas.Baralho;
 import mc322.jogo.cartas.Carta;
-import mc322.jogo.cartas.CartaEscudo;
 import mc322.jogo.efeitos.Efeito;
 import mc322.jogo.efeitos.TiposEfeitos;
 import mc322.jogo.gerenciador.GameManager;
@@ -18,11 +18,9 @@ import mc322.jogo.observer.Estados;
 
 public class Heroi extends Entidade {
     private int energia;
-    private ArrayList<Carta> maoJogador;
-    private ArrayList<Carta> baralhoPessoal;
-    public static final String RESET = "\u001B[0m";
-    public static final String AZUL = "\u001B[34m";
-    public static final String NEGRITO = "\u001B[1m";
+    private int energiaAtual;
+    private MaoJogador maoJogador;
+    private Baralho baralhoPessoal;
 
     public Heroi(String nome, int vida, int escudo, int energia, int vidaInicial, int velocidade, boolean turno,
             GameManager gm) {
@@ -33,8 +31,10 @@ public class Heroi extends Entidade {
         this.vidaInicial = vidaInicial;
         this.velocidade = velocidade;
         this.turno = turno;
-        this.maoJogador = new ArrayList<>();
+        this.maoJogador = new MaoJogador(baralhoPessoal);
         this.gm = gm;
+        this.baralhoPessoal = Dados.carregarBaralhoGeral(); // tenho que mudar isso aqui para um baralho específico de
+                                                            // cada jogador.
         this.inicializaMap();
     }
 
@@ -43,26 +43,6 @@ public class Heroi extends Entidade {
 
         for (TiposEfeitos tipo : TiposEfeitos.values())
             this.mapEfeitos.put(tipo, null);
-    }
-
-    // Busca uma carta na mão do jogador pelo nome e retorna o seu índice (posição).
-    public int encontraNome(String nomeCarta) { // essa função não pode estar aqui
-        int i = 0;
-
-        while (i < this.maoJogador.size()) {
-            if (this.maoJogador.get(i).getNome().equals(nomeCarta))
-                return i;
-            i++;
-        }
-        return -1;
-    }
-
-    // Utiliza o método encontraNome para buscar e retornar o objeto Carta exato que
-    // está na mão.
-    public Carta encontraCarta(String nomeCarta) {
-        int i = encontraNome(nomeCarta);
-        Carta carta = this.maoJogador.get(i);
-        return carta;
     }
 
     @Override
@@ -88,7 +68,7 @@ public class Heroi extends Entidade {
     }
 
     @Override
-    public void ganhaEscudo(int valorEscudo) { 
+    public void ganhaEscudo(int valorEscudo) {
         this.escudo += valorEscudo;
     }
 
@@ -106,10 +86,6 @@ public class Heroi extends Entidade {
         }
     }
 
-    // Adiciona uma carta recém-comprada da loja pra mão do herói.
-    public void adicionaCard(Carta carta) {
-        this.maoJogador.add(carta);
-    }
 
     @Override
     public int getEscudo() {
@@ -130,38 +106,20 @@ public class Heroi extends Entidade {
         return this.vida;
     }
 
-    public void imprimeCartas() {
-        for (int i = 0; i < this.maoJogador.size(); i++) {
-            System.out.println(NEGRITO + i + RESET + "-" + AZUL + this.maoJogador.get(i).getNome() + RESET + " -  "
-                    + this.maoJogador.get(i).getDescricao());
-        }
+    public void imprimeMaoJogador() {
+        this.maoJogador.imprimeCartas();
     }
 
-    public ArrayList<Carta> getMaoJogador() {
+    public MaoJogador getMaoJogador() {
         return this.maoJogador;
     }
 
-    // Remove da mão e bota numa pilha de descarte
-    public void removeCartaMaoJogador(Baralho baralho, int i) {
-        Carta carta = this.maoJogador.remove(i);
-        baralho.adicionaPilhaDescarte(carta);
+    public void recebeCarta(Carta cartaEscolhida) {
+        this.getMaoJogador().ganhaCarta(cartaEscolhida);
     }
 
-    // Limpa a mão do herói, com aquelas q ele n usou. Manda pra pilha de descarte
-    public void resetaMaoJogador(Baralho baralho) {
-        int tamanho = this.maoJogador.size();
-
-        while (tamanho > 0) {
-            tamanho--;
-            baralho.adicionaPilhaDescarte(this.maoJogador.remove(tamanho));
-        }
-    }
-
-    /*essa lógica não precisa estar aqui e sim na mão */
-    public boolean maoVazia() {
-        if (this.maoJogador.size() == 0)
-            return true;
-        return false;
+    public boolean temCartaDisponivel() {
+        return !this.getMaoJogador().maoVazia();
     }
 
     @Override
@@ -223,5 +181,17 @@ public class Heroi extends Entidade {
 
     public boolean getHasEfeitoFraqueza() {
         return this.hasEfeitoFraqueza;
+    }
+
+    public void jogarCarta(int indiceCartaMao) {
+        /*validar se o heroi pode de fato usar a carta*/
+        Carta cartaEscolhida = this.getMaoJogador().removeCartaMaoJogador(indiceCartaMao); //posso criar um método que engloba os dois passos (perguntar pro ped)
+
+    }
+
+    public boolean temOpcaoCartaMao(int i) {
+        if (!this.temCartaDisponivel())
+            return false;
+        return this.getMaoJogador().isIndiceValido(i);
     }
 }

@@ -1,5 +1,6 @@
 package mc322.jogo.gerenciador;
 
+import mc322.jogo.Cores;
 import mc322.jogo.Dados;
 import mc322.jogo.Musica;
 import mc322.jogo.entidades.Entidade;
@@ -84,8 +85,8 @@ public class GameManager implements Publisher {
         oponente.gerarInimigos(dificuldade);
 
         // ------------------------------Equipe--------------------------
-        System.out.println("\n\n\n" + Prints.NEGRITO + "====================== SELEÇÃO DE EQUIPE ======================"
-                + Prints.RESET);
+        System.out.println("\n\n\n" + Cores.NEGRITO + "====================== SELEÇÃO DE EQUIPE ======================"
+                + Cores.RESET);
         jogador.escolherHerois(sc);
 
         Baralho deckGeral = Dados.carregarBaralhoGeral();
@@ -93,8 +94,8 @@ public class GameManager implements Publisher {
             inimigoSorteado.embaralhaBaralho();
         }
 
-        System.out.println("\n" + Prints.AMARELO + Prints.NEGRITO + "Preparando...  A BATALHA VAI COMEÇAR!"
-                + Prints.RESET + "\n\n");
+        System.out.println("\n" + Cores.AMARELO + Cores.NEGRITO + "Preparando...  A BATALHA VAI COMEÇAR!"
+                + Cores.RESET + "\n\n");
         dj.tocarMusica("../sons/Need_a_hero.wav");
         iniciarBatalha(jogador, oponente, sc, tela, deckGeral);
     }
@@ -141,7 +142,7 @@ public class GameManager implements Publisher {
                     if (entidadeAtual instanceof Heroi) {
                         Heroi heroiAtual = (Heroi) entidadeAtual;
                         System.out.println(
-                                Prints.CIANO + "\n>>> Turno de " + heroiAtual.getNome() + " <<<" + Prints.RESET);
+                                Cores.CIANO + "\n>>> Turno de " + heroiAtual.getNome() + " <<<" + Cores.RESET);
 
                         // O herói recebe o deckGeral e a lista de inimigos disponíveis
                         turnoHeroi.jogar(heroiAtual, jogador.getHeroisEscolhidos(), oponente.getInimigosEscolhidos(),

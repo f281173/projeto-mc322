@@ -1,5 +1,6 @@
 package mc322.jogo.cartas;
 
+import mc322.jogo.RequisitoJogo;
 import mc322.jogo.entidades.Entidade;
 
 public class CartaEscudo extends Carta {
@@ -16,7 +17,7 @@ public class CartaEscudo extends Carta {
     @Override
     public void usar(Entidade personagem, Baralho baralho) {
         personagem.ganhaEscudo(this.getEscudoGanho());
-        this.personagem = null;
+        this.personagem = null;  
         baralho.adicionaPilhaDescarte(this);
     }
 
@@ -42,6 +43,11 @@ public class CartaEscudo extends Carta {
     @Override
     public int getOpcaoCarta() {
         return this.opcaoCarta;
+    }
+
+    @Override
+    public RequisitoJogo cartaRequisito() {
+        return RequisitoJogo.NENHUM;
     }
 
 }
