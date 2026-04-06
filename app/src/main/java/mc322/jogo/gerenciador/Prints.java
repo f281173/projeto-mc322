@@ -1,6 +1,7 @@
 package mc322.jogo.gerenciador;
 
 import java.util.ArrayList;
+
 import mc322.jogo.Musica;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
@@ -109,4 +110,89 @@ public class Prints {
         System.out.println(Prints.NEGRITO + "=======================================" + Prints.RESET);
     }
 
+
+    public static final String DIALOGO_N1 = 
+        "Narrador: Era uma vez, num lugar tão tão distante, um ogro em seu pântano, que vivia sozinho, longe de tudo. Até que...\n" +
+        "Shrek: O que diabos esse bando de contos de fadas está fazendo no meu quintal?!\n" +
+        "Pinóquio: Lord Farquaad está atrás de todas as criaturas mágicas! Ele quer um reino perfeito, o caos está tomando conta!\n" +
+        "Aldeões: Ali estão eles, se escondendo atrás do ogro!! Peguem todos!\n" +
+        "Shrek: Haha. Na minha casa não.";
+
+
+    public static final String DIALOGO_N10 = 
+        "Criaturas mágicas: Você nos salvou, somos eternamente gratos.\\n" +
+        "Shrek: Tá,tá, agora saiam do meu pântano.\n" +
+        "Pinoquio: Não podemos, ele vai voltar a nos perseguir.\n"+
+        "Shrek: GRRR. Eu vou falar com ele.\n" +
+        "Narrador: Shrek então parte em uma viagem. Para ter seu pântano livre novamente. \n" +
+        "Narrador: No meio do caminho, Shrek encontra uma carruagem. Ele vê criaturas mágicas presas!\n"+
+        "Shrek: Esse lord é persistente mesmo\n"+
+        "Narrador: Shrek solta as criaturas. Entretanto um anão chega..\n"+
+        "Rumpelstiltskin: Eii! Estes caras eram meus. Meu poder, nãoooo!.\n" +
+        "Rumpelstiltskin: Você vai pagar por isso! Vou te derrotar e te prender igual aos outros. Você vai render bastante poder mágico.\n" +
+        "Shrek: Que? Pode tentar então!\n";
+
+
+    public static final String DIALOGO_N21 = 
+        "Narrador: No caminho Shrek vê um burro preso numa gaiola;\n"  +
+        "Burro: Ei! Você, cara fortão! Me salva desses caras!\n" +
+        "Shrek: Argh... lá se vai a minha paz.\n";
+
+
+
+    public static final String DIALOGO_N22 = 
+        "Narrador: No caminho Shrek vê um gato lutando contra um grupo de capangas\n"  +
+        "Gato: Ei besta grotesca! Me ajude!\n" +
+        "Shrek: Beleza, gatinho!\n ";
+
+
+    
+    public static final String DIALOGO_N5 = 
+        "Narrador: Shrek arromba as pesadas portas do Castelo de Duloc.\n" +
+        "Farquaad: Como um ogro imundo ousa interromper meu reino perfeito? Guardas, matem-no!\n" +
+        "Shrek: Eu só quero o meu pântano de volta, seu meio-metro de tirano!\n";
+
+
+
+    public static final String DIALOGO_N50 = 
+        "Farquaad (tossindo): Espere! Um acordo! Você é forte...\n" +
+        "Farquaad: Se descer até a masmorra vulcânica, derrotar o Dragão e me trazer a Princesa Fiona, devolvo seu pântano e prometo não deixar mais ninguém chegar lá!\n" +
+        "Você:.....hum";
+
+    public static final String DIALOGO_N61 = 
+        "Narrador: Apoś passar por vários obstáculos, você finalmente chega ao quarto da princesa\n" +
+        "Fiona: Finalmente, meu cavaleiro... Pera, você não tem um cavalo branco?\n" +
+        "Você: Menos papo, mais fuga. A lagartixa gigante acordou!";
+
+     public static final String DIALOGO_N7 = 
+        "Narrador: Voltando ao pântano, você avista um cavaleiro bonitão" +
+        "Príncipe Encantado: Aí está você. Você me roubou!\n" +
+        "Você: Pode vir!";
+
+
+    public static final String DIALOGO_N9 = 
+        "Narrador: Furiosa, a fada madrinha chega ao local\n" +
+        "Fada Madrinha: NINGUÉM toca no meu precioso!\n" +
+        "Você: Senhora, a culpa não é minha se o seu filho é um engomadinho insuportável.\n";
+
+    public static final String DIALOGO_N90 = 
+        "Fada: Nãoooo!\n" +
+        "Narrador: A Varinha da Fada quebra, mas você absorve parte do poder.\n";
+
+    public static final String DIALOGO_N100 =
+        "Narrador: Voltando ao pântano, cansados mas felizes, por que finalmente acabou.\n " +
+        "Narrador: Agora viverão felizes para sempr...\n" +
+        "Narrador: O ar fica pesado. A magia da Fada e a fumaça do Dragão começam a se juntar em um redemoinho...\n" +
+        "Rumepel: Eai criaturas, hehehe. Eu voltei, depois de coletar toda a magia solta pelo seu rastro de caos!\n" +
+        "Rumepel: Estou mais forte do que nunca. hahahaha\n" +
+        "Narrador: E a batalha final se inicia...\n" ;
+    
+
+
+
+
+        public static void limparTela() {
+            System.out.print("\033[H\033[2J");  
+            System.out.flush(); 
+    }
 }

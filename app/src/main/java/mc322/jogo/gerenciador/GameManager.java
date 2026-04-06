@@ -5,6 +5,10 @@ import mc322.jogo.Musica;
 import mc322.jogo.entidades.Entidade;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
+import mc322.jogo.mapa.Campanha;
+import mc322.jogo.mapa.EventoMapa;
+import mc322.jogo.mapa.NoMapa;
+import mc322.jogo.mapa.TipoEvento;
 import mc322.jogo.observer.Estados;
 import mc322.jogo.cartas.Baralho;
 import mc322.jogo.cartas.Carta;
@@ -85,49 +89,66 @@ public class GameManager implements Publisher {
 
     public void viajarPeloGrafo(NoMapa nodoAtual, Jogador jogador, Scanner sc, Prints tela) {
         
+        
         EventoMapa evento = nodoAtual.getEvento();
-        System.out.println("\n==================================================");
-        System.out.println("📍 VOCÊ CHEGOU EM: " + evento.getNomeFase());
-        System.out.println("📜 " + evento.getDialogo());
-        System.out.println("==================================================\n");
+        Prints.limparTela();  //talvez tenha q mudar de lugar
+        System.out.println(evento.getNomeFase());
+        System.out.println(evento.getDialogo());
+        
 
         if (evento.getTipo() == TipoEvento.BATALHA || evento.getTipo() == TipoEvento.BOSS) {
             Batalha arena = new Batalha();
             boolean sobreviveu = arena.executarCombate(jogador, evento.getOponente(), this, sc, tela);
             if (!sobreviveu) return; 
         } 
+
         else if (evento.getTipo() == TipoEvento.DESCANSO_BAR) {
             System.out.println(Prints.VERDE + "🍺 Você bebeu uma poção de lama no bar! Recuperou 30 de vida." + Prints.RESET);
-            // Lógica para recuperar vida dos heróis (ex: heroi.recebeCura(30))
+            
+            for (Heroi heroi : jogador.getHeroisEscolhidos()) {
+                if (heroi.estaVivo()) {
+                    heroi.curar(30); 
+                }
+            }
+            
         } 
+
         else if (evento.getTipo() == TipoEvento.ARMADILHA) {
             System.out.println(Prints.VERMELHO + "🕳️ Você caiu num buraco com espinhos! Perdeu 15 de vida." + Prints.RESET);
-            jogador.getHeroisEscolhidos().get(0).recebeDanoEfeito(15); 
+            for (Heroi heroi : jogador.getHeroisEscolhidos()) {
+                if (heroi.estaVivo()) {
+                    heroi.recebeDanoEfeito(15); 
+                }
+            }
         }
+
         else if (evento.getTipo() == TipoEvento.RECOMPENSA_CARTA) {
             Carta novaCarta = evento.getCartaRecompensa();
             if (novaCarta != null) {
                 System.out.println(Prints.AZUL + "📜 Você encontrou: " + novaCarta.getNome() + "!" + Prints.RESET);
                 // Código para adicionar a carta no baralho 
+
             }
         } 
 
 
         //companheiros
-        if (evento.getNomeFase().equals("21-Batalha Burro")) {
-            System.out.println(Prints.AZUL + "🐴 O Burro se juntou à sua equipe!" + Prints.RESET);
+        if (evento.getNomeFase().equals("Flor azul com espinhos vermelhos")) {
+            System.out.println(Prints.AZUL + " O Burro se juntou à sua equipe!" + Prints.RESET);
             Heroi burro = new Heroi("Burro", 80, 10, 7, 80, 50, true, this);
             jogador.adicionarHeroiTodos(burro);
             jogador.getHeroisEscolhidos().add(burro); 
         } 
-        else if (evento.getNomeFase().equals("22-Batalha Gato")) {
-            System.out.println(Prints.AZUL + "🐱 O Gato de Botas se juntou à sua equipe!" + Prints.RESET);
+
+        else if (evento.getNomeFase().equals("Flor vermelha com espinhos azuis")) {
+            System.out.println(Prints.AZUL + " O Gato de Botas se juntou à sua equipe!" + Prints.RESET);
             Heroi gato = new Heroi("Gato de Botas", 70, 15, 5, 70, 80, true, this);
             jogador.adicionarHeroiTodos(gato);
             jogador.getHeroisEscolhidos().add(gato);
         }
-        else if (evento.getNomeFase().equals("61-dragao/fiona")) {
-            System.out.println(Prints.AZUL + "👸 Princesa Fiona se juntou à sua equipe!" + Prints.RESET);
+
+        else if (evento.getNomeFase().equals("Entrando na masmorra")) {
+            System.out.println(Prints.AZUL + " Princesa Fiona se juntou à sua equipe!" + Prints.RESET);
             Heroi fiona = new Heroi("Fiona", 90, 25, 5, 90, 40, true, this);
             jogador.adicionarHeroiTodos(fiona);
             jogador.getHeroisEscolhidos().add(fiona);
@@ -146,11 +167,11 @@ public class GameManager implements Publisher {
 
         System.out.println("\nPara onde você quer ir agora?");
         for (int i = 0; i < proximos.size(); i++) {
-            System.out.println(i + " - " + proximos.get(i).getEvento().toString());
+            System.out.println(i + " - " + proximos.get(i).getEvento().getNomeFase());
         }
 
 
-        int escolha = -1;
+        int escolha;
         while (true) {
             System.out.print(Prints.NEGRITO + "Sua escolha: " + Prints.RESET);
             escolha = sc.nextInt();
@@ -166,3 +187,5 @@ public class GameManager implements Publisher {
     } 
 
 }
+
+

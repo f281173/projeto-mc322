@@ -57,6 +57,7 @@ public class Batalha {
         while (jogador.temHeroisVivos() && oponente.temInimigosVivos()) {
 
             // Olha quem já jogou
+            //Prints.limparTela(); //---------------olhar se deu errado
             for (Entidade entidades : ordemTurno) {
                 entidades.verificaseAtacou(false);
             }

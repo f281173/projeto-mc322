@@ -1,6 +1,7 @@
-package mc322.jogo.gerenciador;
+package mc322.jogo.mapa;
 
 import mc322.jogo.cartas.Carta;
+import mc322.jogo.gerenciador.Oponente;
 
 public class EventoMapa {
     private String nomeFase;
@@ -35,11 +36,7 @@ public class EventoMapa {
         return oponenteDaFase; 
     } 
     
-    @Override
-    public String toString() {
-        return this.nomeFase + " [" + this.tipo.name() + "]";
-    }
-
+    
     public void setCartaRecompensa(Carta carta){ 
         this.cartaRecompensa = carta; 
     }

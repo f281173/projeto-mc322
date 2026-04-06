@@ -1,10 +1,11 @@
 package mc322.jogo.entidades;
 
-import mc322.jogo.gerenciador.GameManager;
+import java.util.HashMap;
+
+import mc322.jogo.cartas.CartaEscudo;
 import mc322.jogo.efeitos.Efeito;
 import mc322.jogo.efeitos.TiposEfeitos;
-import mc322.jogo.cartas.CartaEscudo;
-import java.util.HashMap;
+import mc322.jogo.gerenciador.GameManager;
 
 public abstract class Entidade {
     protected String nome;
@@ -57,4 +58,11 @@ public abstract class Entidade {
 
     public abstract String statusEfeitos();
 
+    
+    public void curar(int cura) {
+        this.vida += cura;
+        if (this.vida > this.vidaInicial) {
+            this.vida = this.vidaInicial; 
+        }
+    }
 }

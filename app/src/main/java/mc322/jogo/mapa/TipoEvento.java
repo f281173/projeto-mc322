@@ -1,4 +1,4 @@
-package mc322.jogo.gerenciador;
+package mc322.jogo.mapa;
 
 
 public enum TipoEvento {
