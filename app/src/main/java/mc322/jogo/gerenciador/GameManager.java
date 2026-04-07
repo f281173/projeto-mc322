@@ -89,16 +89,15 @@ public class GameManager implements Publisher {
                 + Cores.RESET);
         jogador.escolherHerois(sc);
 
-        Baralho deckGeral = Dados.carregarBaralhoGeral();
 
         System.out.println("\n" + Cores.AMARELO + Cores.NEGRITO + "Preparando...  A BATALHA VAI COMEÇAR!"
                 + Cores.RESET + "\n\n");
         dj.tocarMusica("../sons/Need_a_hero.wav");
-        iniciarBatalha(jogador, oponente, sc, tela, deckGeral);
+        iniciarBatalha(jogador, oponente, sc, tela);
     }
 
     // Partida em si, gerencia os turnos
-    private void iniciarBatalha(Jogador jogador, Oponente oponente, Scanner sc, Prints tela, Baralho deckGeral) {
+    private void iniciarBatalha(Jogador jogador, Oponente oponente, Scanner sc, Prints tela) {
 
         // Junta os escolhidos dos heróis e vilões para decidir a ordem do turno
         ArrayList<Entidade> ordemTurno = new ArrayList<>();
@@ -143,7 +142,7 @@ public class GameManager implements Publisher {
 
                         // O herói recebe o deckGeral e a lista de inimigos disponíveis
                         turnoHeroi.jogar(heroiAtual, jogador.getHeroisEscolhidos(), oponente,
-                                tela, deckGeral, sc);
+                                tela, sc);
 
                         /* após um turno do heroi, podemos ter a morte de todos os inimigos */
                         if (!jogador.temHeroisVivos() || !oponente.temInimigosVivos())

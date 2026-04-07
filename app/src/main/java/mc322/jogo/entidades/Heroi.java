@@ -3,7 +3,6 @@ package mc322.jogo.entidades;
 import java.util.ArrayList;
 
 import mc322.jogo.Cores;
-import mc322.jogo.Dados;
 import mc322.jogo.RequisitoJogo;
 import mc322.jogo.cartas.Baralho;
 import mc322.jogo.cartas.Carta;
@@ -26,7 +25,7 @@ public class Heroi extends Entidade {
     private MaoJogador maoJogador;
     private Baralho baralhoPessoal;
 
-    public Heroi(String nome, int vida, int escudo, int energia, int vidaInicial, int velocidade, boolean turno,GameManager gm) {
+    public Heroi(String nome, int vida, int escudo, int energia, int vidaInicial, int velocidade, boolean turno,GameManager gm,  Baralho deck) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
@@ -36,7 +35,7 @@ public class Heroi extends Entidade {
         this.velocidade = velocidade;
         this.turno = turno;
         this.gm = gm;
-        this.baralhoPessoal = new Baralho(Dados.carregarBaralhoGeral()); // tenho que mudar isso aqui para um baralho específico de cada jogador.
+        this.baralhoPessoal = deck; // tenho que mudar isso aqui para um baralho específico de cada jogador.
         this.maoJogador = new MaoJogador(baralhoPessoal);
         this.listaEfeitos = new ArrayList<>();
     }
@@ -134,6 +133,11 @@ public class Heroi extends Entidade {
     @Override
     public boolean getTurno() {
         return this.turno;
+    }
+
+
+    public  Baralho getBaralhoPessoal() {
+        return this.baralhoPessoal;
     }
 
     @Override
