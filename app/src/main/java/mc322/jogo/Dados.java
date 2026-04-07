@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import mc322.jogo.cartas.Baralho;
 import mc322.jogo.cartas.CartaDano;
+import mc322.jogo.cartas.CartaDanoArea;
 import mc322.jogo.cartas.CartaEfeito;
 import mc322.jogo.cartas.CartaEscudo;
 import mc322.jogo.efeitos.EfeitoForca;
@@ -35,7 +36,7 @@ public class Dados {
                 deckShrek.adicionaBaralho(new CartaDano("Pântano tenebroso", "Dano: [Custo: 5 | Dano: 50] - É como o nome diz.. ", 5, 40));
                 deckShrek.adicionaBaralho(new CartaDano("Arroto do Ogro", "Dano: [Custo: 3 | Dano: 28] - Depois de uma garrafa de coca. ", 3, 28));
                 deckShrek.adicionaBaralho(new CartaDano("Fúria de Ogro", "Dano: [Custo: 2 | Dano: 18] - GRRRR", 2, 18));
-                // deckShrek.adicionaBaralho(new CartaDanoArea("TESTE AREA", "TÁ BALA ARTHUR ?", 4, 50));
+                deckShrek.adicionaBaralho(new CartaDanoArea("TESTE AREA", "TÁ BALA ARTHUR ?", 4, 50));
 
                 deckShrek.adicionaBaralho(new CartaEscudo("Beijo de amor verdadeiro", "Escudo: [Custo: 3 | Escudo: 30] - Aquece o coração." ,3, 30));
                 deckShrek.adicionaBaralho(new CartaEscudo("Pele Verde e Grossa", "Escudo: [Custo: 2 | Escudo: 25] - Muito verde, muito grossa.", 2, 25));
@@ -57,7 +58,9 @@ public class Dados {
                 deckBurro.adicionaBaralho(new CartaDano( "Falatório Infinito","Dano: [Custo: 3 | Dano: 32] - Confunde o inimigo enquanto causa dano leve.", 3, 32));
                 deckBurro.adicionaBaralho(new CartaDano( "Empurrão Desesperado", "Dano: [Custo: 4 | Dano: 40] - Burro avança sem pensar e causa dano médio.", 4, 40));
                 deckBurro.adicionaBaralho(new CartaDano( "Toma essa", "Dano: [Custo: 2 | Dano: 20] - Toma.", 2, 20));
-                
+                deckShrek.adicionaBaralho(new CartaDanoArea("TESTE AREA", "TÁ BALA ARTHUR ?", 4, 50));
+
+
                 deckBurro.adicionaBaralho(new CartaEscudo( "Proteção Improvisada","Escudo: [Custo: 3 | Escudo: 20] - Usa qualquer coisa como defesa.", 3, 20));
                 deckBurro.adicionaBaralho(new CartaEscudo( "Amizade Verdadeira","Escudo: [Custo: 4 | Escudo: 35] - O poder da amizade protege.",4, 35));
                 deckBurro.adicionaBaralho(new CartaEscudo( "Botas Velhas", "Escudo: [Custo: 1 | Escudo: 10] - Defesa simples, mas útil.", 1, 10));
@@ -76,7 +79,8 @@ public class Dados {
                 deckGato.adicionaBaralho(new CartaDano(  "Dança das Espadas", "Dano: [Custo: 4 | Dano: 42] - Uma sequência elegante de golpes.", 4, 42 ));
                 deckGato.adicionaBaralho(new CartaDano( "Golpe Crítico Felino", "Dano: [Custo: 5 | Dano: 55] - Ataque mortal com precisão felina.", 5, 55 ));
                 deckGato.adicionaBaralho(new CartaDano( "Miauuu", "Dano: [Custo: 1 | Dano: 15] - Miauu.", 1, 15 ));
-               
+               deckShrek.adicionaBaralho(new CartaDanoArea("TESTE AREA", "TÁ BALA ARTHUR ?", 4, 50));
+
                 deckGato.adicionaBaralho(new CartaEscudo( "Olhar Fofo", "Escudo: [Custo: 2 | Escudo: 15] - Desarma o inimigo emocionalmente.", 2, 15 ));
                 deckGato.adicionaBaralho(new CartaEscudo( "Esquiva Ágil", "Escudo: [Custo: 1 | Escudo: 30] - Movimentos rápidos evitam dano.", 1, 10));
                 deckGato.adicionaBaralho(new CartaEscudo( "Capa do Espadachim", "Escudo: [Custo: 3 | Escudo: 32] - Defesa leve e estilosa.", 3, 32));

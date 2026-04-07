@@ -35,7 +35,7 @@ public class TurnoHeroi {
         int opcaoCompra = 0;
         int cartasCompradas = 0;
         int limiteCompra = 3;
-        player.getBaralhoPessoal().criarPilhaCompra(6);
+        player.getBaralhoPessoal().criarPilhaCompra(4);
 
         /* vamos notificar que iniciou o turno para a entidade */
         gm.notificar(player, Estados.INICIO_DE_TURNO);
