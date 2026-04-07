@@ -1,7 +1,10 @@
 package mc322.jogo.entidades;
 
 import mc322.jogo.gerenciador.GameManager;
+import mc322.jogo.observer.Estados;
 import mc322.jogo.efeitos.Efeito;
+import mc322.jogo.efeitos.EfeitoForca;
+import mc322.jogo.efeitos.EfeitoFraqueza;
 import mc322.jogo.efeitos.TiposEfeitos;
 
 import java.util.ArrayList;
@@ -18,43 +21,167 @@ public abstract class Entidade {
     protected boolean turno;
     protected GameManager gm;
     protected int velocidade;
-    /*atributos para gerenciar os efeitos que estão agindo na entidade */
+
+    /** atributo para gerenciar os efeitos que estão agindo na entidade */
     protected ArrayList<Efeito> listaEfeitos;
 
-
-    /* método para gerar o dano partindo de uma carta de dano */
+    /** método para gerar o dano partindo de uma carta de dano */
     public abstract void recebeDano(int dano);
 
-    /* método para gerar o dano partindo de uma carta de Efeito */
+    /**
+     * método para gerar o dano partindo de uma carta de Efeito. O efeito veneno tem
+     * a peculiaridae de retirar o dono direto da vida.
+     * 
+     * @param dano: dano no oponente, já descontado de possíveis efeitos de fraqueza
+     */
     public abstract void recebeDanoEfeito(int dano);
 
-    public abstract boolean estaVivo();
+    public void ganhaEscudo(int valorEscudo) {
+        this.escudo += valorEscudo;
+    }
 
-    public abstract int getEscudo();
+    /** Método responsável por retirar o escudo da entidade a cada final de turno */
+    public void zeraEscudo() {
+        this.escudo = 0;
+    }
 
-    public abstract void ganhaEscudo(int valorEscudo);
+    public int getEscudo() {
+        return this.escudo;
+    }
 
-    public abstract void zeraEscudo(); 
+    public String getNome() {
+        return this.nome;
+    }
 
-    public abstract String getNome();
+    public int getVida() {
+        return this.vida;
+    }
 
-    public abstract int getVida();
+    public int getVidaInicial() {
+        return this.vidaInicial;
+    }
 
-    public abstract int getVidaInicial();
+    public int getVelocidade() {
+        return this.velocidade;
+    }
 
-    public abstract int getVelocidade();
+    public boolean getTurno() {
+        return this.turno;
+    }
 
-    public abstract boolean getTurno();
+    public void verificaseAtacou(boolean status) {
+        this.turno = status;
+    }
 
-    public abstract void verificaseAtacou(boolean status);
+    public boolean estaVivo() {
+        if (this.vida > 0)
+            return true;
+        return false;
+    }
 
-    public abstract void aplicarEfeito(Efeito efeito);
+    public ArrayList<Efeito> getListaEfeitos() {
+        return this.listaEfeitos;
+    }
 
-    /* retira o efeito da lista de efeitos daquela entidade */
-    public abstract void terminaEfeito(TiposEfeitos tipo);
+    /**
+     * Encontra o índice de um efeito na lista de efeitos da entidade. Caso
+     * não exista tal efeito, retorna-se -1
+     * 
+     * @param tipoAlvo o tipo de efeito buscado
+     * @return índice no vetor com a posição do efeito.
+     */
+    private int buscaEfeito(TiposEfeitos tipoAlvo) {
+        for (int i = 0; i < this.getListaEfeitos().size(); i++) {
+            Efeito efeito = getListaEfeitos().get(i);
 
-    public abstract void ataque(Entidade alvo, int valorDano); //preciso colocar isso em inimigo
+            if (efeito.getTipo() == tipoAlvo)
+                return i;
+        }
+        return -1; // não existe ainda esse efeito agindo no Heroi
+    }
 
-    public abstract void imprimeEfeitos();
+    /**
+     * Método responsável por inserir o efeito na lista de efeitos da
+     * Entidade.Primeiro,
+     * verifico se esse efeito já existe, caso sim implemento a lógica de acumúlos
+     * apropriada {@link EfeitoFraqueza} {@link EfeitoForca}
+     * para cada tipo de efeito.
+     * 
+     * @param efeito efeito que será aplicado por uma carta ou por um inimigo.
+     */
+    public void aplicarEfeito(Efeito efeito) {
+        int valor = this.buscaEfeito(efeito.getTipo());
+
+        /* significa que ainda não existe esse efeito nessa entidade */
+        if (valor == -1) {
+            Efeito novoEfeito = Efeito.criaEfeito(efeito);
+            novoEfeito.setDono(this);
+            this.getListaEfeitos().add(novoEfeito);
+
+            /* preciso inscrever cada efeito do modo correto */
+            if (novoEfeito.getTipo() == TiposEfeitos.VENENO) {
+                this.gm.inscrever(novoEfeito, Estados.INICIO_DE_TURNO);
+
+            } else if (novoEfeito.getTipo() == TiposEfeitos.FRAQUEZA) {
+                this.gm.inscrever(novoEfeito, Estados.ATAQUE);
+                this.gm.inscrever(novoEfeito, Estados.FIM_DE_TURNO);
+
+            } else if (novoEfeito.getTipo() == TiposEfeitos.FORCA) {
+                this.gm.inscrever(novoEfeito, Estados.ATAQUE);
+                this.gm.inscrever(novoEfeito, Estados.FIM_DE_TURNO);
+            }
+
+        } else {
+            /* decido como cada tipo de efeito vai se comportar */
+            if (efeito.getTipo() == TiposEfeitos.VENENO) {
+                this.getListaEfeitos().get(valor).aumentaAcumulos(efeito.getAcumulosInicial());
+
+            } else if (efeito.getTipo() == TiposEfeitos.FRAQUEZA) {
+                ((EfeitoFraqueza) this.getListaEfeitos().get(valor))
+                        .alteraFraqueza(((EfeitoFraqueza) efeito).getValorFraqueza(), efeito.getAcumulosInicial());
+
+            } else if (efeito.getTipo() == TiposEfeitos.FORCA) {
+                ((EfeitoForca) this.getListaEfeitos().get(valor)).alteraForca(((EfeitoForca) efeito).getValorForca(),
+                        efeito.getAcumulosInicial());
+            }
+        }
+    }
+
+    /**
+     * Retira o efeito da lista de efeitos daquela entidade
+     * 
+     * @param tipo: especifífica qual o tipo de efeito na lista de efeitos da
+     *              Entidade para que possa ser removido
+     * 
+     */
+    public void terminaEfeito(TiposEfeitos tipo) {
+        int indice = this.buscaEfeito(tipo);
+        this.getListaEfeitos().remove(indice);
+    }
+
+    /**
+     * Método abstrato que será implementado em cada entidade com a forma personalizada de ataque.
+     * Recebe o valor de dano base de uma carta ou de uma ação do Inimigo e caso a entidade esteja sob ação de
+     * algum efeito que modfique o dano, Ataque será o método que faz essa verificação. 
+     * 
+     * @param alvo Heroi ou vilão que será atacado
+     * @param valorDano valor de dano da carta para ser usada.
+     *   
+     */
+    public abstract void ataque(Entidade alvo, int valorDano); 
+
+    /** Método para impressão de todos os efeitos ativos naquela Entidade */
+    public void imprimeEfeitos() {
+
+        /*Somente será impresso alguma coisa se existirem efeitos ativos */
+        if (this.getListaEfeitos().size() > 0) {
+            System.out.println("=================================================================");
+            System.out.println("EFEITOS QUE ESTÃO EM AÇÃO EM: " + this.getNome());
+            for (Efeito efeito : this.getListaEfeitos()) {
+                System.out.println(this.getNome() + "está sob " + efeito.getString());
+            }
+            System.out.println("=================================================================");
+        }
+    }
 
 }

@@ -29,7 +29,19 @@ public class TurnoHeroi {
         this.gm = gm;
     }
 
-    // Turno de um herói específico
+    
+    /**
+     * Método responsável por gerenciar um Turno do Heroi com respeito a interação com o terminal.
+     * Responsável por gerenciar as entradas do usuário durante o turno do heroi, ou seja, as cartas
+     * escolhidas e as ações de ataacar, aplicar escudo ou aplicar efeito.
+     * 
+     * @param player Heroi que vai atacar nesse turno
+     * @param herois lista com todos os heróis escolhidos nessa batalha
+     * @param oponente lista com todos os inimigos escolhidos nessa batalha
+     * @param tela Classe com todos os prints de telas do jogo {@link Prints}
+     * @param deck
+     * @param sc Scanner do teclado.
+     */
     public void jogar(Heroi player, ArrayList<Heroi> herois, Oponente oponente, Prints tela, Baralho deck, Scanner sc) {
 
         player.zeraEscudo();
@@ -107,10 +119,7 @@ public class TurnoHeroi {
                         i = sc.nextInt();
                     }
 
-                    /*
-                     * A ideia desse switch é pedir a carta o que ela precisa para ser executada,
-                     * assim não perco o encapsulamento
-                     */
+                    /* A ideia desse switch é pedir a carta o que ela precisa para ser executada, assim não perco o encapsulamento*/
                     RequisitoJogo requisito = player.temRequisito(i); // pergunto o que preciso para a carta escolhida
                     String resposta;
 
@@ -147,7 +156,11 @@ public class TurnoHeroi {
                             resposta = player.jogarCarta(i, oponente.getInimigosEscolhidos());
                             System.out.println(resposta);
                             break;
+                        
+                            /*Aqui é quando o usuário pode escolher um novo companheiro Herói */
+                        case RequisitoJogo.TODOS_HEROIS:
 
+                            break;
                         default:
                             break;
                     }

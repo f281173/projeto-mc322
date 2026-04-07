@@ -38,6 +38,12 @@ public class MaoJogador {
         }
     }    
 
+    /**
+     * Método para jogar as cartas da mão do jogador para a pilha de descarte do Baralho.
+     * 
+     * @param 
+     * @return
+     */
     public Carta removeCartaMaoJogador(int i) {
         if (i >= this.mao.size()) {
             System.out.println("Voce escolheu uma carta inválida !! Tente novamente");

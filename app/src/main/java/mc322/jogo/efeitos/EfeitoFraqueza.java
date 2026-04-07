@@ -7,6 +7,12 @@ import mc322.jogo.observer.Estados;
 /**
  * O Efeito fraqueza diminui em uma porcentagem fixa o ataque de uma entidade
  * durante a quantidade de turnos respectiva a quantidade de acúmulos.
+ * 
+ * A lógica de acúmulos funciona de uma forma diferente, nesse caso soma-se os acúmulos
+ * caso seja aplicado mais um efeito, mas permanece a maior fraqueza. Dessa forma, caso
+ * tenha uma fraqueza de 50% e uma de 25%, será a de maior redução que passa agir durante
+ * todos os acúmulos
+ * 
  */
 public class EfeitoFraqueza extends Efeito {
     private int valorFraqueza;
@@ -48,6 +54,17 @@ public class EfeitoFraqueza extends Efeito {
         this.valorFraqueza = valorFraqueza;
     }
 
+    /**
+     * Esse método implementa a lógica de acúmulos para esse efeito. Veja que caso
+     * o efeito que será aplicado seja maior que o existente em termos de valor em porcentagem, então
+     * substituímos os efeitos e somamos os acúmulos
+     * 
+     * Não deixamos a aplicação de aumentos independentes em cada efeito. Como aumentar duas 
+     * vezes a força ou fraqueza em uma determinada porcentagem
+     * 
+     * @param valorFraqueza porcentagem de fraqueza do efeito que será aplicada
+     * @param acumulos quantidade de acúmulos do efeito.
+     */
     public void alteraFraqueza(int valorFraqueza, int acumulos) {
         if (this.getValorFraqueza() < valorFraqueza)
             this.setValorFraqueza(valorFraqueza);

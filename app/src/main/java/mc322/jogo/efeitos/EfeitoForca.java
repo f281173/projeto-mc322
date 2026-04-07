@@ -4,6 +4,14 @@ import mc322.jogo.RequisitoJogo;
 import mc322.jogo.gerenciador.GameManager;
 import mc322.jogo.observer.Estados;
 
+/**
+ * O Efeito Força aumenta em uma porcentagem fixa o ataque de uma entidade
+ * durante a quantidade de turnos respectiva a quantidade de acúmulos.
+ * 
+ * A lógica de acúmulos nesse feito funciona da mesma maneira que a lógica
+ * de acúmulos de {@link EfeitoFraqueza}, em que soma-se os acúmulos e o maior efeito de força ativo
+ * permanece durante todos os acúmulos
+ */
 public class EfeitoForca extends Efeito {
     private int valorForca;
 
@@ -44,6 +52,16 @@ public class EfeitoForca extends Efeito {
         this.valorForca = valorForca;
     }
 
+    /**
+     * Esse método implementa a lógica de acúmulos para esse efeito. Veja que caso
+     * o efeito que será aplicado seja maior que o existente em termos de valor em porcentagem, então
+     * substituímos os efeitos e somamos os acúmulos
+     * 
+     * Não deixamos a aplicação de aumentos independentes em cada efeito. Como aumentar duas 
+     * vezes a força ou fraqueza em uma determinada porcentagem
+     * @param valorForca valor em porcentagem do aumento da força
+     * @param acumulos inteiro representando a quantidade de acúmulos
+     */
     public void alteraForca(int valorForca, int acumulos) {
         if (this.getValorForca() < valorForca)
             this.setValorForca(valorForca);

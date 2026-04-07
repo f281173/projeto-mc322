@@ -13,14 +13,18 @@ import mc322.jogo.observer.Estados;
 /**
  * Classe responsável por representar os adversários do jogo.
  * Herda de Entidade e possui uma mecânica de combate automática baseada
- * em um baralho pré-definido.
+ * em um sistema de ações pré-definido. 
+ * 
+ * @author Arthur Nascimento
  */
 
 public class Inimigo extends Entidade {
 
-    private ArrayList<AcaoInimigo> sistemaAcoes; //atributo com as ações que esse inimigo tem logo quando o bixinho nasce.
+    /** Vetor com todas as ações possíveis para cada Inimigo.*/
+    private ArrayList<AcaoInimigo> sistemaAcoes; 
 
-    public Inimigo(String nome, int vida, int escudo, int vidaInicial, int velocidade, boolean turno, GameManager gm, ArrayList<AcaoInimigo> sistemaAcoes) {
+    public Inimigo(String nome, int vida, int escudo, int vidaInicial, int velocidade, boolean turno, GameManager gm,
+            ArrayList<AcaoInimigo> sistemaAcoes) {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
@@ -28,15 +32,23 @@ public class Inimigo extends Entidade {
         this.velocidade = velocidade;
         this.turno = turno;
         this.sistemaAcoes = sistemaAcoes;
-
         this.gm = gm;
         this.listaEfeitos = new ArrayList<>();
     }
 
+    /**
+     * Método para adicionar uma nova ação ao atributo sistemadeAcoes.
+     * 
+     * @param acao uma nova ação entre as implementadas na interface {@link AcaoInimigo}
+     */
     public void adicionaAcao(AcaoInimigo acao) {
         this.sistemaAcoes.add(acao);
     }
 
+    /**
+     * Método para disponibilizar o tamanho do vetor de ações de cada inimigo
+     * @return tamanho do vetor
+     */
     public int getTamanhoSistemaAcoes() {
         return this.sistemaAcoes.size();
     }
@@ -74,131 +86,22 @@ public class Inimigo extends Entidade {
     }
 
     public void ataque(Entidade alvo, int valorDano) {
-        /*vamos ver quais são os efeitos na lista de efeitos que alterar o valor do dano */
-        for (Efeito efeito: this.listaEfeitos) {
+    /* vamos ver quais são os efeitos na lista de efeitos que alterar o valor do dano*/
+        for (Efeito efeito : this.listaEfeitos) {
             if (efeito.getTipo() == TiposEfeitos.FRAQUEZA) {
                 double fator = (100.0 - ((EfeitoFraqueza) efeito).getValorFraqueza()) / 100;
-                valorDano = (int)(valorDano * fator); // aqui fiz o truncamento para baixo.
+                valorDano = (int) (valorDano * fator); // aqui fiz o truncamento para baixo.
             }
 
             if (efeito.getTipo() == TiposEfeitos.FORCA) {
                 double fator = (100.0 + ((EfeitoForca) efeito).getValorForca()) / 100;
-                valorDano = (int)(valorDano * fator); // aqui fiz o truncamento para baixo
-
+                valorDano = (int) (valorDano * fator); // aqui fiz o truncamento para baixo
 
             }
         }
-        /*publico que o inimigo vai atacar */
+        /* publico que o inimigo vai atacar */
         gm.notificar(this, Estados.ATAQUE);
         alvo.recebeDano(valorDano);
     }
 
-    @Override
-    public void ganhaEscudo(int valorEscudo) {
-        this.escudo += valorEscudo;
-    }
-
-    @Override
-    public void zeraEscudo() {
-        this.escudo = 0;
-    }
-
-    @Override
-    public int getEscudo() {
-        return this.escudo;
-    }
-
-    @Override
-    public String getNome() {
-        return this.nome;
-    }
-
-    @Override
-    public int getVida() {
-        return this.vida;
-    }
-
-    @Override
-    public int getVidaInicial() {
-        return this.vidaInicial;
-    }
-
-    @Override
-    public int getVelocidade() {
-        return this.velocidade;
-    }
-
-    @Override
-    public boolean getTurno() {
-        return this.turno;
-    }
-
-    // Olha se já atacou
-    @Override
-    public void verificaseAtacou(boolean status) {
-        this.turno = status;
-    }
-
-    /* vale questionar se isso deve estar aqui ou não */
-    private int buscaEfeito(TiposEfeitos tipoAlvo) {
-        for (int i = 0; i < this.listaEfeitos.size(); i++) {
-            Efeito efeito = listaEfeitos.get(i);
-
-            if (efeito.getTipo() == tipoAlvo)
-                return i;
-        }
-        return -1; // não existe ainda esse efeito agindo no Heroi
-    }
-
-    public void aplicarEfeito(Efeito efeito) {
-        int valor = this.buscaEfeito(efeito.getTipo());
-
-        /* significa que ainda não existe esse efeito nessa entidade */
-        if (valor == -1) {
-            Efeito novoEfeito = Efeito.criaEfeito(efeito);
-            novoEfeito.setDono(this);
-            this.listaEfeitos.add(novoEfeito);
-
-            /* preciso inscrever cada efeito do modo correto */
-            if (novoEfeito.getTipo() == TiposEfeitos.VENENO) {
-                this.gm.inscrever(novoEfeito, Estados.INICIO_DE_TURNO);
-
-            } else if (novoEfeito.getTipo() == TiposEfeitos.FRAQUEZA) {
-                this.gm.inscrever(novoEfeito, Estados.ATAQUE);
-                this.gm.inscrever(novoEfeito, Estados.FIM_DE_TURNO);
-
-            } else if (novoEfeito.getTipo() == TiposEfeitos.FORCA) {
-                this.gm.inscrever(novoEfeito, Estados.ATAQUE);
-                this.gm.inscrever(novoEfeito, Estados.FIM_DE_TURNO);
-            }
-
-        } else {
-            /* decido como cada tipo de efeito vai se comportar */
-            if (efeito.getTipo() == TiposEfeitos.VENENO) {
-                this.listaEfeitos.get(valor).aumentaAcumulos(efeito.getAcumulosInicial());
-
-            } else if (efeito.getTipo() == TiposEfeitos.FRAQUEZA) {
-                ((EfeitoFraqueza) this.listaEfeitos.get(valor))
-                        .alteraFraqueza(((EfeitoFraqueza) efeito).getValorFraqueza(), efeito.getAcumulosInicial());
-
-            } else if (efeito.getTipo() == TiposEfeitos.FORCA) {
-                ((EfeitoForca) this.listaEfeitos.get(valor)).alteraForca(((EfeitoForca)efeito).getValorForca(), efeito.getAcumulosInicial());
-            }
-        }
-    }
-
-    @Override
-    public void terminaEfeito(TiposEfeitos tipo) {
-        int indice = this.buscaEfeito(tipo);
-        this.listaEfeitos.remove(indice);
-    }
-
-    public void imprimeEfeitos() {
-        System.out.println("=================================================================");
-        System.out.println("EFEITOS QUE ESTÃO EM AÇÃO EM: " + this.getNome());
-        for (Efeito efeito : this.listaEfeitos) {
-            System.out.println(this.getNome() + "está sob "+ efeito.getString());
-        }
-        System.out.println("=================================================================");
-    }
 }

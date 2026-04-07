@@ -63,7 +63,7 @@ public class Dados {
                                 new CartaDano("Invocação do Dragão Aliado", "Custa 5 de energia e causa 50 de dano", 5,
                                                 50));
 
-                /*Cartas de dano em áera*/
+                /* Cartas de dano em áera */
                 deck.adicionaBaralho(new CartaDanoArea("TESTE AREA", "TÁ BALA ARTHUR ?", 4, 50));
                 deck.adicionaBaralho(new CartaDanoArea("TESTE AREA", "TÁ BALA ARTHUR ?", 4, 50));
                 deck.adicionaBaralho(new CartaDanoArea("TESTE AREA", "TÁ BALA ARTHUR ?", 4, 50));
@@ -105,10 +105,14 @@ public class Dados {
                 deck.adicionaBaralho(new CartaEfeito("Banho de Lama",
                                 "Custa 2 de energia. Aplica 50% de Fraqueza. Deixa as armas do inimigo escorregadias.",
                                 2, (new EfeitoFraqueza(5, gm, 50))));
-                deck.adicionaBaralho(new CartaEfeito("TESTE CARTA FORCA", "TESTE AUMENTA 25% FORCA", 3, (new EfeitoForca(5, gm, 25))));
-                deck.adicionaBaralho(new CartaEfeito("TESTE CARTA FORCA", "TESTE AUMENTA 25% FORCA", 3, (new EfeitoForca(5, gm, 25))));
-                deck.adicionaBaralho(new CartaEfeito("TESTE CARTA FORCA", "TESTE AUMENTA 25% FORCA", 3, (new EfeitoForca(5, gm, 25))));
-                deck.adicionaBaralho(new CartaEfeito("TESTE CARTA FORCA", "TESTE AUMENTA 25% FORCA", 3, (new EfeitoForca(5, gm, 25))));
+                deck.adicionaBaralho(new CartaEfeito("TESTE CARTA FORCA", "TESTE AUMENTA 25% FORCA", 3,
+                                (new EfeitoForca(5, gm, 25))));
+                deck.adicionaBaralho(new CartaEfeito("TESTE CARTA FORCA", "TESTE AUMENTA 25% FORCA", 3,
+                                (new EfeitoForca(5, gm, 25))));
+                deck.adicionaBaralho(new CartaEfeito("TESTE CARTA FORCA", "TESTE AUMENTA 25% FORCA", 3,
+                                (new EfeitoForca(5, gm, 25))));
+                deck.adicionaBaralho(new CartaEfeito("TESTE CARTA FORCA", "TESTE AUMENTA 25% FORCA", 3,
+                                (new EfeitoForca(5, gm, 25))));
 
                 return deck;
         }

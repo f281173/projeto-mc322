@@ -5,6 +5,12 @@ import mc322.jogo.RequisitoJogo;
 import mc322.jogo.entidades.Entidade;
 import mc322.jogo.gerenciador.GameManager;
 
+/**
+ * Classe abstrada para implementar a base de diversos efeitos do Jogo.
+ * O efeito é quem é responsável por receber a notificação
+ * de uma determinada ação do jogo, que pode ser vista em {@link Estados} para a ação do efeito.
+ * (Efeito é o Subscriber do padrão Observer).
+ */
 public abstract class Efeito implements Subscriber {
     protected String nome;
     protected Entidade dono;
@@ -43,7 +49,6 @@ public abstract class Efeito implements Subscriber {
         return this.acumulosInicial;
     }
 
-    @Override
     public Entidade getDono() {
         return this.dono;
     }
@@ -60,11 +65,24 @@ public abstract class Efeito implements Subscriber {
         return this.tipo;
     }
 
+    /**
+     * Método para indicar para a classe que interage com o usuário quais são os 
+     * requisitos necessários para a ação desse efeito.
+     * 
+     * @return retorna uma constante disponíveis em  {@link RequisitoJogo}
+     */
     public abstract RequisitoJogo requisitoEfeito();
 
     public abstract void acaoEfeito();
 
-    /* Nosso padrão para criar qualquer tipo de efeito */
+    /**
+     * Um método responsável por ser uma fábrica de criar objetos  do tipo
+     * Efeito, dai podemos usar um único método para criar ou fazer uma cópia de um Efeito
+     * já existente 
+     *  
+     * @param efeito O efeito que será copiado 
+     * @return retorna um novo tipo efeito.
+     */
     public static Efeito criaEfeito(Efeito efeito) {
         if (efeito.getTipo() == TiposEfeitos.VENENO) {
             return new EfeitoVeneno((EfeitoVeneno) efeito);

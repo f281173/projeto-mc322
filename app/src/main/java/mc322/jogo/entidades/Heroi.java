@@ -73,18 +73,8 @@ public class Heroi extends Entidade {
         this.escudo = 0;
     }
 
-    @Override
-    public boolean estaVivo() {
-        if (this.vida > 0)
-            return true;
-        return false;
-    }
 
 
-    @Override
-    public int getEscudo() {
-        return this.escudo;
-    }
 
     public int getEnergiaAtual() {
         return this.energiaAtual;
@@ -94,15 +84,6 @@ public class Heroi extends Entidade {
         this.energiaAtual = this.energiaAtual - custo;
     }
 
-    @Override
-    public String getNome() {
-        return this.nome;
-    }
-
-    @Override
-    public int getVida() {
-        return this.vida;
-    }
 
     public void imprimeMaoJogador() {
         this.maoJogador.imprimeCartas();
@@ -120,83 +101,9 @@ public class Heroi extends Entidade {
         return !this.getMaoJogador().maoVazia();
     }
 
-    @Override
-    public int getVidaInicial() {
-        return this.vidaInicial;
-    }
-
-    @Override
-    public int getVelocidade() {
-        return this.velocidade;
-    }
-
-    // Pra ver se já jogou ou não naquela rodada
-    @Override
-    public boolean getTurno() {
-        return this.turno;
-    }
-
-    @Override
-    public void verificaseAtacou(boolean status) {
-        this.turno = status;
-    }
 
     public void resetaEnergia() {
         this.energiaAtual = this.energiaInicial;
-    }
-
-    /*vale questionar se isso deve estar aqui ou não*/
-    private int buscaEfeito(TiposEfeitos tipoAlvo) {
-        for (int i = 0; i < this.listaEfeitos.size(); i ++) {
-            Efeito efeito = listaEfeitos.get(i);
-
-            if (efeito.getTipo() == tipoAlvo)
-                return i;
-        }
-        return -1; // não existe ainda esse efeito agindo no Heroi
-    }
-
-    @Override 
-    public void aplicarEfeito(Efeito efeito) {
-        int valor = this.buscaEfeito(efeito.getTipo());
-
-        /* significa que ainda não existe esse efeito nessa entidade */
-        if (valor == -1) {
-            Efeito novoEfeito = Efeito.criaEfeito(efeito);
-            novoEfeito.setDono(this);
-            this.listaEfeitos.add(novoEfeito);
-
-            /* preciso inscrever cada efeito do modo correto */
-            if (novoEfeito.getTipo() == TiposEfeitos.VENENO) {
-                this.gm.inscrever(novoEfeito, Estados.INICIO_DE_TURNO);
-
-            } else if (novoEfeito.getTipo() == TiposEfeitos.FRAQUEZA) {
-                this.gm.inscrever(novoEfeito, Estados.ATAQUE);
-                this.gm.inscrever(novoEfeito, Estados.FIM_DE_TURNO);
-
-            } else if (novoEfeito.getTipo() == TiposEfeitos.FORCA) {
-                this.gm.inscrever(novoEfeito, Estados.ATAQUE);
-                this.gm.inscrever(novoEfeito, Estados.FIM_DE_TURNO);
-            }
-
-        } else {
-            /*decido como cada tipo de efeito vai se comportar*/
-            if (efeito.getTipo() == TiposEfeitos.VENENO) {
-                this.listaEfeitos.get(valor).aumentaAcumulos(efeito.getAcumulosInicial());
-
-            } else if (efeito.getTipo() == TiposEfeitos.FRAQUEZA) {
-                ((EfeitoFraqueza) this.listaEfeitos.get(valor)).alteraFraqueza(((EfeitoFraqueza)efeito).getValorFraqueza(), efeito.getAcumulosInicial());
-
-            } else if (efeito.getTipo() == TiposEfeitos.FORCA) {
-                ((EfeitoForca) this.listaEfeitos.get(valor)).alteraForca(((EfeitoForca)efeito).getValorForca(), efeito.getAcumulosInicial());
-            }
-        }
-    }
-
-    @Override
-    public void terminaEfeito(TiposEfeitos tipo) {
-        int indice = this.buscaEfeito(tipo);
-        this.listaEfeitos.remove(indice);
     }
 
     public RequisitoJogo temRequisito(int indice) {
@@ -207,7 +114,7 @@ public class Heroi extends Entidade {
 
     public void ataque(Entidade alvo, int valorDano) {
         /*vamos ver quais são os efeitos na lista de efeitos que alterar o valor do dano */
-        for (Efeito efeito: this.listaEfeitos) {
+        for (Efeito efeito: this.getListaEfeitos()) {
             if (efeito.getTipo() == TiposEfeitos.FRAQUEZA) {
                 double fator = (100.0 - ((EfeitoFraqueza) efeito).getValorFraqueza()) / 100;
                 valorDano = (int)(valorDano * fator); // aqui fiz o truncamento para baixo.
@@ -280,12 +187,4 @@ public class Heroi extends Entidade {
         return Cores.NEGRITO + Cores.VERMELHO + "\n⚠️ VOCÊ NÃO TEM MAIS ENERGIA!" + Cores.RESET; // carta descartada sem o jogador conseguir usar.
     }
 
-    public void imprimeEfeitos() {
-        System.out.println("=================================================================");
-        System.out.println("EFEITOS QUE ESTÃO EM AÇÃO EM: " + this.getNome());
-        for (Efeito efeito : this.listaEfeitos) {
-            System.out.println(this.getNome() + "está sob "+ efeito.getString());
-        }
-        System.out.println("=================================================================");
-    }
 }
