@@ -122,14 +122,14 @@ public class Prints {
     public static final String DIALOGO_N10 = 
         AZUL + NEGRITO + "Criaturas mágicas: " + RESET + "Você nos salvou, somos eternamente gratos.\n" +
         AZUL + NEGRITO + "Shrek: " + RESET + "Tá, tá, agora saiam do meu pântano.\n" +
-        AZUL + NEGRITO + "Pinóquio: " + RESET + "Não podemos, ele vai voltar a nos perseguir.\n" +
+        AZUL + NEGRITO + "Porco: " + RESET + "Não podemos, ele vai voltar a nos perseguir.\n" +
         AZUL + NEGRITO + "Shrek: " + RESET + "GRRR. Eu vou falar com ele.\n" +
         NEGRITO + "Narrador: " + RESET + "Shrek então parte em uma viagem. Para ter seu pântano livre novamente.\n" +
         NEGRITO + "Narrador: " + RESET + "No meio do caminho, Shrek encontra uma carruagem. Ele vê criaturas mágicas presas!\n" +
         AZUL + NEGRITO + "Shrek: " + RESET + "Esse lord é persistente mesmo.\n" +
         NEGRITO + "Narrador: " + RESET + "Shrek solta as criaturas. Entretanto um anão chega...\n" +
-        VERMELHO + NEGRITO + "Rumpelstiltskin: " + RESET + "Eii! Estes caras eram meus. Meu poder, nãoooo!\n" +
-        VERMELHO + NEGRITO + "Rumpelstiltskin: " + RESET + "Você vai pagar por isso! Vou te derrotar e te prender igual aos outros. Você vai render bastante poder mágico.\n" +
+        VERMELHO + NEGRITO + "Caçador: " + RESET + "Eii! Estes caras eram meus. Meu dinheiro, nãoooo!\n" +
+        VERMELHO + NEGRITO + "Caçador: " + RESET + "Você vai pagar por isso! Vou te derrotar e te prender igual aos outros. Você deve valer bastante.\n" +
         AZUL + NEGRITO + "Shrek: " + RESET + "Que? Pode tentar então!\n";
 
 
@@ -162,39 +162,41 @@ public class Prints {
 
     public static final String DIALOGO_N50 = 
         VERMELHO + NEGRITO + "Farquaad (tossindo): " + RESET + "Espere! Um acordo! Você é forte...\n" +
-        VERMELHO + NEGRITO + "Farquaad: " + RESET + "Se descer até a masmorra vulcânica, derrotar o Dragão e me trazer a Princesa Fiona, devolvo seu pântano e prometo não deixar mais ninguém chegar lá!\n" +
+        VERMELHO + NEGRITO + "Farquaad: " + RESET + "Se descer até a torre perdida, derrotar a bruxa velha e me trazer a Princesa Fiona, devolvo seu pântano e prometo não deixar mais ninguém chegar lá!\n" +
         AZUL + NEGRITO + "Você: " + RESET + ".....hum\n";
 
     public static final String DIALOGO_N61 = 
         NEGRITO + "Narrador: " + RESET + "Após passar por vários obstáculos, você finalmente chega ao quarto da princesa.\n" +
         AZUL + NEGRITO + "Fiona: " + RESET + "Finalmente, meu cavaleiro... Pera, você não tem um cavalo branco?\n" +
-        AZUL + NEGRITO + "Você: " + RESET + "Menos papo, mais fuga. A lagartixa gigante acordou!\n";
+        AZUL + NEGRITO + "Você: " + RESET + "Menos papo, mais fuga. A bruxa velha  pode acordar!\n" +
+        AZUL + NEGRITO + "Bruxa velha: " + RESET + "Já acordei, hihihi!\n";;
 
 
 
      public static final String DIALOGO_N7 = 
-        NEGRITO + "Narrador: " + RESET + "Voltando ao pântano, você avista um cavaleiro bonitão.\n" +
-        VERMELHO + NEGRITO + "Príncipe Encantado: " + RESET + "Aí está você. Você me roubou!\n" +
+        NEGRITO + "Narrador: " + RESET + "Voltando ao pântano, você avista um cavaleiro com uma marreta.\n" +
+        VERMELHO + NEGRITO + "Cavaleiro da Marreta: " + RESET + "Aí está você. Você me roubou!\n" +
         AZUL + NEGRITO + "Você: " + RESET + "Pode vir!\n";
 
 
 
     public static final String DIALOGO_N9 = 
-        NEGRITO + "Narrador: " + RESET + "Furiosa, a fada madrinha chega ao local.\n" +
-        VERMELHO + NEGRITO + "Fada Madrinha: " + RESET + "NINGUÉM toca no meu precioso!\n" +
-        AZUL + NEGRITO + "Você: " + RESET + "Senhora, a culpa não é minha se o seu filho é um engomadinho insuportável.\n";
+        NEGRITO + "Narrador: " + RESET + "Furioso, Thelonius chega ao local.\n" +
+        VERMELHO + NEGRITO + "Thelonius: " + RESET + "Meu amigo marreta, você o destruiu!\n" +
+        AZUL + NEGRITO + "Você: " + RESET + "Colega, a culpa não é minha se o seu amigo é fraco.\n";
 
     public static final String DIALOGO_N90 = 
-        VERMELHO + NEGRITO + "Fada: " + RESET + "Nãoooo!\n" +
-        NEGRITO + "Narrador: " + RESET + "A Varinha da Fada quebra, mas você absorve parte do poder.\n";
+        VERMELHO + NEGRITO + "Thelonius: " + RESET + "Nãoooo! Não vai ficar assim. \n" + 
+        "Narrador: Thelonius pega o apito e..... PIIIIIIIIIIIIII, Thelonius cai no chão." +
+        NEGRITO + "Narrador: " + RESET + "A capa mágica de Thelonius rasga, mas você absorve parte do poder.\n";
 
 
     public static final String DIALOGO_N100 = 
-        NEGRITO + "Narrador: " + RESET + "Voltando ao pântano, cansados mas felizes, porque finalmente acabou.\n" +
-        NEGRITO + "Narrador: " + RESET + "Agora viverão felizes para sempr...\n" +
-        NEGRITO + "Narrador: " + RESET + "O ar fica pesado. A magia da Fada e a fumaça do Dragão começam a se juntar em um redemoinho...\n" +
-        VERMELHO + NEGRITO + "Rumpel: " + RESET + "Eai criaturas, hehehe. Eu voltei, depois de coletar toda a magia solta pelo seu rastro de caos!\n" +
-        VERMELHO + NEGRITO + "Rumpel: " + RESET + "Estou mais forte do que nunca. hahahaha\n" +
+        NEGRITO + "Narrador: " + RESET + "Não muito tempo depois do apito, vocês escutam um rugido.\n" +
+        NEGRITO + "Narrador: " + RESET + "Um dragão surge dos céus...\n" +
+        NEGRITO + "Narrador: " + RESET + "O ar fica pesado. O tempo escurece, fumaças saem das narinas do Dragão...\n" +
+        VERMELHO + NEGRITO + "Dragão: " + RESET + "ROARRRRR!\n" +
+        VERMELHO + NEGRITO + "Shrek: " + RESET + "Tá de brincadeira\n" +
         NEGRITO + "Narrador: " + RESET + "E a batalha final se inicia...\n";
     
 
