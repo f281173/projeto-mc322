@@ -22,6 +22,11 @@ public class MaoJogador {
         this.mao = new ArrayList<>();
     }
 
+    /**
+     * Método para colocar uma carta no vetor que representa a mão do jogador.
+     * 
+     * @param cartaEscolhida objeto Carta que vai para a mão do jogador.
+     */
     public void ganhaCarta(Carta cartaEscolhida) {
         this.getMaoJogador().add(cartaEscolhida);
     }
@@ -55,6 +60,12 @@ public class MaoJogador {
         return carta;
     }
 
+    /**
+     * Método executado todo final de turno para devolver todas as cartas não jogadas
+     * da mão do jogador para o seu Baralho.
+     * 
+     * @param baralho baralho pessoal do Heroi, que tem o atributo MãoJogador.
+     */
    public void limpaMaoJogador(Baralho baralho) {
         int tamanho = this.getMaoJogador().size();
 
@@ -82,6 +93,13 @@ public class MaoJogador {
         return this.baralhoMaoJogador;
     }
 
+    /**
+     * Método para verificar se o índice escolhido entre as opções
+     * do usuário é um índice valido que de fato escolhe uma Carta.
+     * 
+     * @param i indice escolhido pelo usuário.
+     * @return booleano para dar a resposta se foi validado ou não.
+     */
     public boolean isIndiceValido(int i) {
         if (i < this.mao.size())
             return true;

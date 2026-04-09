@@ -76,7 +76,7 @@ public class Dados {
                 deckBurro.adicionaBaralho(new CartaDano("Empurrão Desesperado",
                                 "Dano: [Custo: 4 | Dano: 40] - Burro avança sem pensar e causa dano médio.", 4, 40));
                 deckBurro.adicionaBaralho(new CartaDano("Toma essa", "Dano: [Custo: 2 | Dano: 20] - Toma.", 2, 20));
-                deckShrek.adicionaBaralho(new CartaDanoArea("burro TESTE AREA", "TÁ BALA ARTHUR ?", 4, 50));
+                deckBurro.adicionaBaralho(new CartaDanoArea("burro ataque de surto", "SAI DA FRENTE QUE É COICE EM TODO MUNDO", 4, 50));
 
                 deckBurro.adicionaBaralho(new CartaEscudo("Proteção Improvisada",
                                 "Escudo: [Custo: 3 | Escudo: 20] - Usa qualquer coisa como defesa.", 3, 20));
@@ -86,7 +86,7 @@ public class Dados {
                                 new CartaEscudo("Botas Velhas",
                                                 "Escudo: [Custo: 1 | Escudo: 10] - Defesa simples, mas útil.", 1, 10));
 
-                deckShrek.adicionaBaralho(new CartaEfeito("A gente já chegou?",
+                deckBurro.adicionaBaralho(new CartaEfeito("A gente já chegou?",
                                 "Efeito: [Custo: 4 | Turnos: 8 | Veneno] - A gente já chegou?", 4,
                                 (new EfeitoVeneno(8, gm))));
                 deckBurro.adicionaBaralho(new CartaEfeito("Motivação do Burro",
@@ -106,7 +106,7 @@ public class Dados {
                 deckGato.adicionaBaralho(new CartaDano("Golpe Crítico Felino",
                                 "Dano: [Custo: 5 | Dano: 55] - Ataque mortal com precisão felina.", 5, 55));
                 deckGato.adicionaBaralho(new CartaDano("Miauuu", "Dano: [Custo: 1 | Dano: 15] - Miauu.", 1, 15));
-                deckShrek.adicionaBaralho(new CartaDanoArea("gato TESTE AREA", "TÁ BALA ARTHUR ?", 4, 50));
+                deckGato.adicionaBaralho(new CartaDanoArea("gato e o El Bigodon Federal", "SAI DA FRENTE", 4, 50));
 
                 deckGato.adicionaBaralho(new CartaEscudo("Olhar Fofo",
                                 "Escudo: [Custo: 2 | Escudo: 15] - Desarma o inimigo emocionalmente.", 2, 15));

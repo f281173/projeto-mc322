@@ -2,7 +2,6 @@ package mc322.jogo.entidades;
 
 import java.util.ArrayList;
 
-import mc322.jogo.Cores;
 import mc322.jogo.efeitos.Efeito;
 import mc322.jogo.efeitos.EfeitoForca;
 import mc322.jogo.efeitos.EfeitoFraqueza;
@@ -89,6 +88,7 @@ public class Inimigo extends Entidade {
         return false;
     }
 
+    @Override
     public void ataque(Entidade alvo, int valorDano) {
         /*
          * vamos ver quais são os efeitos na lista de efeitos que alterar o valor do

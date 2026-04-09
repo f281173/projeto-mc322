@@ -51,7 +51,7 @@ public class TurnoVilao {
 
             /* sorteia um heroi pra bater */
             Random gerador = new Random();
-            Heroi alvo = heroisVivos.get(gerador.nextInt(heroisVivos.size()));
+            Heroi alvo = heroisVivos.get(gerador.nextInt(heroisVivos.size()));;
 
             /* sorteia uma ação para ser executada */
             AcaoInimigo acao = enemy.getSistemaAcoes().get(gerador.nextInt(enemy.getTamanhoSistemaAcoes()));

@@ -41,7 +41,7 @@ public class CartaEfeito extends Carta {
     @Override
     public String usar(Entidade dono, Entidade alvo, ArrayList<Inimigo> inimigos) {
         alvo.aplicarEfeito(this.efeito);
-        return Cores.AZUL + "\n Você ativou " + this.getNome() + " e aplicou o " + this.getNome() + " : " + this.getDescricao() + Cores.RESET;
+        return Cores.AZUL + "\n Você ativou " + this.getNome() + " e aplicou o " + this.getNome() + " : " + this.getDescricao() + " em " + alvo.getNome()+ Cores.RESET;
     }
 
     @Override

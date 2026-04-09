@@ -22,7 +22,8 @@ import java.util.HashMap;
 
 public class GameManager implements Publisher {
     /*
-     * Um hashMap com as chaves sendo os dicionários de estados e os valores lista
+     * Um hashMap com as chaves sendo os estados
+     * possíveis no jogo e os valores  a lista
      * de subscribers
      */
     private HashMap<Estados, ArrayList<Subscriber>> efeitosAtivos;
@@ -32,6 +33,10 @@ public class GameManager implements Publisher {
         this.inicializaEfeitosAtivos();
     }
 
+    /**
+     * Método para inicializar o hashMap com os observadores
+     * interessados em cada estado do jogo
+     */
     public void inicializaEfeitosAtivos() {
         this.efeitosAtivos = new HashMap<>();
 
@@ -62,7 +67,13 @@ public class GameManager implements Publisher {
         }
     }
 
-    // Prepara a partida, escolhendo a dificuldade e equipe
+    /**
+     * Método para construir a partida escolhendo os herois
+     * para formar a equipe de batalha
+     * 
+     * @param sc Scanner de leitura de dados do teclado
+     * @param tela para impressão no terminal.
+     */
     public void prepararPartida(Scanner sc, Prints tela) {
 
         tela.comeco();
@@ -95,7 +106,15 @@ public class GameManager implements Publisher {
         iniciarBatalha(jogador, oponente, sc, tela);
     }
 
-    // Partida em si, gerencia os turnos
+    /**
+     * Método para gerenciar a Batalha no que tange a ordem dos turnos pelo atributo 
+     * velocidade de cada Heroi.
+     * 
+     * @param jogador Objeto que representa todos os Herois fazendo parte de um único jogador (usuário)
+     * @param oponente Objeto para gerenciar os inimigos
+     * @param sc Objeto Scanner para leitura de dados do teclado
+     * @param tela Objeto com métodos para impressão no terminal.
+     */
     private void iniciarBatalha(Jogador jogador, Oponente oponente, Scanner sc, Prints tela) {
 
         // Junta os escolhidos dos heróis e vilões para decidir a ordem do turno

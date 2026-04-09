@@ -4,6 +4,10 @@ import mc322.jogo.Cores;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
 
+/**
+ * Classe que implementa AçãoInimigo e tem a função de
+ * criar uma ação de dar escudo para o inmigo em um turno.
+ */
 public class AcaoEscudo implements AcaoInimigo {
     private String nomeAcao;
     private int valorEscudo;

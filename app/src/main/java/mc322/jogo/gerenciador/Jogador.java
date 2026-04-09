@@ -17,12 +17,22 @@ public class Jogador {
     private ArrayList<Heroi> todosHerois = new ArrayList<>();
     private ArrayList<Heroi> heroisEscolhidos = new ArrayList<>();
 
-    // Adiciona os heróis à lista de todos os heróis
+   /**
+    * Método para carregar um Heroi presente em dados para dentro 
+    * do objeto Jogador.
+    * 
+    * @param heroi Objeto Heroi que foi adicionado na batalha.
+    */
     public void adicionarHeroiTodos(Heroi heroi) {
         this.todosHerois.add(heroi);
     }
 
-    // Interface com atributos dos heróis para o jogador montar sua equipe
+    /**
+     * Método para que o usuário possa escolher quais herois  já
+     * criados em {@link Dados} vão fazer parte da batalha.
+     * 
+     * @param sc Objeto Scanner para leitura de dados do telado.
+     */
     public void escolherHerois(Scanner sc) {
         System.out.println("Heróis Disponíveis:");
         for (int i = 0; i < todosHerois.size(); i++) {
@@ -68,7 +78,10 @@ public class Jogador {
         return this.heroisEscolhidos;
     }
 
-    // Verifica se tem algum herói vivo
+    /**
+     * Método para verificar se ainda existe algum heroi da batalha vivo.
+     * @return booleano true para se existem e false caso contrário.
+     */
     public boolean temHeroisVivos() {
         for (Heroi h : heroisEscolhidos) {
             if (h.estaVivo()) {

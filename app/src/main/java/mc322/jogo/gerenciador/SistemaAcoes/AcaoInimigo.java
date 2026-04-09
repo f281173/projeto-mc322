@@ -12,6 +12,14 @@ import mc322.jogo.entidades.Inimigo;
  * EFEITOS: tem efeitos que ele pode aplicar em um oponente
  */
 public interface AcaoInimigo {
+    /**
+     * Método para executar uma ação genérica (será implementado
+     * por cada ação específica) pelo inimigo.
+     * 
+     * @param dono a qual Inimigo paritu aquela ação
+     * @param alvo Quem o inimigo quer de fato atingir com a ação.
+     * @return
+     */
     public String executar(Inimigo dono, Heroi alvo);
-    
+
 }

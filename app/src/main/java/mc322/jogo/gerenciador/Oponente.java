@@ -13,12 +13,23 @@ public class Oponente {
     private ArrayList<Inimigo> todosInimigos = new ArrayList<>();
     private ArrayList<Inimigo> inimigosEscolhidos = new ArrayList<>();
 
-    // Adiciona os vilões à lista de todos os vilões
+    /**
+     * Método para adicionar um Vilão nono no nosso jogo
+     * @param enemy novo vilão para o jogo.
+     */
     public void adicionarInimigoTodos(Inimigo enemy) {
         this.todosInimigos.add(enemy);
     }
 
-    // Todos os inimigos escolhidos, é aleatório e baseado na dificuldade
+   /**
+    * Método para gerar os inimigos para a batalha, baseado em 
+    * dificuldade.
+    * 
+    * @param dificuldade escolha do usuário, que pode ser
+    * 1 - fácil (apenas 1 inimigo)
+    * 2 - médio (2 inimigos)
+    * 3 - difícil (3 inimigos)
+    */
     public void gerarInimigos(int dificuldade) {
         this.inimigosEscolhidos.clear();
 
@@ -31,7 +42,7 @@ public class Oponente {
         }
     }
 
-    /* método para imprimir os inimigos vivos que foram escolhidos naquele jogo */
+    /** método para imprimir os inimigos vivos que foram escolhidos naquele jogo */
     public void imprimeInimigosVivos() {
         for (int j = 0; j < this.inimigosEscolhidos.size(); j++) {
             if (this.inimigosEscolhidos.get(j).estaVivo()) {
@@ -41,7 +52,12 @@ public class Oponente {
         }
     }
 
-    /*método para validar escolha do usuário*/
+    /**
+     * método para validar escolha do usuário
+     * 
+     * @param alvoEscolhido inteiro que é escolhido pelo usuário (representa um índice do vetor de inimigos)
+     * @return um booleano para dizer se a escolha é valida ou não
+     */
     public boolean validaEscolhaInimigo(int alvoEscolhido) {
         if (alvoEscolhido >= 0 && alvoEscolhido < this.inimigosEscolhidos.size() && this.inimigosEscolhidos.get(alvoEscolhido).estaVivo())
             return true;
@@ -52,7 +68,11 @@ public class Oponente {
         return this.inimigosEscolhidos;
     }
 
-    // Olha se tem alguém vivo no time de inimigos
+    /**
+     * Método para verificar se ainda existem inimigos vivos no combate
+     * 
+     * @return booleano true se existir e false caso contrário.
+     */
     public boolean temInimigosVivos() {
         for (Inimigo i : inimigosEscolhidos) {
             if (i.estaVivo()) {

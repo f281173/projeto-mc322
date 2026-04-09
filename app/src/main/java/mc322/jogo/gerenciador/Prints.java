@@ -32,6 +32,8 @@ public class Prints {
      * @param inimigos   vetor com todo os inmigos escolhidos para aquela Batalha
      */
     public void status_batalha(Heroi heroiAtual, ArrayList<Heroi> herois, ArrayList<Inimigo> inimigos) {
+        heroiAtual.imprimeEfeitos();
+        System.out.println();
         System.out.println(
                 "\n" + Cores.NEGRITO + "=================== STATUS DA BATALHA ===================" + Cores.RESET);
 
@@ -42,6 +44,11 @@ public class Prints {
         System.out.println(Cores.NEGRITO + "=========================================================" + Cores.RESET);
     }
 
+    /**
+     * Método responsável por imprimir a energia do Heroi na tela
+     * 
+     * @param energia inteiro que representa o atritbuto energia do herói
+     */
     public void energia(int energia) {
         System.out.println(Cores.AMARELO + "⚡ Energia: " + Cores.RESET + energia + " disponíveis");
     }
@@ -84,7 +91,7 @@ public class Prints {
                         + Cores.VERDE + "[VIVO] " + h.getVida() + "/" + h.getVidaInicial() + Cores.RESET
                         + " de vida  | "
                         + Cores.AZUL + "🛡️  " + h.getEscudo() + Cores.RESET + " de escudo"
-                        + heroiAtual.statusEfeitoForca() + " " + heroiAtual.statusEfeitoFraqueza());
+                        + h.statusEfeitoForca() + " " + h.statusEfeitoFraqueza());
             } else {
 
                 System.out.println(Cores.CIANO + Cores.NEGRITO + h.getNome() + Cores.RESET + " "
@@ -94,9 +101,10 @@ public class Prints {
     }
 
     /**
-     * Método responsável por gerenciar a tela do momento de compra de cartas de cada Herói em seu turno.
+     * Método responsável por gerenciar a tela do momento de compra de cartas de
+     * cada Herói em seu turno.
      * 
-     * @param limiteCompra Limite de compras de cartas em um único turno
+     * @param limiteCompra    Limite de compras de cartas em um único turno
      * @param cartasCompradas quantidade de cartas que já foram compradas.
      */
     public void faseCompra(int limiteCompra, int cartasCompradas) {
@@ -108,7 +116,8 @@ public class Prints {
     }
 
     /**
-     * Método responsável pela tela no ínicio da batalha, logo após a fase de compra.
+     * Método responsável pela tela no ínicio da batalha, logo após a fase de
+     * compra.
      */
     public void faseBatalha() {
         System.out.println("1 - Ver mão");
@@ -117,6 +126,13 @@ public class Prints {
         System.out.print(Cores.NEGRITO + "Escolha: " + Cores.RESET);
     }
 
+    /**
+     * Método que imprime a tela de fim de jogo.
+     * 
+     * @param player objeto que gerencia os heróis (necessário para verificar qual
+     *               está vivo)
+     * @param dj     objeto musica para trocar para uma outra música.
+     */
     public void fimDeJogo(Jogador player, Musica dj) {
         if (!player.temHeroisVivos()) {
             dj.tocarMusica("../sons/I_need_sleep.wav");

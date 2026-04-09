@@ -119,6 +119,7 @@ public class Heroi extends Entidade {
         return carta.cartaRequisito();
     }
 
+    @Override
     public void ataque(Entidade alvo, int valorDano) {
         /*
          * verifica quais os efeitos estão presente na lista de efeitos e se impactam no
@@ -204,5 +205,4 @@ public class Heroi extends Entidade {
         }
         return Cores.NEGRITO + Cores.VERMELHO + "\n⚠️ VOCÊ NÃO TEM MAIS ENERGIA!" + Cores.RESET;
     }
-
 }

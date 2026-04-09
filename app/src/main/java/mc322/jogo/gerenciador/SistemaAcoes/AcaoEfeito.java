@@ -6,6 +6,10 @@ import mc322.jogo.efeitos.TiposEfeitos;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
 
+/**
+ * Classe que implementa a AçãoInimigo e tem a função
+ * de criar um ação de efeito para o inimigo.
+ */
 public class AcaoEfeito implements AcaoInimigo {
     private String nomeAcao;
     private Efeito efeito;
@@ -24,7 +28,7 @@ public class AcaoEfeito implements AcaoInimigo {
 
         else if (this.efeito.getTipo() == TiposEfeitos.VENENO)
             alvo.aplicarEfeito(efeito);
-        return dono.getNome() + " usou '" + this.nomeAcao + Cores.AZUL + " ativou " + this.efeito.getString();
+        return dono.getNome() + " usou '" + this.nomeAcao + Cores.AZUL + " ativou " + this.efeito.getString() + " em " + alvo.getNome();
     }
 
     public String getnomeAcao() {
