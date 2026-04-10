@@ -36,7 +36,7 @@ public class CartaDanoArea extends CartaDano {
             }
 
         }
-        return Cores.VERMELHO + "\n⚔️ Você usou " + this.getNome() + " no " + " em todos os inimigos "
+        return Cores.VERMELHO + "\n⚔️ Você usou " + this.getNome() + " em " + " todos os inimigos "
                 + " e causou dano! " + Cores.RESET;
     }
 
