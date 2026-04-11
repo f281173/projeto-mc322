@@ -63,7 +63,6 @@ public class TurnoHeroi {
         while (opcaoCompra != ENCERRAR_FASE_COMPRA && oponente.temInimigosVivos() && cartasCompradas < limiteCompra
                 && player.estaVivo()) {
             
-            player.imprimeEfeitos();
             tela.status_batalha(player, herois.getHeroisEscolhidos(), oponente.getInimigosEscolhidos());
             tela.energia(player.getEnergiaAtual());
             tela.faseCompra(limiteCompra, cartasCompradas);
