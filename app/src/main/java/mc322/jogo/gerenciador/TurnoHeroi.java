@@ -7,6 +7,7 @@ import mc322.jogo.RequisitoJogo;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.observer.Estados;
 
+
 /**
  * Classe responsável por gerenciar a interação do jogador durante o turno de um
  * Herói.
@@ -203,4 +204,6 @@ public class TurnoHeroi {
         player.limpaMao();
         gm.notificar(player, Estados.FIM_DE_TURNO);
     }
+
 }
+

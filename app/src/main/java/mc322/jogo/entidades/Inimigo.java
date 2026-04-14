@@ -110,6 +110,8 @@ public class Inimigo extends Entidade {
         gm.notificar(this, Estados.ATAQUE);
         alvo.recebeDano(valorDano);
     }
+
+
 }
 
 

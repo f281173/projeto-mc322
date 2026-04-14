@@ -244,4 +244,14 @@ public abstract class Entidade {
         return "";
     }
 
+
+    
+
+    
+    public void curar(int cura) {
+        this.vida += cura;
+        if (this.vida > this.vidaInicial) {
+            this.vida = this.vidaInicial; 
+        }
+    }
 }

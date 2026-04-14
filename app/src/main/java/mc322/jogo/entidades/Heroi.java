@@ -109,6 +109,11 @@ public class Heroi extends Entidade {
         return this.baralhoPessoal;
     }
 
+    public void ganhaCarta(Carta carta) {
+            this.baralhoPessoal.adicionaBaralho(carta);
+        }
+    
+
     /**
      * Método para receber a informação dos requisitos da carta que o Herói vai
      * jogar.
@@ -171,9 +176,7 @@ public class Heroi extends Entidade {
     public String jogarCarta(int indiceCartaMao, Heroi heroi) {
         /* validar se o heroi pode de fato usar a carta */
         Carta cartaEscolhida = this.getMaoJogador().removeCartaMaoJogador(indiceCartaMao);
-
         int custo = cartaEscolhida.getCusto();
-
         if (this.analisaEnergia(custo)) {
             String resposta = cartaEscolhida.usar(this, heroi, null);
             return resposta; // significa que a carta foi usada com sucesso
@@ -233,4 +236,7 @@ public class Heroi extends Entidade {
         }
         return Cores.NEGRITO + Cores.VERMELHO + "\n⚠️ VOCÊ NÃO TEM MAIS ENERGIA!" + Cores.RESET;
     }
+
+    
+
 }

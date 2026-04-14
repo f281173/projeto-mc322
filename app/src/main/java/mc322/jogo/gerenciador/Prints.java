@@ -165,4 +165,139 @@ public class Prints {
             System.out.print("\033[H\033[2J");  
             System.out.flush(); 
     }
+
+
+    public static final String DIALOGO_N1 = 
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Era uma vez, num lugar tão tão distante, um ogro em seu pântano, que vivia sozinho, longe de tudo. Até que...\n" +
+        Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "O que diabos esse bando de contos de fadas está fazendo no meu quintal?!\n" +
+        Cores.AZUL + Cores.NEGRITO + "Pinóquio: " + Cores.RESET + "Lord Farquaad está atrás de todas as criaturas mágicas! Ele quer um reino perfeito, o caos está tomando conta!\n" +
+        Cores.VERMELHO + Cores.NEGRITO + "Aldeões: " + Cores.RESET + "Ali estão eles, se escondendo atrás do ogro!! Peguem todos!\n" +
+        Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Haha. Na minha casa não.\n";
+
+
+    public static final String DIALOGO_N10 = 
+        Cores.AZUL + Cores.NEGRITO + "Criaturas mágicas: " + Cores.RESET + "Você nos salvou, somos eternamente gratos.\n" +
+        Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Tá, tá, agora saiam do meu pântano.\n" +
+        Cores.AZUL + Cores.NEGRITO + "Porco: " + Cores.RESET + "Não podemos, ele vai voltar a nos perseguir.\n" +
+        Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "GRRR. Eu vou falar com ele.\n" +
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Shrek então parte em uma viagem. Para ter seu pântano livre novamente.\n" +
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "No meio do caminho, Shrek encontra uma carruagem. Ele vê criaturas mágicas presas!\n" +
+        Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Esse lord é persistente mesmo.\n" +
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Shrek solta as criaturas. Entretanto um anão chega...\n" +
+        Cores.VERMELHO + Cores.NEGRITO + "Caçador: " + Cores.RESET + "Eii! Estes caras eram meus. Meu dinheiro, nãoooo!\n" +
+        Cores.VERMELHO + Cores.NEGRITO + "Caçador: " + Cores.RESET + "Você vai pagar por isso! Vou te derrotar e te prender igual aos outros. Você deve valer bastante.\n" +
+        Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Que? Pode tentar então!\n";
+
+
+
+    public static final String DIALOGO_N21 = 
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "No caminho Shrek vê um burro preso numa gaiola.\n" +
+        Cores.AZUL + Cores.NEGRITO + "Burro: " + Cores.RESET + "Ei! Você, cara fortão! Me salva desses caras!\n" +
+        Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Argh... lá se vai a minha paz.\n";
+
+
+
+
+    public static final String DIALOGO_N22 = 
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "No caminho Shrek vê um gato lutando contra um grupo de capangas.\n" +
+        Cores.AZUL + Cores.NEGRITO + "Gato: " + Cores.RESET + "Ei besta grotesca! Me ajude!\n" +
+        Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Beleza, gatinho!\n";
+
+
+
+
+    
+    public static final String DIALOGO_N5 = 
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Shrek arromba as pesadas portas do Castelo de Duloc.\n" +
+        Cores.VERMELHO + Cores.NEGRITO + "Farquaad: " + Cores.RESET + "Como um ogro imundo ousa interromper meu reino perfeito? Guardas, matem-no!\n" +
+        Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Eu só quero o meu pântano de volta, seu meio-metro de tirano!\n";
+
+
+
+
+
+    public static final String DIALOGO_N50 = 
+        Cores.VERMELHO + Cores.NEGRITO + "Farquaad (tossindo): " + Cores.RESET + "Espere! Um acordo! Você é forte...\n" +
+        Cores.VERMELHO + Cores.NEGRITO + "Farquaad: " + Cores.RESET + "Se descer até a torre perdida, derrotar a bruxa velha e me trazer a Princesa Fiona, devolvo seu pântano e prometo não deixar mais ninguém chegar lá!\n" +
+        Cores.AZUL + Cores.NEGRITO + "Você: " + Cores.RESET + ".....hum\n";
+
+    public static final String DIALOGO_N61 = 
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Após passar por vários obstáculos, você finalmente chega ao quarto da princesa.\n" +
+        Cores.AZUL + Cores.NEGRITO + "Fiona: " + Cores.RESET + "Finalmente, meu cavaleiro... Pera, você não tem um cavalo branco?\n" +
+        Cores.AZUL + Cores.NEGRITO + "Você: " + Cores.RESET + "Menos papo, mais fuga. A bruxa velha  pode acordar!\n" +
+        Cores.AZUL + Cores.NEGRITO + "Bruxa velha: " + Cores.RESET + "Já acordei, hihihi!\n";;
+
+
+
+     public static final String DIALOGO_N7 = 
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Voltando ao pântano, você avista um cavaleiro com uma marreta.\n" +
+        Cores.VERMELHO + Cores.NEGRITO + "Cavaleiro da Marreta: " + Cores.RESET + "Aí está você. Você me roubou!\n" +
+        Cores.AZUL + Cores.NEGRITO + "Você: " + Cores.RESET + "Pode vir!\n";
+
+
+
+    public static final String DIALOGO_N9 = 
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Furioso, Thelonius chega ao local.\n" +
+        Cores.VERMELHO + Cores.NEGRITO + "Thelonius: " + Cores.RESET + "Meu amigo marreta, você o destruiu!\n" +
+        Cores.AZUL + Cores.NEGRITO + "Você: " + Cores.RESET + "Colega, a culpa não é minha se o seu amigo é fraco.\n";
+
+    public static final String DIALOGO_N90 = 
+        Cores.VERMELHO + Cores.NEGRITO + "Thelonius: " + Cores.RESET + "Nãoooo! Não vai ficar assim. \n" + 
+        "Narrador: Thelonius pega o apito e..... PIIIIIIIIIIIIII, Thelonius cai no chão." +
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "A capa mágica de Thelonius rasga, mas você absorve parte do poder.\n";
+
+
+    public static final String DIALOGO_N100 = 
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Não muito tempo depois do apito, vocês escutam um rugido.\n" +
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Um dragão surge dos céus...\n" +
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "O ar fica pesado. O tempo escurece, fumaças saem das narinas do Dragão...\n" +
+        Cores.VERMELHO + Cores.NEGRITO + "Dragão: " + Cores.RESET + "ROARRRRR!\n" +
+        Cores.VERMELHO + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Tá de brincadeira\n" +
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "E a batalha final se inicia...\n";
+    
+
+    
+    public static void PrintaMapa(String faseAtual) {
+        String mapa = 
+        "                                     [Inicio]\n" +
+        "                                        |\n" +
+        "                                    [Batalha]\n" +
+        "                                        |\n" +
+        "                             [Acampamento do Caçador]\n" +
+        "                                        |\n" +
+        "                                   [Encruzilhada]\n" +
+        "                              /                         \\\n" +
+        "        [Flor azul com espinhos vermelhos]             [Flor vermelha com espinhos azuis]\n" +
+        "               /                \\                                     /               \\\n" +
+        "      [Caminho bonito]         [Caminho tortuoso]              [Tempo na fogueira]       [Floresta à noite]\n" +
+        "         |         \\                \\                              |                   |\n" +
+        " [Floresta densa] [Seguir pelo rio] [Passar pela ponte]    [Cabana do caçador] [Seguindo pela floresta]\n" +
+        "         \\              \\          /                            /                    /\n" +
+        "          \\______________\\________/____________________________/____________________/\n" +
+        "                                         |\n" +
+        "                                 [Castelo de Duloc]\n" +
+        "                                          |\n" +
+        "                                      [Proposta]\n" +
+        "                                   /          \\\n" +
+        "                              [Vamos lá]   [Quero não!]\n" +
+        "                                  |                |\n" +
+        "                    [Torre da Bruxa Velha] [Volta para o pântano]\n" +
+        "                                 \\                /\n" +
+        "                                  \\              /\n" +
+        "                                    [Na floresta]\n" +
+        "                                  /             \\\n" +
+        "                       [Voltar agora]     [Descansar um pouco e voltar depois]\n" +
+        "                                 \\             /\n" +
+        "                                [Seguir jornada]\n" +
+        "                                        |\n" +
+        "                                    [Continuar]\n" +
+        "                                          |\n" +
+        "                                  [I need a hero]\n";
+
+        mapa = mapa.replace("[" + faseAtual + "]", Cores.VERDE + Cores.NEGRITO + "[" + faseAtual + " 📍]" + Cores.RESET);
+
+        System.out.println(mapa);
+    }
+
 }
+

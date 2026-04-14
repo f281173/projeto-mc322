@@ -28,80 +28,78 @@ public class Dados {
          */
         private static GameManager gm;
 
-        public static ArrayList<Heroi> carregarHerois() {
-                ArrayList<Heroi> herois = new ArrayList<>();
+        public static Heroi criarShrek(GameManager gm) {
+            /** Baralho do Personagem Shrek */
+            Baralho deckShrek = new Baralho();
+
+            deckShrek.adicionaBaralho(
+                            new CartaDano("Soco do Ogro", "Dano: [Custo: 3 | Dano: 30] - Um jab de direita.", 3,
+                                            30));
+            deckShrek.adicionaBaralho(
+                            new CartaDano("Pântano Tenebroso", "Dano: [Custo: 5 | Dano: 50] - É como o nome diz.. ",
+                                            5, 40));
+            deckShrek.adicionaBaralho(new CartaDano("Arroto do Ogro",
+                            "Dano: [Custo: 3 | Dano: 28] - Depois de uma garrafa de coca. ", 3, 28));
+            deckShrek.adicionaBaralho(new CartaDano("Fúria de Ogro", "Dano: [Custo: 2 | Dano: 18] - GRRRR", 2, 18));
+
+            deckShrek.adicionaBaralho(new CartaDanoArea("Faz o Urro!", "[Custo: 5 | Dano: 60 ÁREA] UUUAAAAAAAAAAHHHHHHHH", 5, 60)); 
+
+            deckShrek.adicionaBaralho(new CartaEscudo("Beijo de Amor Verdadeiro",
+                            "Escudo: [Custo: 3 | Escudo: 30] - Aquece o oração.", 3, 30));
+            deckShrek.adicionaBaralho(new CartaEscudo("Pele Verde e Grossa",
+                            "Escudo: [Custo: 2 | Escudo: 25] - Muito verde, muito grossa.", 2, 25));
+            deckShrek.adicionaBaralho(
+                            new CartaEscudo("Panela de Lama", "Escudo: [Custo: 1 | Escudo: 5] - Sabor escudo.", 1,
+                                            5));
+
+            deckShrek.adicionaBaralho(new CartaEfeito("Hálito Matinal de Ogro",
+                            "Efeito: [Custo: 3 | Turnos: 2 |Veneno] - Depois de escovar os dentes", 3,
+                            (new EfeitoVeneno(2, gm))));
+            deckShrek.adicionaBaralho(new CartaEfeito("Arroto de Cebola",
+                            "Efeito: [Custo: 4 | Turnos: 5 |Fraqueza: 25%] - É de fazer chorar.", 4,
+                            (new EfeitoFraqueza(5, gm, 25))));
+            deckShrek.adicionaBaralho(new CartaEfeito("Banho de Lama",
+                            "Efeito: [Custo: 2 | Turnos: 5 |Força: +50%] - Renovado.", 2,
+                            (new EfeitoForca(5, gm, 50))));
+
+            return new Heroi("Shrek", 1000, 20, 6, 1000, 20, true, gm, deckShrek) ;
+        }
 
 
+        public static Heroi criarBurro(GameManager gm) {
+            /** Baralho do Personagem Burro */
+            Baralho deckBurro = new Baralho();
 
-                /** Baralho do Personagem Shrek */
-                Baralho deckShrek = new Baralho();
+            deckBurro.adicionaBaralho(
+                            new CartaDano("Coice do Burro",
+                                            "Dano: [Custo: 1 | Dano: 10] - Um coice rápido e inesperado.", 1, 10));
+            deckBurro.adicionaBaralho(new CartaDano("Falatório Infinito",
+                            "Dano: [Custo: 3 | Dano: 32] - Confunde o inimigo enquanto causa dano leve.", 3, 32));
+            deckBurro.adicionaBaralho(new CartaDano("Empurrão Desesperado",
+                            "Dano: [Custo: 4 | Dano: 40] - Burro avança sem pensar e causa dano médio.", 4, 40));
+            deckBurro.adicionaBaralho(new CartaDano("Toma Essa", "Dano: [Custo: 2 | Dano: 20] - Toma.", 2, 20));
+            deckBurro.adicionaBaralho(new CartaDanoArea("Burro Ataque de Surto", "[Custo: 4 | Dano: 50 ÁREA] SAI DA FRENTE QUE É COICE EM TODO MUNDO", 4, 50));  
 
-                deckShrek.adicionaBaralho(
-                                new CartaDano("Soco do Ogro", "Dano: [Custo: 3 | Dano: 30] - Um jab de direita.", 3,
-                                                30));
-                deckShrek.adicionaBaralho(
-                                new CartaDano("Pântano Tenebroso", "Dano: [Custo: 5 | Dano: 50] - É como o nome diz.. ",
-                                                5, 40));
-                deckShrek.adicionaBaralho(new CartaDano("Arroto do Ogro",
-                                "Dano: [Custo: 3 | Dano: 28] - Depois de uma garrafa de coca. ", 3, 28));
-                deckShrek.adicionaBaralho(new CartaDano("Fúria de Ogro", "Dano: [Custo: 2 | Dano: 18] - GRRRR", 2, 18));
+            deckBurro.adicionaBaralho(new CartaEscudo("Proteção Improvisada",
+                            "Escudo: [Custo: 3 | Escudo: 20] - Usa qualquer coisa como defesa.", 3, 20));
+            deckBurro.adicionaBaralho(new CartaEscudo("Amizade Verdadeira",
+                            "Escudo: [Custo: 4 | Escudo: 35] - O poder da amizade protege.", 4, 35));
+            deckBurro.adicionaBaralho(
+                            new CartaEscudo("Botas Velhas",
+                                            "Escudo: [Custo: 1 | Escudo: 10] - Defesa simples, mas útil.", 1, 10));
 
-                deckShrek.adicionaBaralho(new CartaDanoArea("Faz o Urro!", "[Custo: 5 | Dano: 60 ÁREA] UUUAAAAAAAAAAHHHHHHHH", 5, 60)); 
+            deckBurro.adicionaBaralho(new CartaEfeito("A Gente Já Chegou?",
+                            "Efeito: [Custo: 4 | Turnos: 8 | Veneno] - A gente já chegou?", 4,
+                            (new EfeitoVeneno(8, gm))));
+            deckBurro.adicionaBaralho(new CartaEfeito("Motivação do Burro",
+                            "Efeito: [Custo: 3 | Turnos: 5| Força: +25%] - Um garoto diferenciado", 3,
+                            (new EfeitoForca(5, gm, 25))));
 
-                deckShrek.adicionaBaralho(new CartaEscudo("Beijo de Amor Verdadeiro",
-                                "Escudo: [Custo: 3 | Escudo: 30] - Aquece o oração.", 3, 30));
-                deckShrek.adicionaBaralho(new CartaEscudo("Pele Verde e Grossa",
-                                "Escudo: [Custo: 2 | Escudo: 25] - Muito verde, muito grossa.", 2, 25));
-                deckShrek.adicionaBaralho(
-                                new CartaEscudo("Panela de Lama", "Escudo: [Custo: 1 | Escudo: 5] - Sabor escudo.", 1,
-                                                5));
-
-                deckShrek.adicionaBaralho(new CartaEfeito("Hálito Matinal de Ogro",
-                                "Efeito: [Custo: 3 | Turnos: 2 |Veneno] - Depois de escovar os dentes", 3,
-                                (new EfeitoVeneno(2, gm))));
-                deckShrek.adicionaBaralho(new CartaEfeito("Arroto de Cebola",
-                                "Efeito: [Custo: 4 | Turnos: 5 |Fraqueza: 25%] - É de fazer chorar.", 4,
-                                (new EfeitoFraqueza(5, gm, 25))));
-                deckShrek.adicionaBaralho(new CartaEfeito("Banho de Lama",
-                                "Efeito: [Custo: 2 | Turnos: 5 |Força: +50%] - Renovado.", 2,
-                                (new EfeitoForca(5, gm, 50))));
-
-                herois.add(new Heroi("Shrek", 100, 20, 6, 100, 20, true, gm, deckShrek));
+            return new Heroi("Burro", 80, 10, 7, 80, 50, true, gm, deckBurro);
+        }
 
 
-
-                /** Baralho do Personagem Burro */
-                Baralho deckBurro = new Baralho();
-
-                deckBurro.adicionaBaralho(
-                                new CartaDano("Coice do Burro",
-                                                "Dano: [Custo: 1 | Dano: 10] - Um coice rápido e inesperado.", 1, 10));
-                deckBurro.adicionaBaralho(new CartaDano("Falatório Infinito",
-                                "Dano: [Custo: 3 | Dano: 32] - Confunde o inimigo enquanto causa dano leve.", 3, 32));
-                deckBurro.adicionaBaralho(new CartaDano("Empurrão Desesperado",
-                                "Dano: [Custo: 4 | Dano: 40] - Burro avança sem pensar e causa dano médio.", 4, 40));
-                deckBurro.adicionaBaralho(new CartaDano("Toma Essa", "Dano: [Custo: 2 | Dano: 20] - Toma.", 2, 20));
-                deckBurro.adicionaBaralho(new CartaDanoArea("Burro Ataque de Surto", "[Custo: 4 | Dano: 50 ÁREA] SAI DA FRENTE QUE É COICE EM TODO MUNDO", 4, 50));  
-
-                deckBurro.adicionaBaralho(new CartaEscudo("Proteção Improvisada",
-                                "Escudo: [Custo: 3 | Escudo: 20] - Usa qualquer coisa como defesa.", 3, 20));
-                deckBurro.adicionaBaralho(new CartaEscudo("Amizade Verdadeira",
-                                "Escudo: [Custo: 4 | Escudo: 35] - O poder da amizade protege.", 4, 35));
-                deckBurro.adicionaBaralho(
-                                new CartaEscudo("Botas Velhas",
-                                                "Escudo: [Custo: 1 | Escudo: 10] - Defesa simples, mas útil.", 1, 10));
-
-                deckBurro.adicionaBaralho(new CartaEfeito("A Gente Já Chegou?",
-                                "Efeito: [Custo: 4 | Turnos: 8 | Veneno] - A gente já chegou?", 4,
-                                (new EfeitoVeneno(8, gm))));
-                deckBurro.adicionaBaralho(new CartaEfeito("Motivação do Burro",
-                                "Efeito: [Custo: 3 | Turnos: 5| Força: +25%] - Um garoto diferenciado", 3,
-                                (new EfeitoForca(5, gm, 25))));
-
-                herois.add(new Heroi("Burro", 80, 10, 7, 80, 50, true, gm, deckBurro));
-
-
-
+        public static Heroi criarGato(GameManager gm) {
                 /** Baralho do Personagem Gato */
                 Baralho deckGato = new Baralho();
 
@@ -130,10 +128,11 @@ public class Dados {
                                 2,
                                 (new EfeitoFraqueza(4, gm, 30))));
 
-                herois.add(new Heroi("Gato de Botas", 70, 15, 5, 60, 80, true, gm, deckGato));
+                return new Heroi("Gato de Botas", 70, 15, 5, 60, 80, true, gm, deckGato);
+        }
 
 
-                
+        public static Heroi criarFiona(GameManager gm) {
                 /** Baralho da personagem Fiona */
                 Baralho deckFiona = new Baralho();
 
@@ -162,99 +161,128 @@ public class Dados {
                                 "Efeito: [Custo: 3 | Turnos: 4| Fraqueza: 20%] - Sente a pressão", 3,
                                 (new EfeitoFraqueza(4, gm, 20))));
 
-                herois.add(new Heroi("Fiona", 90, 25, 5, 90, 40, true, gm, deckFiona));
+                return new Heroi("Fiona", 90, 25, 5, 90, 40, true, gm, deckFiona);
 
-                return herois;
-        }
-
-
-        /**
-         * Método para carregar nosso vetor com todos os inimigos do Jogo. A partir
-         * desse vetor que criamos
-         * um subVetor com os inimigos escolhidos em cada Batalha
-         * 
-         * @return vetor de Inimigos do jogo
-         */
-        public static ArrayList<Inimigo> carregarInimigos() {
-                ArrayList<Inimigo> inimigos = new ArrayList<>();
-
-                /** Inimigo Dragão com o seu sistema de ações do jogo */
-                ArrayList<AcaoInimigo> acoesDragao = new ArrayList<>();
-                acoesDragao.add(new AcaoAtacar("Cauda Giratória", 45));
-                acoesDragao.add(new AcaoAtacar("Mordida Feroz", 25));
-                acoesDragao.add(new AcaoEfeito("Baforada de Fogo", (new EfeitoVeneno(8, gm)))); // teste
-                acoesDragao.add(new AcaoEscudo("Escamas Duras", 15));
-                acoesDragao.add(new AcaoEfeito("Nuvem de Cinzas", (new EfeitoFraqueza(5, gm, 25))));
-                acoesDragao.add(new AcaoEfeito("O Dragão Alpha", (new EfeitoForca(5, gm, 25))));
-                Inimigo dragao = new Inimigo("Dragão", 100, 40, 100, 10, true, gm, acoesDragao);
-
-                inimigos.add(dragao);
-
-                /** Inimigo Farquaad com o seu sistema de ações do jogo */
-                ArrayList<AcaoInimigo> acoesFarquaad = new ArrayList<>();
-                acoesFarquaad.add(new AcaoAtacar("Ordem de Execução", 20));
-                acoesFarquaad.add(new AcaoAtacar("Golpe Baixo", 30));
-                acoesFarquaad.add(new AcaoEscudo("Esconder Atrás dos Guardas", 30));
-                acoesFarquaad.add(new AcaoEfeito("Tortura do Biscoito", (new EfeitoVeneno(9, gm))));
-                acoesFarquaad.add(new AcaoEfeito("Complexo de Inferioridade", (new EfeitoFraqueza(6, gm, 50))));
-                acoesFarquaad.add(new AcaoEfeito("Decreto Real", (new EfeitoForca(5, gm, 25))));
-
-                Inimigo farquaad = new Inimigo("Lord Farquaad", 60, 30, 60, 30, true, gm, acoesFarquaad);
-
-                inimigos.add(farquaad);
-
-                /** Inimigo Fada com o seu sistema de ações do jogo */
-                ArrayList<AcaoInimigo> acoesFada = new ArrayList<>();
-                acoesFada.add(new AcaoAtacar("Raio Mágico", 30));
-                acoesFada.add(new AcaoAtacar("Poção Explosiva", 10));
-                acoesFada.add(new AcaoEscudo("Bolha de Sabão", 25));
-                acoesFada.add(new AcaoEfeito("Poção de Amor Tóxico", (new EfeitoVeneno(4, gm))));
-                acoesFada.add(new AcaoEfeito("Pó de Pirlipimpim", (new EfeitoFraqueza(5, gm, 25))));
-                acoesFada.add(new AcaoEfeito("Brilho Ofuscante", (new EfeitoFraqueza(2, gm, 15))));
-                acoesFada.add(new AcaoEfeito("Meu Herói", (new EfeitoForca(5, gm, 55))));
-
-                Inimigo fada = new Inimigo("Fada Madrinha", 90, 20, 90, 60, true, gm, acoesFada);
-
-                inimigos.add(fada);
-
-
-
-                ArrayList<AcaoInimigo> acoesEncantado = new ArrayList<>();
-                acoesEncantado.add(new AcaoAtacar("O Herói Destinado", 40));
-                acoesEncantado.add(new AcaoAtacar("Cabelos Brilhantes", 20));
-                acoesEncantado.add(new AcaoEscudo("Pose no Espelho", 40));
-                acoesEncantado.add(new AcaoEfeito("Perfume muito cheroso", (new EfeitoVeneno(6, gm))));
-                acoesEncantado.add(new AcaoEfeito("Olha de Modelo", (new EfeitoFraqueza(2, gm, 45))));
-                acoesEncantado.add(new AcaoEfeito("Toma essa, Betinha!", (new EfeitoFraqueza(5, gm, 15))));
-                acoesEncantado.add(new AcaoEfeito("Muita Aura", (new EfeitoForca(5, gm, 45))));
-
-                Inimigo encantado = new Inimigo("Príncipe Encantado", 80, 40, 80, 85, true, gm, acoesEncantado);
-
-                inimigos.add(encantado);
-
-
-               
-                ArrayList<AcaoInimigo> acoesRumpel = new ArrayList<>();
-                acoesRumpel.add(new AcaoAtacar("Pena em Chamas", 50));
-                acoesRumpel.add(new AcaoAtacar("Contrato Mágico", 20));
-                acoesRumpel.add(new AcaoEscudo("Esconder na Carruagem", 25));
-                acoesRumpel.add(new AcaoEfeito("Tinta Invisível", (new EfeitoVeneno(12, gm))));
-                acoesRumpel.add(new AcaoEfeito("Letras Miúdas", (new EfeitoFraqueza(6, gm, 25))));
-                acoesRumpel.add(new AcaoEfeito("Dia do Ogro", (new EfeitoFraqueza(4, gm, 45))));
-                acoesRumpel.add(new AcaoEfeito("Acordo Mágico", (new EfeitoForca(5, gm, 35))));
-                acoesRumpel.add(new AcaoEfeito("Alterar a Realidade", (new EfeitoForca(6, gm, 25))));
-
-                Inimigo Rumpel = new Inimigo("Rumpelstiltskin", 60, 40, 60, 25, true, gm, acoesRumpel);
-
-                inimigos.add(Rumpel);
                 
-
-
-                return inimigos;
         }
 
-        public static void setGm(GameManager gm) {
-                Dados.gm = gm;
+
+
+
+        // ---------------------- INIMIGOS GENERICOS --------------------------------------------
+
+        public static Inimigo criarAldeao(GameManager gm) {
+            ArrayList<AcaoInimigo> acoes = new ArrayList<>();
+            acoes.add(new AcaoAtacar("Tochada", 12));
+            acoes.add(new AcaoAtacar("Golpe com graveto", 15));
+            acoes.add(new AcaoEscudo("Recuar com Medo", 10));
+            
+            return new Inimigo("Aldeão Furioso", 40, 0, 40, 15, true, gm, acoes);
         }
 
+        public static Inimigo criarSoldadoFarquad(GameManager gm) {
+            ArrayList<AcaoInimigo> acoes = new ArrayList<>();
+            acoes.add(new AcaoAtacar("Lave bem o seu .. pé", 20));
+            acoes.add(new AcaoAtacar("Chute alto", 15));
+            acoes.add(new AcaoEscudo("Atrás do Lord", 10));
+            
+            return new Inimigo("Soldados do Lord", 60, 0, 60, 25, true, gm, acoes);
+        }
+
+        public static Inimigo criarLobo(GameManager gm) {
+            ArrayList<AcaoInimigo> acoes = new ArrayList<>();
+            acoes.add(new AcaoAtacar("Mordida", 20));
+            acoes.add(new AcaoAtacar("Líder da alcateia", 35));
+            acoes.add(new AcaoEscudo("Lua cheia", 10));
+            
+            return new Inimigo("Lobo", 50, 10, 50, 95, true, gm, acoes);
+        }
+
+        public static Inimigo criarCapanga(GameManager gm) {
+            ArrayList<AcaoInimigo> acoes = new ArrayList<>();
+            acoes.add(new AcaoAtacar("Jab de esquerda", 20));
+            acoes.add(new AcaoAtacar("Golpe de espada", 25));
+            acoes.add(new AcaoEscudo("Cabeleira meio esvoaçante", 20));
+            
+            return new Inimigo("Capanga do Encantado", 80, 20, 80, 65, true, gm, acoes);
+        }
+
+        public static Inimigo criarBruxa(GameManager gm) {
+            ArrayList<AcaoInimigo> acoes = new ArrayList<>();
+            acoes.add(new AcaoAtacar("Risada fantasmagórica", 20));
+            acoes.add(new AcaoAtacar("Bombas de abóbora", 40));
+            acoes.add(new AcaoEscudo("Fuga com a vassoura", 30));
+            
+            return new Inimigo("Bruxa", 90, 20, 90, 85, true, gm, acoes);
+        }
+
+        // ------------------------------- CHEFOES --------------------------------------------------
+
+        public static Inimigo criarFarquaad(GameManager gm) {
+            ArrayList<AcaoInimigo> acoes = new ArrayList<>();
+            acoes.add(new AcaoAtacar("Ordem de Execução", 20));
+            acoes.add(new AcaoAtacar("Golpe Baixo", 30));
+            acoes.add(new AcaoEscudo("Muralha de Guardas", 30));
+            acoes.add(new AcaoEfeito("Gargalhada Suprema", new EfeitoVeneno(3, gm))); 
+            acoes.add(new AcaoEfeito("Ameaça de Prisão", new EfeitoFraqueza(4, gm, 25)));
+            acoes.add(new AcaoEfeito("Choro do Biscoito", new EfeitoFraqueza(4, gm, 25)));
+            
+            return new Inimigo("Lord Farquaad", 60, 30, 60, 30, true, gm, acoes);
+        }
+
+        public static Inimigo criarDragao(GameManager gm) {
+            ArrayList<AcaoInimigo> acoes = new ArrayList<>();
+            acoes.add(new AcaoAtacar("Baforada de Fogo", 45));
+            acoes.add(new AcaoAtacar("Mordida Feroz", 15));
+            acoes.add(new AcaoEscudo("Escamas Duras", 15));
+            acoes.add(new AcaoEfeito("Fumaça Tóxica", new EfeitoVeneno(3, gm)));
+            acoes.add(new AcaoEfeito("Rugido Aterrorizante", new EfeitoFraqueza(4, gm, 25)));
+            acoes.add(new AcaoEfeito("Cauda Esmagadora", new EfeitoFraqueza(3, gm, 25)));
+            
+            // acoes.add(new AcaoAtacarArea("Sopro de Fogo em Área", 20)); 
+
+            return new Inimigo("Dragão", 100, 40, 100, 10, true, gm, acoes);
+        }
+
+        public static Inimigo criarEncantado(GameManager gm) {
+            ArrayList<AcaoInimigo> acoes = new ArrayList<>();
+            acoes.add(new AcaoAtacar("O Herói destinado", 25));
+            acoes.add(new AcaoEscudo("Cabelos brilhantes", 20));
+            acoes.add(new AcaoEfeito("Pose no Espelho", new EfeitoForca(3, gm, 25))); 
+            
+            return new Inimigo("Príncipe Encantado", 80, 40, 80, 55, true, gm, acoes);
+        }
+
+        public static Inimigo criarFada(GameManager gm) {
+            ArrayList<AcaoInimigo> acoes = new ArrayList<>();
+            acoes.add(new AcaoAtacar("Raio Mágico", 30));
+            acoes.add(new AcaoAtacar("Poção Explosiva", 10));
+            acoes.add(new AcaoEscudo("Bolha de Sabão", 25));
+            acoes.add(new AcaoEfeito("Feitiço da Fada", new EfeitoVeneno(10, gm)));
+            acoes.add(new AcaoEfeito("Poeira Cegante", new EfeitoFraqueza(3, gm, 25)));
+
+            return new Inimigo("Fada Madrinha", 90, 20, 90, 60, true, gm, acoes);
+        }
+
+        public static Inimigo criarRumpel(GameManager gm) {
+            ArrayList<AcaoInimigo> acoes = new ArrayList<>();
+            acoes.add(new AcaoAtacar("Pena em chamas", 55));
+            acoes.add(new AcaoEscudo("Esconder na Carruagem", 40));
+            acoes.add(new AcaoEfeito("Contrato Mágico", new EfeitoFraqueza(5, gm, 25)));
+            acoes.add(new AcaoEfeito("Tinta Tóxica", new EfeitoVeneno(3, gm)));
+            acoes.add(new AcaoEfeito("Alterar a Realidade", new EfeitoForca(4, gm, 30)));
+
+            return new Inimigo("Rumpelstiltskin", 100, 70, 100, 55, true, gm, acoes);
+        }
+ 
+
+        public static void setGm(GameManager gm){
+            Dados.gm = gm;}
+ 
 }
+
+
+
+
+
+

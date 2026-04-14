@@ -1,8 +1,9 @@
 package mc322.jogo.gerenciador;
 
-import mc322.jogo.entidades.Inimigo;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import mc322.jogo.entidades.Inimigo;
 
 /**
  * Classe responsável por gerenciar a equipe de Inimigos.

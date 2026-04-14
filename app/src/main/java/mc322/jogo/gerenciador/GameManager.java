@@ -6,9 +6,17 @@ import mc322.jogo.Musica;
 import mc322.jogo.entidades.Entidade;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
+import mc322.jogo.mapa.Campanha;
+import mc322.jogo.mapa.EventoMapa;
+import mc322.jogo.mapa.NoMapa;
+import mc322.jogo.mapa.TipoEvento;
 import mc322.jogo.observer.Estados;
+import mc322.jogo.cartas.Baralho;
+import mc322.jogo.cartas.Carta;
+import mc322.jogo.cartas.CartaDanoArea;
 import mc322.jogo.observer.Publisher;
 import mc322.jogo.observer.Subscriber;
+import mc322.jogo.Cores;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.HashMap;
@@ -78,119 +86,126 @@ public class GameManager implements Publisher {
 
         tela.comeco();
         dj.tocarMusica("../sons/Funkytown.wav");
-        Jogador jogador = new Jogador();
-        Oponente oponente = new Oponente();
 
-        for (Heroi h : Dados.carregarHerois()) {
-            jogador.adicionarHeroiTodos(h);
-        }
-
-        for (Inimigo i : Dados.carregarInimigos()) {
-            oponente.adicionarInimigoTodos(i);
-        }
-
-        // ---------------------------Dificuldade-----------------
         tela.dificuldade();
         int dificuldade = sc.nextInt();
+        sc.nextLine();
 
-        while(dificuldade <= 0) {
-            System.out.println("OPÇÃO INVALIDA !!!");
-            System.out.print("Escolha novamente: ");
-            dificuldade = sc.nextInt();
-        }
-        oponente.gerarInimigos(dificuldade);
+        Jogador jogador = new Jogador();
+        Heroi shrek = Dados.criarShrek(this);
+        jogador.adicionarHeroiTodos(shrek);
+        jogador.getHeroisEscolhidos().add(shrek);
 
-        // ------------------------------Equipe--------------------------
-        System.out.println("\n\n\n" + Cores.NEGRITO + "====================== SELEÇÃO DE EQUIPE ======================"
-                + Cores.RESET);
-        jogador.escolherHerois(sc);
+        // criar um mapa aqui eu acho
+        NoMapa inicioDoMapa = Campanha.criarMapa(this, dificuldade);
+        System.out.println("\nA JORNADA VAI COMEÇAR!\n\n");
+        viajarPeloGrafo(inicioDoMapa, jogador, sc, tela, shrek);
 
-
-        System.out.println("\n" + Cores.AMARELO + Cores.NEGRITO + "Preparando...  A BATALHA VAI COMEÇAR!"
-                + Cores.RESET + "\n\n");
-        dj.tocarMusica("../sons/Need_a_hero.wav");
-        iniciarBatalha(jogador, oponente, sc, tela);
     }
 
-    /**
-     * Método para gerenciar a Batalha no que tange a ordem dos turnos pelo atributo 
-     * velocidade de cada Heroi.
-     * 
-     * @param jogador Objeto que representa todos os Herois fazendo parte de um único jogador (usuário)
-     * @param oponente Objeto para gerenciar os inimigos
-     * @param sc Objeto Scanner para leitura de dados do teclado
-     * @param tela Objeto com métodos para impressão no terminal.
-     */
-    private void iniciarBatalha(Jogador jogador, Oponente oponente, Scanner sc, Prints tela) {
 
-        Prints.limparTela(); 
-        // Junta os escolhidos dos heróis e vilões para decidir a ordem do turno
-        ArrayList<Entidade> ordemTurno = new ArrayList<>();
-        ordemTurno.addAll(jogador.getHeroisEscolhidos());
-        ordemTurno.addAll(oponente.getInimigosEscolhidos());
 
-        // Olha a velocidade
-        for (int i = 0; i < ordemTurno.size(); i++) {
-            for (int j = 0; j < ordemTurno.size() - 1 - i; j++) {
+    public void viajarPeloGrafo(NoMapa nodoAtual, Jogador jogador, Scanner sc, Prints tela, Heroi Shrek) {
+        
+        Prints.limparTela();
+        EventoMapa evento = nodoAtual.getEvento();
+        //Prints.limparTela();  //talvez tenha q mudar de lugar
+        System.out.println(evento.getNomeFase());
+        System.out.println(evento.getDialogo());
+        
 
-                Entidade atual = ordemTurno.get(j);
-                Entidade proximo = ordemTurno.get(j + 1);
+        if (evento.getTipo() == TipoEvento.BATALHA || evento.getTipo() == TipoEvento.BOSS) {
+            Batalha arena = new Batalha();
+            boolean sobreviveu = arena.executarCombate(jogador, evento.getOponente(), this, sc, tela);
+            if (!sobreviveu) return; 
+        } 
 
-                if (atual.getVelocidade() < proximo.getVelocidade()) {
-                    ordemTurno.set(j, proximo);
-                    ordemTurno.set(j + 1, atual);
+        else if (evento.getTipo() == TipoEvento.DESCANSO_BAR) {
+            System.out.println(Cores.VERDE + "🍺 Você bebeu uma poção de lama no bar! Recuperou 30 de vida." + Cores.RESET);
+            
+            for (Heroi heroi : jogador.getHeroisEscolhidos()) {
+                if (heroi.estaVivo()) {
+                    heroi.curar(30); 
+                }
+            }
+            
+        } 
+
+        else if (evento.getTipo() == TipoEvento.ARMADILHA) {
+            System.out.println(Cores.VERMELHO + "🕳️ Você caiu num buraco com espinhos! Perdeu 15 de vida." + Cores.RESET);
+            for (Heroi heroi : jogador.getHeroisEscolhidos()) {
+                if (heroi.estaVivo()) {
+                    heroi.recebeDanoEfeito(15); 
                 }
             }
         }
 
-        TurnoHeroi turnoHeroi = new TurnoHeroi(this);
-        TurnoVilao turnoVilao = new TurnoVilao(this);
+        else if (evento.getTipo() == TipoEvento.RECOMPENSA_CARTA) {
+            Carta novaCarta = evento.getCartaRecompensa();
+            if (novaCarta != null) {
+                System.out.println(Cores.AZUL + "📜 Você encontrou uma nova carta: " + novaCarta.getNome() + "!" + Cores.RESET);
+                Shrek.ganhaCarta(novaCarta); 
 
-        // --------------------BATALHA--------------------------------------------------
-
-        while (jogador.temHeroisVivos() && oponente.temInimigosVivos()) {
-
-            // Olha quem já jogou
-            for (Entidade entidades : ordemTurno) {
-                entidades.verificaseAtacou(false);
             }
+        } 
 
-            for (Entidade entidadeAtual : ordemTurno) {
 
-                // Só joga se estiver vivo e não tiver atacado nesta rodada
-                if (entidadeAtual.estaVivo() && !entidadeAtual.getTurno()) {
+        //companheiros
+        if (evento.getNomeFase().equals("Flor azul com espinhos vermelhos")) {
+            System.out.println(Cores.AZUL + " O Burro se juntou à sua equipe!" + Cores.RESET);
+            Heroi burro = Dados.criarBurro(this);
+            jogador.adicionarHeroiTodos(burro);
+            jogador.getHeroisEscolhidos().add(burro); 
+        } 
 
-                    if (entidadeAtual instanceof Heroi) {
-                        Heroi heroiAtual = (Heroi) entidadeAtual;
-                        System.out.println(
-                                Cores.CIANO + "\n>>> Turno de " + heroiAtual.getNome() + " <<<" + Cores.RESET);
+        else if (evento.getNomeFase().equals("Flor vermelha com espinhos azuis")) {
+            System.out.println(Cores.AZUL + " O Gato de Botas se juntou à sua equipe!" + Cores.RESET);
+            Heroi gato = Dados.criarGato(this);        
+            jogador.adicionarHeroiTodos(gato);
+            jogador.getHeroisEscolhidos().add(gato);
+        }
 
-                        // O herói recebe o deckGeral e a lista de inimigos disponíveis
-                        turnoHeroi.jogar(heroiAtual, jogador, oponente,
-                                tela, sc);
+        else if (evento.getNomeFase().equals("Entrando na masmorra")) {
+            System.out.println(Cores.AZUL + " Princesa Fiona se juntou à sua equipe!" + Cores.RESET);
+            Heroi fiona = Dados.criarFiona(this);            
+            jogador.adicionarHeroiTodos(fiona);
+            jogador.getHeroisEscolhidos().add(fiona);
+        }
 
-                        /* após um turno do heroi, podemos ter a morte de todos os inimigos */
-                        if (!jogador.temHeroisVivos() || !oponente.temInimigosVivos())
-                            break;
+ 
+      
 
-                    } else if (entidadeAtual instanceof Inimigo) {
-                        Inimigo inimigoAtual = (Inimigo) entidadeAtual;
-                        // O inimigo ataca um herói aleatório da lista
-                        turnoVilao.jogar(inimigoAtual, jogador.getHeroisEscolhidos());
+        //navegação
+        ArrayList<NoMapa> proximos = nodoAtual.getProximos();
+        
+        if (proximos.isEmpty() || nodoAtual.FimDeJogo()) {
+            System.out.println(Cores.VERDE + Cores.NEGRITO + "🏆 FIM DE JOGO! VOCÊ ZEROU A CAMPANHA!" + Cores.RESET);
+            return;
+        }
 
-                        /* verificar se ainda temos herois e inimigos vivos */
-                        if (!jogador.temHeroisVivos() || !oponente.temInimigosVivos())
-                            break;
+        Prints.PrintaMapa(evento.getNomeFase());
 
-                    }
+        System.out.println("\nPara onde você quer ir agora?");
+        for (int i = 0; i < proximos.size(); i++) {
+            System.out.println(i + " - " + proximos.get(i).getEvento().getNomeFase());
+        }
 
-                    // Marca que já jogou neste turno
-                    entidadeAtual.verificaseAtacou(true); // aqui que ele marca que foi atacada
-                }
+
+        int escolha;
+        while (true) {
+            System.out.print(Cores.NEGRITO + "Sua escolha: " + Cores.RESET);
+            escolha = sc.nextInt();
+            
+            if (escolha >= 0 && escolha < proximos.size()) {
+    
+                viajarPeloGrafo(proximos.get(escolha), jogador, sc, tela, Shrek);
+                break; 
+            } else {
+                System.out.println(Cores.VERMELHO + "Opção inválida! Digite um número do menu." + Cores.RESET);
             }
         }
-        tela.fimDeJogo(jogador, dj);
-
-    }
+    } 
 
 }
+
+

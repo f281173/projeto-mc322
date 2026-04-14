@@ -61,6 +61,7 @@ public class TurnoVilao {
             enemy.imprimeEfeitos();
 
         }
+
         /* tenho que publicar que o turno do inimigo terminou */
         gm.notificar(enemy, Estados.FIM_DE_TURNO);
 
@@ -68,3 +69,4 @@ public class TurnoVilao {
                 + Cores.RESET);
     }
 }
+
