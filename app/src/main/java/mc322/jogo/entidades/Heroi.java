@@ -45,6 +45,23 @@ public class Heroi extends Entidade {
         this.listaEfeitos = new ArrayList<>();
     }
 
+    /**
+     * Construtor auxiliar para construir os testes automatizados
+     * 
+     * @param vida
+     * @param escudo
+     * @param energia
+     */
+    public Heroi(int vida, int escudo, int energia, int velocidade, String nome) {
+        this.vida = vida;
+        this.vidaInicial = vida;
+        this.escudo = escudo;
+        this.energiaAtual = energia;
+        this.energiaInicial = energia;
+        this.velocidade = velocidade;
+        this.nome = nome;
+    }
+
     @Override
     public void recebeDano(int dano) {
 
@@ -56,6 +73,9 @@ public class Heroi extends Entidade {
             this.escudo = 0;
             this.vida -= danoRestante;
         }
+
+        if (this.vida < 0)
+            this.vida = 0;
     }
 
     @Override
@@ -69,7 +89,9 @@ public class Heroi extends Entidade {
 
     @Override
     public void ganhaEscudo(int valorEscudo) {
-        this.escudo += valorEscudo;
+        if (valorEscudo > 0) {
+            this.escudo += valorEscudo;
+        }
     }
 
     @Override

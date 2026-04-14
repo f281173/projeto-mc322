@@ -38,6 +38,17 @@ public class Inimigo extends Entidade {
     }
 
     /**
+     * Construtor auxiliar para construir os testes automatizados
+     * 
+     * @param vida
+     * @param escudo
+     */
+    public Inimigo(int vida, int escudo) {
+        this.vida = vida;
+        this.escudo = escudo;
+    }
+
+    /**
      * Método para adicionar uma nova ação ao atributo sistemadeAcoes.
      * 
      * @param acao uma nova ação entre as implementadas na interface
@@ -70,6 +81,9 @@ public class Inimigo extends Entidade {
             this.escudo = 0;
             this.vida -= danoRestante;
         }
+
+        if (this.vida < 0)
+            this.vida = 0;
     }
 
     @Override
@@ -81,12 +95,6 @@ public class Inimigo extends Entidade {
         }
     }
 
-    @Override
-    public boolean estaVivo() {
-        if (this.vida > 0)
-            return true;
-        return false;
-    }
 
     @Override
     public void ataque(Entidade alvo, int valorDano) {

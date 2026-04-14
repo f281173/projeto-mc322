@@ -1,6 +1,7 @@
 plugins {
 
     application
+    jacoco
 }
 
 repositories {
@@ -29,6 +30,18 @@ application {
 tasks.named<Test>("test") {
 
     useJUnitPlatform()
+
+    finalizedBy(tasks.named("jacocoTestReport"))
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // Garante que os testes correm antes de medir a cobertura
+    
+    reports {
+        html.required.set(true)
+        xml.required.set(false)
+        csv.required.set(false)
+    }
 }
 
 tasks.named<JavaExec>("run") {
