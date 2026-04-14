@@ -47,10 +47,10 @@ public class Campanha {
 
     
     
-    private static Oponente gerarGrupoComHistoria(GameManager gm, Supplier<Inimigo> inimigoGarantido, int dificuldade) {
+    private static Oponente carregaInimigoGenerico(GameManager gm, Supplier<Inimigo> inimigo1, int dificuldade) {
         Oponente op = new Oponente();
         
-        op.adicionarInimigoTodos(inimigoGarantido.get());
+        op.adicionarInimigoTodos(inimigo1.get());
 
         Random gerador = new Random();   //Basicamente faz um sorteio para escolher os inimigos restantes da batalha
         for (int i = 0; i < (dificuldade - 1); i++) {
@@ -101,7 +101,7 @@ public class Campanha {
             "Batalha", 
             Prints.VERMELHO + Prints.NEGRITO + "Aldeão: " + Prints.RESET + "Renda-se, monstro! Em nome de Lord Farquaad!\n" +
             Prints.AZUL + Prints.NEGRITO + "Shrek: " + Prints.RESET + "Toma essa!\n", 
-            TipoEvento.BATALHA, gerarGrupoComHistoria(gm, () -> Dados.criarAldeao(gm), dificuldade)
+            TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarAldeao(gm), dificuldade)
         ));
 
 
@@ -129,7 +129,7 @@ public class Campanha {
             "Flor azul com espinhos vermelhos\n", 
             Prints.DIALOGO_N21,
             TipoEvento.BATALHA, 
-            gerarGrupoComHistoria(gm, () -> Dados.criarAldeao(gm), dificuldade)
+            carregaInimigoGenerico(gm, () -> Dados.criarAldeao(gm), dificuldade)
         ));
         
         NoMapa n31_golpe = new NoMapa(new EventoMapa("Caminho bonito", 
@@ -140,12 +140,12 @@ public class Campanha {
 
         NoMapa n32_batalha = new NoMapa(new EventoMapa("Caminho tortuoso", 
             Prints.VERMELHO + Prints.NEGRITO + "Lobo Mau: " + Prints.RESET + "Cuidado por onde anda, ogro...", 
-            TipoEvento.BATALHA, gerarGrupoComHistoria(gm, () -> Dados.criarLobo(gm), dificuldade)
+            TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarLobo(gm), dificuldade)
         )); //lobo
         
         NoMapa n41_batalha = new NoMapa(new EventoMapa("Floresta densa",
             Prints.NEGRITO + "Narrador:" + Prints.RESET + "Uma emboscada na floresta densa!",
-            TipoEvento.BATALHA, gerarGrupoComHistoria(gm, () -> Dados.criarAldeao(gm), dificuldade)
+            TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarAldeao(gm), dificuldade)
         ));  //mascote
         
         NoMapa n42_bar = new NoMapa(new EventoMapa("Seguir pelo rio",
@@ -154,7 +154,7 @@ public class Campanha {
         
         NoMapa n43_batalha = new NoMapa(new EventoMapa("Passar pela ponte", 
             Prints.VERMELHO + Prints.NEGRITO + "Guarda da Ponte: " + Prints.RESET + "Pedágio cobrado em sangue!",
-            TipoEvento.BATALHA, gerarGrupoComHistoria(gm, () -> Dados.criarAldeao(gm), dificuldade))); //mascote
+            TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarAldeao(gm), dificuldade))); //mascote
 
         n10_flores.adicionarCaminho(n21_burro);
 
@@ -171,7 +171,7 @@ public class Campanha {
         NoMapa n22_gato = new NoMapa(new EventoMapa(
             "Flor vermelha com espinhos azuis\n", 
             Prints.DIALOGO_N22,
-            TipoEvento.BATALHA, gerarGrupoComHistoria(gm, () -> Dados.criarAldeao(gm), dificuldade)
+            TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarAldeao(gm), dificuldade)
         ));
 
 
@@ -188,7 +188,7 @@ public class Campanha {
 
         NoMapa n44_batalha = new NoMapa(new EventoMapa("Cabana do caçador",
             Prints.VERMELHO + Prints.NEGRITO + "Caçador: " + Prints.RESET + "O Lord já está sabendo de suas aventuras! O prêmio pela sua cabeça é alto!", 
-            TipoEvento.BATALHA, gerarGrupoComHistoria(gm, () -> Dados.criarAldeao(gm), dificuldade)));  //mascote
+            TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarAldeao(gm), dificuldade)));  //mascote
         
 
         NoMapa n45_golpe = new NoMapa(new EventoMapa("Cabana do caçador", 
@@ -216,7 +216,7 @@ public class Campanha {
         // 5 FARQUAAD-------------------------------------------------------------------------------
 
         NoMapa n5_farquaad  = new NoMapa(new EventoMapa(
-            "5-Farquaad", 
+            "Castelo de Duloc", 
             Prints.DIALOGO_N5,
             TipoEvento.BOSS, carregarBoss(Dados.criarFarquaad(gm)) ));
 
@@ -240,11 +240,11 @@ public class Campanha {
 
         NoMapa n51_batalha = new NoMapa(new EventoMapa("Vamos lá",
             Prints.NEGRITO + "Narrador: " + Prints.RESET + "No caminho para a masmorra, Shrek encontra inimigos...", 
-            TipoEvento.BATALHA, gerarGrupoComHistoria(gm, () -> Dados.criarAldeao(gm), dificuldade))); //witch
+            TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarAldeao(gm), dificuldade))); //witch
 
-        NoMapa n52_batalha = new NoMapa(new EventoMapa("52-Nahh. Passar bem",
+        NoMapa n52_batalha = new NoMapa(new EventoMapa("Quero não!",
             Prints.NEGRITO + "Narrador: " + Prints.RESET + "Voltando para o pântano, Shrek encontra inimigos...",
-            TipoEvento.BATALHA, gerarGrupoComHistoria(gm, () -> Dados.criarAldeao(gm), dificuldade)));  //witch
+            TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarAldeao(gm), dificuldade)));  //witch
         
         NoMapa n61_torre_bruxa = new NoMapa(new EventoMapa("Torre da Bruxa Velha", 
             Prints.DIALOGO_N61,
@@ -275,7 +275,7 @@ public class Campanha {
         
         NoMapa n81_batalha = new NoMapa(new EventoMapa("Voltar agora",
             Prints.NEGRITO + "Narrador: " + Prints.RESET + "Após derrotar o cavaleiro, Thelonius descobre e envia capangas...\n" + Prints.VERMELHO + Prints.NEGRITO + "Capangas: " + Prints.RESET + "Lá está ele. Atacar!\n",
-            TipoEvento.BATALHA, gerarGrupoComHistoria(gm, () -> Dados.criarAldeao(gm), dificuldade))); //big bad wolf
+            TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarAldeao(gm), dificuldade))); //big bad wolf
             
         
         NoMapa n82_golpe = new NoMapa(new EventoMapa("Descansar um pouco e voltar depois", 

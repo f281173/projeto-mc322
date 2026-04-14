@@ -20,7 +20,7 @@ public class Dados {
 
     public static ArrayList<Heroi> carregarHerois() {
         ArrayList<Heroi> herois = new ArrayList<>();
-        herois.add(new Heroi("Shrek", 1000, 20, 6, 100, 20, true, gm));
+        herois.add(new Heroi("Shrek", 1000, 20, 6, 1000, 20, true, gm));
         herois.add(new Heroi("Burro", 80, 10, 7, 80, 50, true, gm));
         herois.add(new Heroi("Pinoquio", 70, 15, 5, 70, 80, true, gm));
         herois.add(new Heroi("Fiona", 90, 25, 5, 90, 40, true, gm));

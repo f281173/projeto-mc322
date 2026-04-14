@@ -208,32 +208,32 @@ public class Prints {
 
     public static void PrintaMapa(String faseAtual) {
         String mapa = 
-        "                               [Inicio]\n" +
+        "                                [Inicio]\n" +
+        "                                   |\n" +
+        "                               [Batalha]\n" +
+        "                                   |\n" +
+        "                        [Acampamento do Caçador]\n" +
+        "                                   |\n" +
+        "                                [Encruzilhada]\n" +
+        "                             /                         \\\n" +
+        "      [Flor azul com espinhos vermelhos]              [Flor vermelha com espinhos azuis]\n" +
+        "               /             \\                                     /               \\\n" +
+        " [Caminho bonito]      [Caminho tortuoso]              [Tempo na fogueira]       [Floresta à noite]\n" +
+        "         |               /         \\                              |                   |\n" +
+        " [Floresta densa] [Seguir pelo rio] [Passar pela ponte]    [Cabana do caçador] [Seguindo pela floresta]\n" +
+        "         \\               |         /                |              /                   /\n" +
+        "          \\______________\\________/________________/_____________/____________________/\n" +
         "                                  |\n" +
-        "                              [Batalha]\n" +
+        "                            [Castelo de Duloc]\n" +
         "                                  |\n" +
-        "                       [Acampamento do Caçador]\n" +
-        "                                  |\n" +
-        "                            [Encruzilhada]\n" +
-        "                           /              \\\n" +
-        "      [Flor azul com espinhos vermelhos]  [Flor vermelha com espinhos azuis]\n" +
-        "               /             \\                      /             \\\n" +
-        " [Caminho bonito]      [Caminho tortuoso]  [Tempo na fogueira] [Floresta à noite]\n" +
-        "         |               /         \\                |               |\n" +
-        " [Floresta densa] [Seguir pelo rio] [Passar pela ponte] [Cabana do caçador] [Seguindo pela floresta]\n" +
-        "         \\               |         /                |               /\n" +
-        "          \\______________\\________/_________________/______________/\n" +
-        "                                  |\n" +
-        "                          [Castelo de Duloc]\n" +
-        "                                  |\n" +
-        "                              [Proposta]\n" +
+        "                                [Proposta]\n" +
         "                             /          \\\n" +
-        "                     [Vamos lá]   [52-Nahh. Passar bem]\n" +
+        "                      [Vamos lá]   [Quero não!]\n" +
         "                         |                |\n" +
-        "              [Entrando na masmorra] [Volta para o pântano]\n" +
+        "              [Torre da Bruxa Velha] [Volta para o pântano]\n" +
         "                         \\                /\n" +
         "                          \\              /\n" +
-        "                            [O Cavaleiro]\n" +
+        "                            [Na floresta]\n" +
         "                           /             \\\n" +
         "                 [Voltar agora]   [Descansar um pouco e voltar depois]\n" +
         "                           \\             /\n" +
@@ -241,7 +241,7 @@ public class Prints {
         "                                  |\n" +
         "                              [Continuar]\n" +
         "                                  |\n" +
-        "                          [O Grande Dragão]\n";
+        "                          [I need a hero]\n";
 
         mapa = mapa.replace("[" + faseAtual + "]", VERDE + NEGRITO + "[" + faseAtual + " 📍]" + RESET);
 

@@ -79,7 +79,7 @@ public class GameManager implements Publisher {
         sc.nextLine();
 
         Jogador jogador = new Jogador();
-        Heroi shrek = new Heroi("Shrek", 100, 20, 6, 100, 20, true, this);
+        Heroi shrek = new Heroi("Shrek", 1000, 20, 6, 1000, 20, true, this);
         jogador.adicionarHeroiTodos(shrek);
         jogador.getHeroisEscolhidos().add(shrek);
 
