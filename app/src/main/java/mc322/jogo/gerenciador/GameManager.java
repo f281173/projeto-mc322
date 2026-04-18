@@ -111,7 +111,8 @@ public class GameManager implements Publisher {
         EventoMapa evento = nodoAtual.getEvento();
         //Prints.limparTela();  //talvez tenha q mudar de lugar
         System.out.println(evento.getNomeFase());
-        System.out.println(evento.getDialogo());
+        //System.out.println(evento.getDialogo());
+        Prints.imprimirLetraPorLetra(evento.getDialogo());
         
 
         if (evento.getTipo() == TipoEvento.BATALHA || evento.getTipo() == TipoEvento.BOSS) {
@@ -160,12 +161,12 @@ public class GameManager implements Publisher {
 
         else if (evento.getNomeFase().equals("Flor vermelha com espinhos azuis")) {
             System.out.println(Cores.AZUL + " O Gato de Botas se juntou à sua equipe!" + Cores.RESET);
-            Heroi gato = Dados.criarGato(this);        
-            jogador.adicionarHeroiTodos(gato);
-            jogador.getHeroisEscolhidos().add(gato);
+            Heroi pinoquio = Dados.criarPinoquio(this);        
+            jogador.adicionarHeroiTodos(pinoquio);
+            jogador.getHeroisEscolhidos().add(pinoquio);
         }
 
-        else if (evento.getNomeFase().equals("Entrando na masmorra")) {
+        else if (evento.getNomeFase().equals("Torre da Bruxa Velha")) {
             System.out.println(Cores.AZUL + " Princesa Fiona se juntou à sua equipe!" + Cores.RESET);
             Heroi fiona = Dados.criarFiona(this);            
             jogador.adicionarHeroiTodos(fiona);
