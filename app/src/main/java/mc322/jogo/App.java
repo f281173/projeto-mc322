@@ -5,7 +5,7 @@ import java.util.Scanner;
 import mc322.jogo.gerenciador.GameManager;
 import mc322.jogo.gerenciador.Prints;
 
-/** Classe que serve como Ponto de Entrada oara executar o Código. */
+/** Classe que serve como Ponto de Entrada para executar o Código. */
 public class App {
 
     public static void main(String[] args) {

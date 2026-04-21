@@ -351,7 +351,6 @@ public class Prints {
 
 
 
-    //usei IA para criar essa função, imprime letra por letra
     public static void imprimirLetraPorLetra(String texto) {
     
         String[] linhas = texto.split("\n");

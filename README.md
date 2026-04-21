@@ -6,11 +6,12 @@
 
 
 ## Visão Geral
-Num lugar tão, tão distante, a paz de um pântano bucólico foi interrompida por perigos diversos. Este projeto é uma simulação de combate onde a lógica de programação encontra o universo de Shrek. O objetivo é simples: sobreviver ao ataque de diferentes inimigos de Shrek, montando estratégias a partir de um baralho de habilidades e gerenciando seus recursos com sabedoria.
+Num lugar tão, tão distante, a paz de um pântano bucólico foi interrompida por perigos diversos. Para recuperar o seu pântano, Shrek embarca numa longa jornada, cheia de desafios e decisões que moldam a história. Este projeto é uma simulação de combate onde a lógica de programação encontra o universo de Shrek. O objetivo é simples: sobreviver aos perigos da jornada, montando estratégias a partir de um baralho de habilidades, tomando as decisões certas no mapa e gerenciando seus recursos com sabedoria.
 
 
 **Funcionalidades:**
 * **Sistema de Turnos:** O jogador e o inimigo alternam ações até que a vida de um chegue a zero.
+* **Sistema de Dificuldade:** O jogador escolhe o nível de desafio no início do jogo (Fácil, Normal ou Difícil). Essa dificuldade dita a quantidade de monstros em batalhas comuns (ex: no modo Difícil, você pode ser emboscado por 3 inimigos genéricos simultâneos). **Atenção:** Chefões (Bosses) não são afetados pela dificuldade e lutam sozinhos.
 * **Sistema de Fases:** O turno do jogador é dividido entre "Fase de Compra" e "Fase de Ação", trazendo mecânicas de deckbuilding e card games.
 * **Gerenciamento de Energia:** O herói possui uma quantidade limitada de energia por turno para usar cartas.
 * **Baralho e Mão Dinâmicos:** As cartas são compradas de um baralho, utilizadas a partir da mão do jogador e embaralhadas novamente ao fim do turno.
@@ -20,6 +21,26 @@ Num lugar tão, tão distante, a paz de um pântano bucólico foi interrompida p
 * **Musica:** Nesse jogo ispirado no universo de Shrek temos que ao longo da partida músicas dos filmes são tocados.
 
 ---
+
+## O Mapa e os Eventos
+
+Durante a jornada, o jogador navegará por um mapa visual de caminhos interligados. Cada nó do mapa representa um tipo diferente de evento:
+
+* **📍 Você está aqui:** Indica a localização atual da sua equipe.
+* **🏠 Início:** O ponto de partida da aventura no pântano.
+* **⚔️ Batalhas Comuns:** Embates contra grupos de inimigos genéricos (Aldeões, Lobos, etc.). A quantidade de inimigos varia de 1 a 3 dependendo da dificuldade escolhida.
+* **👹 Boss/Chefão:** Lutas intensas que avançam a história contra inimigos únicos, como o Caçador, a Bruxa Velha e o Dragão.
+* **📜 Recompensas:** Momentos pacíficos de exploração onde o jogador descobre novas Cartas (habilidades) para fortalecer permanentemente o seu baralho.
+* **🍺 Bar/Cura:** Áreas de descanso, onde a equipe pode se curar.
+* **🕳️ Armadilha:** Eventos de azar e acidentes pelo caminho que causam danos e prejudicam a equipe.
+* **🔀 Decisão/Encruzilhada:** Momentos críticos onde o jogador deve escolher entre dois ou mais caminhos, alterando completamente as batalhas e recompensas da sua rota.
+* **❓ Evento Surpresa:**  Pontos do mapa que podem ser recompensas ou armadilhas. Só é revelado quando o jogador se aproxima.
+
+---
+
+
+
+
 
 **Sobre cada tipo de Carta implementada:**
 
@@ -65,6 +86,7 @@ O projeto é dividido nas seguintes classes principais:
 |**Publisher e Subscriber**| Interfaces importantes para a implementação do padrão Observer |
 |**Turno Heroi e Turno Vilão**| Classes para organizar a dinâmica de turnos entre Heróis e vilões ou inimigos|
 |**Dados**| Classe que guarda todas as informações das entidades|
+| **Campanha**| Estrutura de Grafos (Nós e Caminhos) que forma o mapa e os eventos do jogo. |
 |**Musica**|Gerencia a trilha sonora|
 
 
