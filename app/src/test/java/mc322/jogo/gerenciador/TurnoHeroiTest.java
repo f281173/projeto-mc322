@@ -11,6 +11,9 @@ import java.util.Scanner;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
+/**
+ * Classe para testar {@link TurnoHeroi}
+ */
 public class TurnoHeroiTest {
 
     private GameManager gm;
@@ -24,22 +27,17 @@ public class TurnoHeroiTest {
 
     @Test
     void testFluxoHeroiCompleto() {
-        // Sequência de Entradas simuladas:
-        // 1 -> Compra carta | 0 -> Escolhe a carta 0 | 2 -> Encerra fase de compra
-        // 2 -> Usar cartas | 0 -> Escolhe a carta 0 na mão | 0 -> Escolhe o alvo (Inimigo)
-        // 3 -> Encerra turno
         String input = "1\n0\n2\n2\n0\n0\n3\n";
         Scanner sc = new Scanner(new ByteArrayInputStream(input.getBytes()));
 
-        // Configuração do Baralho com uma carta de Dano
         Baralho deck = new Baralho();
         deck.adicionaBaralho(new CartaDano("Golpe", "Dano 10", 1, 10));
-        
+
         Heroi shrek = new Heroi("Shrek", 100, 10, 5, 100, 10, true, gm, deck);
-        
+
         Jogador jogador = new Jogador();
         jogador.getHeroisEscolhidos().add(shrek);
-        
+
         Oponente oponente = new Oponente();
         oponente.adicionarInimigoTodos(new Inimigo("Vilao", 50, 0, 50, 5, false, gm, new ArrayList<>()));
         oponente.gerarInimigos(1);
@@ -51,17 +49,15 @@ public class TurnoHeroiTest {
 
     @Test
     void testRequisitosDiferentes() {
-        // Teste para cobrir o ramo de Escudo (Requisito HEROI)
-        // 2 -> Encerra compra | 2 -> Usar cartas | 0 -> Carta 0 | 3 -> Sair
         String input = "2\n2\n0\n3\n";
         Scanner sc = new Scanner(new ByteArrayInputStream(input.getBytes()));
 
         Baralho deck = new Baralho();
         deck.adicionaBaralho(new CartaEscudo("Escudo", "Defesa", 1, 10));
-        
+
         Heroi shrek = new Heroi("Shrek", 100, 0, 5, 100, 10, true, gm, deck);
         shrek.ganhaCarta(new CartaEscudo("Defesa", "E", 1, 5)); // Garante carta na mão
-        
+
         Jogador jogador = new Jogador();
         jogador.getHeroisEscolhidos().add(shrek);
         Oponente oponente = new Oponente();

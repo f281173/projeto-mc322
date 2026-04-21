@@ -9,18 +9,20 @@ import mc322.jogo.observer.Subscriber;
 import mc322.jogo.entidades.Entidade;
 import mc322.jogo.entidades.Heroi;
 
+/**
+ * Classe que testa {@link GameManager}
+ */
 public class GameManagerTest {
 
     private GameManager gm;
 
     @BeforeEach
     void setUp() {
-        gm = new GameManager(); // Cobre o construtor e inicializaEfeitosAtivos()
+        gm = new GameManager();
     }
 
     @Test
     void testInicializacaoEInscricao() {
-        // Mock simples de um Subscriber (Efeito)
         Subscriber sub = new Subscriber() {
             @Override
             public void serNotificado(Estados state) {
@@ -32,8 +34,6 @@ public class GameManagerTest {
             }
         };
 
-        // Testa o fluxo de inscrição e desinscrição (cobre os métodos da interface
-        // Publisher)
         assertDoesNotThrow(() -> {
             gm.inscrever(sub, Estados.ATAQUE);
             gm.desinscrever(sub, Estados.ATAQUE);
@@ -42,8 +42,6 @@ public class GameManagerTest {
 
     @Test
     void testNotificarSemInscritos() {
-        // Testa a notificação num estado vazio para garantir que não lança
-        // NullPointerException
         assertDoesNotThrow(() -> {
             gm.notificar(null, Estados.INICIO_DE_TURNO);
         });
@@ -53,7 +51,6 @@ public class GameManagerTest {
     void testNotificacaoMultiplosInscritos() {
         Heroi shrek = new Heroi(100, 0, 5, 10, "Shrek");
 
-        // Criamos dois subscritores para o mesmo estado
         class ContadorSub implements Subscriber {
             int chamadas = 0;
 
@@ -84,7 +81,6 @@ public class GameManagerTest {
     void testFluxoNotificacaoReal() {
         Heroi h = new Heroi(100, 0, 5, 10, "Heroi");
 
-        // Criamos um subscritor que pertence ao herói
         class MockSub implements mc322.jogo.observer.Subscriber {
             boolean foiNotificado = false;
 
@@ -102,7 +98,6 @@ public class GameManagerTest {
         MockSub sub = new MockSub();
         gm.inscrever(sub, mc322.jogo.observer.Estados.ATAQUE);
 
-        // Isto deve entrar no loop 'for (Subscriber efeito : copiaInscritos)'
         gm.notificar(h, mc322.jogo.observer.Estados.ATAQUE);
         assertTrue(sub.foiNotificado);
     }
@@ -137,7 +132,6 @@ public class GameManagerTest {
         gm.inscrever(subShrek, mc322.jogo.observer.Estados.ATAQUE);
         gm.inscrever(subBurro, mc322.jogo.observer.Estados.ATAQUE);
 
-        // Notifica apenas o Shrek. O sub do Burro não deve incrementar.
         gm.notificar(shrek, mc322.jogo.observer.Estados.ATAQUE);
 
         assertEquals(1, subShrek.cont);

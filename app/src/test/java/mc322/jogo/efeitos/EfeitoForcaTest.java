@@ -6,18 +6,28 @@ import mc322.jogo.gerenciador.GameManager;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.observer.Estados;
 
+/**
+ * Classe para fazer o teste de {@link EfeitoForca}
+ */
 public class EfeitoForcaTest {
+
+    /**
+     * Se aplicar uma força maior que 50%, deve substituir o valor e somar acúmulos
+     */
     @Test
     void testLogicaAcumuloForca() {
         GameManager gm = new GameManager();
         EfeitoForca ef = new EfeitoForca(2, gm, 25);
-        
-        // Se aplicar uma força maior (50%), deve substituir o valor e somar acúmulos
+
         ef.alteraForca(50, 3);
         assertEquals(50, ef.getValorForca());
         assertEquals(5, ef.getAcumulos());
     }
 
+    /**
+     * Notifica o fim de turno. Deve reduzir acúmulo e remover o efeito por ser o
+     * último.
+     */
     @Test
     void testTerminoEfeitoForca() {
         GameManager gm = new GameManager();
@@ -26,7 +36,6 @@ public class EfeitoForcaTest {
         ef.setDono(h);
         h.getListaEfeitos().add(ef);
 
-        // Notifica fim de turno: deve reduzir acúmulo e remover o efeito por ser o último
         ef.serNotificado(Estados.FIM_DE_TURNO);
         assertEquals(0, ef.getAcumulos());
         assertTrue(h.getListaEfeitos().isEmpty());

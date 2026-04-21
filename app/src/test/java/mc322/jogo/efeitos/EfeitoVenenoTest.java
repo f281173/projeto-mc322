@@ -7,6 +7,9 @@ import mc322.jogo.entidades.Inimigo;
 import mc322.jogo.observer.Estados;
 import java.util.ArrayList;
 
+/**
+ * Classe para testar {@link EfeitoVeneno}
+ */
 public class EfeitoVenenoTest {
     @Test
     void testDanoVenenoNoInicioDoTurno() {
@@ -16,10 +19,9 @@ public class EfeitoVenenoTest {
         ev.setDono(i);
         i.getListaEfeitos().add(ev);
 
-        // Notifica início de turno: deve causar dano igual aos acúmulos (10)
+
         ev.serNotificado(Estados.INICIO_DE_TURNO);
         
-        // Vida deve cair para 90, mas o escudo (50) deve permanecer intacto
         assertEquals(90, i.getVida());
         assertEquals(50, i.getEscudo());
         assertEquals(9, ev.getAcumulos());
