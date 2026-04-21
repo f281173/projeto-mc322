@@ -118,6 +118,14 @@ public class Inimigo extends Entidade {
         gm.notificar(this, Estados.ATAQUE);
         alvo.recebeDano(valorDano);
     }
+    
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setGm(GameManager gm) {
+        this.gm = gm;
+    }
 
 
 }

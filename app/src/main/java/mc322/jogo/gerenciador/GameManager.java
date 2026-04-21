@@ -204,7 +204,7 @@ public class GameManager implements Publisher {
                 System.out.println(Cores.VERMELHO + "Opção inválida! Digite um número do menu." + Cores.RESET);
             }
         }
-    } 
+    }
 
 }
 

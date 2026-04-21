@@ -74,4 +74,39 @@ public class HeroiTest {
     assertEquals(10, h.getVidaInicial());
     assertEquals(5, h.getVelocidade());
     }
+
+@Test
+    public void testGestaoDeEnergia() {
+        // Usa o construtor auxiliar que já estavas a usar
+        Heroi h = new Heroi(100, 0, 5, 10, "Heroi Teste");
+        
+        assertEquals(5, h.getEnergiaAtual());
+        
+        h.diminuiEnergia(2);
+        assertEquals(3, h.getEnergiaAtual());
+        
+        h.resetaEnergia();
+        assertEquals(5, h.getEnergiaAtual());
+    }
+
+    @Test
+    public void testAnalisaEnergiaComSucesso() {
+        Heroi h = new Heroi(100, 0, 5, 10, "Heroi Teste");
+        
+        // Testa o caminho 'true' do analisaEnergia (o teu teste atual só via o false)
+        assertTrue(h.analisaEnergia(3));
+        assertEquals(2, h.getEnergiaAtual());
+    }
+
+    @Test
+    public void testTemOpcaoCartaMaoVazia() {
+        // Criando herói pelo construtor simplificado, a mão/baralho podem estar nulos 
+        // ou vazios dependendo da inicialização da classe pai.
+        Heroi h = new Heroi(100, 10, 5, 10, "Heroi");
+        
+        // Verifica se o comportamento de mão vazia está consistente
+        assertFalse(h.temCartaDisponivel());
+        assertFalse(h.temOpcaoCartaMao(0));
+    }
 }
+

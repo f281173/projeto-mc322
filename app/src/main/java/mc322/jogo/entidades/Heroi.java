@@ -60,6 +60,8 @@ public class Heroi extends Entidade {
         this.energiaInicial = energia;
         this.velocidade = velocidade;
         this.nome = nome;
+        this.listaEfeitos = new java.util.ArrayList<>();
+        this.maoJogador = new MaoJogador(null);
     }
 
     @Override
