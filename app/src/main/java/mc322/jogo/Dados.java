@@ -59,7 +59,7 @@ public class Dados {
                             "Efeito: [Custo: 2 | Turnos: 5 |Força: +50%] - Renovado.", 2,
                             (new EfeitoForca(5, gm, 50))));
 
-            return new Heroi("Shrek", 1000, 20, 6, 1000, 20, true, gm, deckShrek) ;
+            return new Heroi("Shrek", 200, 20, 6, 200, 20, true, gm, deckShrek) ;
         }
 
 
@@ -90,38 +90,40 @@ public class Dados {
                             "Efeito: [Custo: 3 | Turnos: 5| Força: +25%] - Um garoto diferenciado", 3,
                             (new EfeitoForca(5, gm, 25))));
 
-            return new Heroi("Burro", 80, 10, 7, 80, 50, true, gm, deckBurro);
+            return new Heroi("Burro", 120, 10, 7, 120, 50, true, gm, deckBurro);
         }
 
 
-        public static Heroi criarGato(GameManager gm) {
-                /** Baralho do Personagem Gato */
-                Baralho deckGato = new Baralho();
+        public static Heroi criarPinoquio(GameManager gm) {
+                /** Baralho do Personagem Pinóquio */
+                Baralho deckPinoquio = new Baralho();
 
-                deckGato.adicionaBaralho(
-                                new CartaDano("Corte Preciso",
-                                                "Dano: [Custo: 2 | Dano: 20] - Um ataque rápido e certeiro.", 2, 20));
-                deckGato.adicionaBaralho(new CartaDano("Dança das Espadas",
-                                "Dano: [Custo: 4 | Dano: 42] - Uma sequência elegante de golpes.", 4, 42));
-                deckGato.adicionaBaralho(new CartaDano("Golpe Crítico Felino",
-                                "Dano: [Custo: 5 | Dano: 55] - Ataque mortal com precisão felina.", 5, 55));
-                deckGato.adicionaBaralho(new CartaDano("Miauuu", "Dano: [Custo: 1 | Dano: 15] - Miauu.", 1, 15));
-                deckGato.adicionaBaralho(new CartaDanoArea("Gato e o El Bigodon Federal", "[Custo: 4 | Dano: 50 ÁREA] SAI DA FRENTE", 4, 50));
+                deckPinoquio.adicionaBaralho(
+                                new CartaDano("Madeirada",
+                                                "Dano: [Custo: 2 | Dano: 20] - Um ataque rápido com braço de madeira.", 2, 20));
+                deckPinoquio.adicionaBaralho(new CartaDano("Sequência de golpes",
+                                "Dano: [Custo: 4 | Dano: 42] - O Gepeto lhe ensinou.", 4, 42));
+                deckPinoquio.adicionaBaralho(new CartaDano("Estocada Nasal",
+                                "Dano: [Custo: 5 | Dano: 55] - Ataque mortal com o nariz esticado.", 5, 55));
+                deckPinoquio.adicionaBaralho(new CartaDano("Eu não estou mentindo!", 
+                                "Dano: [Custo: 1 | Dano: 15] - *Crec*. O nariz cresceu e bateu no inimigo.", 1, 15));
+                deckPinoquio.adicionaBaralho(new CartaDanoArea("Dança sem Cordas", 
+                                "[Custo: 4 | Dano: 50 ÁREA] SAI DA FRENTE, O FANTOCHE TÁ SOLTO!", 4, 50));
 
-                deckGato.adicionaBaralho(new CartaEscudo("Olhar Fofo",
-                                "Escudo: [Custo: 2 | Escudo: 15] - Desarma o inimigo emocionalmente.", 2, 15));
-                deckGato.adicionaBaralho(new CartaEscudo("Esquiva Ágil",
-                                "Escudo: [Custo: 1 | Escudo: 10] - Movimentos rápidos evitam dano.", 1, 10));
+                deckPinoquio.adicionaBaralho(new CartaEscudo("Corpo de Carvalho",
+                                "Escudo: [Custo: 2 | Escudo: 15] - A madeira dura absorve o impacto.", 2, 15));
+                deckPinoquio.adicionaBaralho(new CartaEscudo("Fio Invisível",
+                                "Escudo: [Custo: 1 | Escudo: 10] - Puxado por cordas mágicas para evitar o dano.", 1, 10));
 
-                deckGato.adicionaBaralho(new CartaEfeito("7 Vidas",
-                                "Efeito: [Custo: 4 | Turnos: 7| Força: +30%] - Até a Morte teme", 4,
+                deckPinoquio.adicionaBaralho(new CartaEfeito("Menino de Verdade",
+                                "Efeito: [Custo: 4 | Turnos: 7| Força: +30%] - A magia da Fada Azul te enche de determinação.", 4,
                                 (new EfeitoForca(7, gm, 30))));
-                deckGato.adicionaBaralho(new CartaEfeito("Marca do Caçador",
-                                "Efeito: [Custo: 2 | Turnos: 4 |Fraqueza: 30%] - Identifica o ponto fraco do inimigo.",
+                deckPinoquio.adicionaBaralho(new CartaEfeito("Mentira Descarada",
+                                "Efeito: [Custo: 2 | Turnos: 4 | Fraqueza: 30%] - As mentiras deixam o inimigo confuso.",
                                 2,
                                 (new EfeitoFraqueza(4, gm, 30))));
 
-                return new Heroi("Gato de Botas", 70, 15, 5, 60, 80, true, gm, deckGato);
+                return new Heroi("Pinóquio", 120, 15, 5, 120, 80, true, gm, deckPinoquio);
         }
 
 
@@ -154,7 +156,7 @@ public class Dados {
                                 "Efeito: [Custo: 3 | Turnos: 4| Fraqueza: 20%] - Sente a pressão", 3,
                                 (new EfeitoFraqueza(4, gm, 20))));
 
-                return new Heroi("Fiona", 90, 25, 5, 90, 40, true, gm, deckFiona);
+                return new Heroi("Fiona", 130, 25, 5, 130, 40, true, gm, deckFiona);
 
                 
         }
@@ -294,7 +296,7 @@ public class Dados {
             acoes.add(new AcaoAtacar("Raio Mágico", 20));
             acoes.add(new AcaoAtacar("Poção Explosiva", 10));
             acoes.add(new AcaoEscudo("Bolha de Sabão", 25));
-            acoes.add(new AcaoEfeito("Feitiço da Fada", new EfeitoVeneno(30, gm)));
+            acoes.add(new AcaoEfeito("Feitiço da Fada", new EfeitoVeneno(10, gm)));
             acoes.add(new AcaoEfeito("Poeira Cegante", new EfeitoFraqueza(3, gm, 25)));
 
             return new Inimigo("Velha Bruxa", 90, 20, 90, 60, true, gm, acoes);

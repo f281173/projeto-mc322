@@ -1,10 +1,11 @@
 package mc322.jogo;
 
-import mc322.jogo.gerenciador.Prints;
-import mc322.jogo.gerenciador.GameManager;
 import java.util.Scanner;
 
-/** Classe que serve como Ponto de Entrada oara executar o Código. */
+import mc322.jogo.gerenciador.GameManager;
+import mc322.jogo.gerenciador.Prints;
+
+/** Classe que serve como Ponto de Entrada para executar o Código. */
 public class App {
 
     public static void main(String[] args) {
@@ -20,7 +21,7 @@ public class App {
             tela.jogarNovamente();
             int escolha = sc.nextInt();
 
-            if (escolha != 1) {
+            if (escolha != 1) {  //colocar as musicas aqui eu acho
                 jogarNovamente = false;
                 System.out.println(Cores.VERDE + "\nObrigado! Até a próxima aventura." + Cores.RESET);
             } else {

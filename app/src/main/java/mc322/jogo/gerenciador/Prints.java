@@ -170,7 +170,7 @@ public class Prints {
     public static final String DIALOGO_N1 = 
         Cores.NEGRITO + "Narrador: " + Cores.RESET + "Era uma vez, num lugar tão tão distante, um ogro em seu pântano, que vivia sozinho, longe de tudo. Até que...\n" +
         Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "O que diabos esse bando de contos de fadas está fazendo no meu quintal?!\n" +
-        Cores.AZUL + Cores.NEGRITO + "Pinóquio: " + Cores.RESET + "Lord Farquaad está atrás de todas as criaturas mágicas! Ele quer um reino perfeito, o caos está tomando conta!\n" +
+        Cores.AZUL + Cores.NEGRITO + "Porco: " + Cores.RESET + "Lord Farquaad está atrás de todas as criaturas mágicas! Ele quer um reino perfeito, o caos está tomando conta!\n" +
         Cores.VERMELHO + Cores.NEGRITO + "Aldeões: " + Cores.RESET + "Ali estão eles, se escondendo atrás do ogro!! Peguem todos!\n" +
         Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Haha. Na minha casa não.\n";
 
@@ -183,7 +183,7 @@ public class Prints {
         Cores.NEGRITO + "Narrador: " + Cores.RESET + "Shrek então parte em uma viagem. Para ter seu pântano livre novamente.\n" +
         Cores.NEGRITO + "Narrador: " + Cores.RESET + "No meio do caminho, Shrek encontra uma carruagem. Ele vê criaturas mágicas presas!\n" +
         Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Esse lord é persistente mesmo.\n" +
-        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Shrek solta as criaturas. Entretanto um anão chega...\n" +
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Shrek solta as criaturas. Entretanto um caçador chega...\n" +
         Cores.VERMELHO + Cores.NEGRITO + "Caçador: " + Cores.RESET + "Eii! Estes caras eram meus. Meu dinheiro, nãoooo!\n" +
         Cores.VERMELHO + Cores.NEGRITO + "Caçador: " + Cores.RESET + "Você vai pagar por isso! Vou te derrotar e te prender igual aos outros. Você deve valer bastante.\n" +
         Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Que? Pode tentar então!\n";
@@ -199,9 +199,9 @@ public class Prints {
 
 
     public static final String DIALOGO_N22 = 
-        Cores.NEGRITO + "Narrador: " + Cores.RESET + "No caminho Shrek vê um gato lutando contra um grupo de capangas.\n" +
-        Cores.AZUL + Cores.NEGRITO + "Gato: " + Cores.RESET + "Ei besta grotesca! Me ajude!\n" +
-        Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Beleza, gatinho!\n";
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "No caminho Shrek vê um boneco de madeira lutando contra um grupo de capangas.\n" +
+        Cores.AZUL + Cores.NEGRITO + "Pinóquio: " + Cores.RESET + "Ei besta grotesca! Me ajude!\n" +
+        Cores.AZUL + Cores.NEGRITO + "Shrek: " + Cores.RESET + "Beleza, brinquedinho!\n";
 
 
 
@@ -258,45 +258,114 @@ public class Prints {
 
     
     public static void PrintaMapa(String faseAtual) {
-        String mapa = 
-        "                                     [Inicio]\n" +
-        "                                        |\n" +
-        "                                    [Batalha]\n" +
-        "                                        |\n" +
-        "                             [Acampamento do Caçador]\n" +
-        "                                        |\n" +
-        "                                   [Encruzilhada]\n" +
-        "                              /                         \\\n" +
-        "        [Flor azul com espinhos vermelhos]             [Flor vermelha com espinhos azuis]\n" +
-        "               /                \\                                     /               \\\n" +
-        "      [Caminho bonito]         [Caminho tortuoso]              [Tempo na fogueira]       [Floresta à noite]\n" +
-        "         |         \\                \\                              |                   |\n" +
-        " [Floresta densa] [Seguir pelo rio] [Passar pela ponte]    [Cabana do caçador] [Seguindo pela floresta]\n" +
-        "         \\              \\          /                            /                    /\n" +
-        "          \\______________\\________/____________________________/____________________/\n" +
-        "                                         |\n" +
-        "                                 [Castelo de Duloc]\n" +
-        "                                          |\n" +
-        "                                      [Proposta]\n" +
-        "                                   /          \\\n" +
-        "                              [Vamos lá]   [Quero não!]\n" +
-        "                                  |                |\n" +
-        "                    [Torre da Bruxa Velha] [Volta para o pântano]\n" +
-        "                                 \\                /\n" +
-        "                                  \\              /\n" +
-        "                                    [Na floresta]\n" +
-        "                                  /             \\\n" +
-        "                       [Voltar agora]     [Descansar um pouco e voltar depois]\n" +
-        "                                 \\             /\n" +
-        "                                [Seguir jornada]\n" +
-        "                                        |\n" +
-        "                                    [Continuar]\n" +
-        "                                          |\n" +
-        "                                  [I need a hero]\n";
+        String idAtual = "";
+        
+        switch (faseAtual) {
+            case "Inicio": idAtual = "01"; break;
+            case "Batalha": idAtual = "02"; break;
+            case "Acampamento do Caçador": idAtual = "03"; break;
+            case "Encruzilhada": idAtual = "04"; break;
+            case "Flor azul com espinhos vermelhos": idAtual = "05"; break;
+            case "Flor vermelha com espinhos azuis": idAtual = "06"; break;
+            case "Caminho bonito": idAtual = "07"; break;
+            case "Caminho tortuoso": idAtual = "08"; break;
+            case "Tempo na fogueira": idAtual = "09"; break;
+            case "Floresta à noite": idAtual = "10"; break;
+            case "Floresta densa": idAtual = "11"; break;
+            case "Seguir pelo rio": idAtual = "12"; break;
+            case "Passar pela ponte": idAtual = "13"; break;
+            case "Cabana do caçador": idAtual = "14"; break;
+            case "Seguindo pela floresta": idAtual = "15"; break;
+            case "Castelo de Duloc": idAtual = "16"; break;
+            case "Proposta": idAtual = "17"; break;
+            case "Vamos lá": idAtual = "18"; break;
+            case "Quero não!": idAtual = "19"; break;
+            case "Torre da Bruxa Velha": idAtual = "20"; break;
+            case "Volta para o pântano": idAtual = "21"; break;
+            case "Na floresta": idAtual = "22"; break;
+            case "Voltar agora": idAtual = "23"; break;
+            case "Descansar um pouco e voltar depois": idAtual = "24"; break;
+            case "Seguir jornada": idAtual = "25"; break;
+            case "Continuar": idAtual = "26"; break;
+            case "I need a hero": idAtual = "27"; break;
+        }
 
-        mapa = mapa.replace("[" + faseAtual + "]", Cores.VERDE + Cores.NEGRITO + "[" + faseAtual + " 📍]" + Cores.RESET);
+
+        String mapa = 
+        "                            [01]\n" +
+        "                              |\n" +
+        "                            [02]\n" +
+        "                              |\n" +
+        "                            [03]\n" +
+        "                              |\n" +
+        "                            [04]\n" +
+        "                          /      \\\n" +
+        "                       [05]      [06]\n" +
+        "                      /    \\    /    \\\n" +
+        "                   [07]  [08]  [09]  [10]\n" +
+        "                  /   |    |     |     |\n" +
+        "                [11] [12] [13]  [14]  [15]\n" +
+        "                  \\   |    /     /     /\n" +
+        "                   \\__|___/_____/_____/\n" +
+        "                              |\n" +
+        "                            [16]\n" +
+        "                              |\n" +
+        "                            [17]\n" +
+        "                           /    \\\n" +
+        "                        [18]    [19]\n" +
+        "                          |      |\n" +
+        "                        [20]    [21]\n" +
+        "                           \\    /\n" +
+        "                            [22]\n" +
+        "                           /    \\\n" +
+        "                        [23]    [24]\n" +
+        "                          \\    /\n" +
+        "                           [25]\n" +
+        "                            |\n" +
+        "                           [26]\n" +
+        "                            |\n" +
+        "                           [27]\n";
+
+  
+        if (!idAtual.isEmpty()) {
+            mapa = mapa.replace("[" + idAtual + "]", Cores.VERDE + "[📍]" + Cores.RESET);
+        }
+
+        mapa = mapa.replace("[01]", "[🏠]").replace("[02]", "[⚔️ ]").replace("[03]", "[👹]")
+                      .replace("[04]", "[🔀]").replace("[05]", "[⚔️ ]").replace("[06]", "[⚔️ ]")
+                    .replace("[07]", "[❓]").replace("[08]", "[⚔️ ]").replace("[09]", "[❓]")
+                    .replace("[10]", "[❓]") .replace("[11]", "[⚔️ ]").replace("[12]", "[🍺]")
+                   .replace("[13]", "[⚔️ ]").replace("[14]", "[⚔️ ]") .replace("[15]", "[❓]")
+                    .replace("[16]", "[👹]") .replace("[17]", "[💬]") .replace("[18]", "[⚔️ ]")
+                    .replace("[19]", "[⚔️ ]").replace("[20]", "[👹]")  .replace("[21]", "[❓]")
+                    .replace("[22]", "[👹]") .replace("[23]", "[⚔️ ]").replace("[24]", "[❓]")
+                   .replace("[25]", "[👹]") .replace("[26]", "[❓]").replace("[27]", "[👹]");
+
+        System.out.println(Cores.NEGRITO + "LEGENDA DO MAPA:" + Cores.RESET);
+        System.out.println("📍 Você está aqui  |  ⚔️ Batalha   |  👹 Boss");
+        System.out.println("❓ Surpresa        |  🍺 Bar ");
+        System.out.println("🔀 Caminho         |  💬 Acordo\n");
 
         System.out.println(mapa);
+    }
+
+
+
+    public static void imprimirLetraPorLetra(String texto) {
+    
+        String[] linhas = texto.split("\n");
+        for (String linha : linhas) {
+            for (char letra : linha.toCharArray()) {
+                System.out.print(letra);
+                
+                try {
+                    Thread.sleep(20); 
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            System.out.println(); 
+        }
     }
 
 }

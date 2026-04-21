@@ -133,7 +133,7 @@ public class Campanha {
 
         // --- CAMINHO ESQUERDO (BURRO) -----------------------------------------------
         NoMapa n21_burro = new NoMapa(new EventoMapa(
-            "Flor azul com espinhos vermelhos\n", 
+            "Flor azul com espinhos vermelhos", 
             Prints.DIALOGO_N21,
             TipoEvento.BATALHA, 
             carregaInimigoGenerico(gm, () -> Dados.criarMonsieurHood(gm), dificuldade)
@@ -174,18 +174,18 @@ public class Campanha {
         n32_batalha.adicionarCaminho(n43_batalha);
 
 
-        // --- CAMINHO DIREITO (GATO) -----------------------------------------------------------
+        // --- CAMINHO DIREITO (Pinóquio) -----------------------------------------------------------
         NoMapa n22_gato = new NoMapa(new EventoMapa(
-            "Flor vermelha com espinhos azuis\n", 
+            "Flor vermelha com espinhos azuis", 
             Prints.DIALOGO_N22,
             TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarMonsieurHood(gm), dificuldade)
         ));
 
 
         NoMapa n33_golpe = new NoMapa(new EventoMapa("Tempo na fogueira",
-            Cores.NEGRITO + "Narrador: " + Cores.RESET + "O Gato de Botas te ensina uma técnica de evasão.", 
+            Cores.NEGRITO + "Narrador: " + Cores.RESET + "O Pinóquio te ensina uma técnica de mentira.", 
             TipoEvento.RECOMPENSA_CARTA, null));
-        n33_golpe.getEvento().setCartaRecompensa(new CartaEscudo("Esquiva Furtiva", "[Custo:1 | Escudo: 35]", 1, 35));
+        n33_golpe.getEvento().setCartaRecompensa(new CartaEscudo("Só uma Mentirinha", "[Custo:1 | Escudo: 35]", 1, 35));
         
 
         NoMapa n34_buraco = new NoMapa(new EventoMapa("Floresta à noite",
@@ -193,20 +193,21 @@ public class Campanha {
             TipoEvento.ARMADILHA, null));
         
 
-        NoMapa n44_batalha = new NoMapa(new EventoMapa("Cabana do caçador",
-            Cores.VERMELHO + Cores.NEGRITO + "Caçador: " + Cores.RESET + "O Lord já está sabendo de suas aventuras! O prêmio pela sua cabeça é alto!", 
+        NoMapa n44_batalha = new NoMapa(new EventoMapa("Cabana",
+            Cores.VERMELHO + Cores.NEGRITO + "Mascote do Lord: " + Cores.RESET + "Ei, essa é minha casa! Em nome de Farquaad, você morre aqui!", 
             TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarFarquadMascot(gm), dificuldade)));  //mascote
         
 
-        NoMapa n45_golpe = new NoMapa(new EventoMapa("Cabana do caçador", 
+        NoMapa n45_golpe = new NoMapa(new EventoMapa("Cabana do Mascote", 
             Cores.NEGRITO + "Narrador: " + Cores.RESET + "Você saqueia o acampamento do caçador.", 
             TipoEvento.RECOMPENSA_CARTA, null));
-        n45_golpe.getEvento().setCartaRecompensa(new CartaDano("Corte Duplo", "[Custo: 3 | Dano: 65]", 3, 65));
+        n45_golpe.getEvento().setCartaRecompensa(new CartaDano("Máscara da morte", "[Custo: 3 | Dano: 65]", 3, 65));
         
 
-        NoMapa n46_bar = new NoMapa(new EventoMapa("Seguindo pela floresta", 
+        NoMapa n46_golpe = new NoMapa(new EventoMapa("Seguindo pela floresta", 
             Cores.NEGRITO + "Narrador: " + Cores.RESET + "Você encontra uma panela de ferro. Excelente para proteger a cabeça.", 
             TipoEvento.RECOMPENSA_CARTA, null));
+        n46_golpe.getEvento().setCartaRecompensa(new CartaEscudo("Panela de Ferro", "[Custo: 1 | Escudo: 40]", 1, 40));
 
         n10_flores.adicionarCaminho(n22_gato);
 
@@ -216,7 +217,7 @@ public class Campanha {
         n33_golpe.adicionarCaminho(n44_batalha);
         n33_golpe.adicionarCaminho(n45_golpe);
 
-        n34_buraco.adicionarCaminho(n46_bar);
+        n34_buraco.adicionarCaminho(n46_golpe);
 
 
    
@@ -238,7 +239,7 @@ public class Campanha {
         n43_batalha.adicionarCaminho(n5_farquaad);
         n44_batalha.adicionarCaminho(n5_farquaad);
         n45_golpe.adicionarCaminho(n5_farquaad);
-        n46_bar.adicionarCaminho(n5_farquaad);
+        n46_golpe.adicionarCaminho(n5_farquaad);
 
         n5_farquaad.adicionarCaminho(n5_masmorra);
 
