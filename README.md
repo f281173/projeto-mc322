@@ -139,6 +139,16 @@ Para rodar o jogo, certifique-se de ter o Java instalado (JDK 17 ou superior rec
 Feito o comando, vá pelo explorador de arquivos até app/build/docs/javadoc/index.html
 
 
+## Como gerar os testes e pegar o HTML com a porcentagem de cobertura.
+
+```java
+
+./gradlew test
+
+```
+
+Feito o comando, vá pelo explorador de arquivos até app/build/reports/jacoco/test/html/index.html
+
 
 
 
