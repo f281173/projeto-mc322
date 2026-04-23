@@ -16,7 +16,7 @@ public class Prints {
     /**
      * Método responsável pela tela de início do jogo.
      */
-    public void comeco() {
+    public static void comeco() {
         System.out.println(Cores.NEGRITO + "===========================================================" + Cores.RESET);
         System.out.println(Cores.NEGRITO + Cores.CIANO + "           BEM-VINDO AO JOGO DE RPG DO SHREK !!            "
                 + Cores.RESET);
@@ -144,7 +144,7 @@ public class Prints {
         }
     }
 
-    public void dificuldade() {
+    public static void dificuldade() {
         System.out.println("\n" + Cores.NEGRITO + "=================== CONFIGURAÇÃO DA PARTIDA ==================="
                 + Cores.RESET);
         System.out.println("Escolha a dificuldade da batalha:");

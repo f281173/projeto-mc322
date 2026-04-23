@@ -5,18 +5,14 @@ import mc322.jogo.Dados;
 import mc322.jogo.Musica;
 import mc322.jogo.entidades.Entidade;
 import mc322.jogo.entidades.Heroi;
-import mc322.jogo.entidades.Inimigo;
 import mc322.jogo.mapa.Campanha;
 import mc322.jogo.mapa.EventoMapa;
 import mc322.jogo.mapa.NoMapa;
 import mc322.jogo.mapa.TipoEvento;
 import mc322.jogo.observer.Estados;
-import mc322.jogo.cartas.Baralho;
 import mc322.jogo.cartas.Carta;
-import mc322.jogo.cartas.CartaDanoArea;
 import mc322.jogo.observer.Publisher;
 import mc322.jogo.observer.Subscriber;
-import mc322.jogo.Cores;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.HashMap;
@@ -84,12 +80,12 @@ public class GameManager implements Publisher {
      */
     public void prepararPartida(Scanner sc, Prints tela) {
 
-        tela.comeco();
+        tela.comeco(); // [TERMINAL]
         dj.tocarMusica("../sons/Funkytown.wav");
 
-        tela.dificuldade();
-        int dificuldade = sc.nextInt();
-        sc.nextLine();
+        tela.dificuldade(); // [TERMINAL]
+        int dificuldade = sc.nextInt(); // [TERMINAL]
+        sc.nextLine(); // [TERMINAL]
 
         Jogador jogador = new Jogador();
         Heroi shrek = Dados.criarShrek(this);
@@ -98,7 +94,7 @@ public class GameManager implements Publisher {
 
         // criar um mapa aqui eu acho
         NoMapa inicioDoMapa = Campanha.criarMapa(this, dificuldade);
-        System.out.println("\nA JORNADA VAI COMEÇAR!\n\n");
+        System.out.println("\nA JORNADA VAI COMEÇAR!\n\n"); // [TERMINAL]
         viajarPeloGrafo(inicioDoMapa, jogador, sc, tela, shrek);
 
     }
@@ -107,12 +103,12 @@ public class GameManager implements Publisher {
 
     public void viajarPeloGrafo(NoMapa nodoAtual, Jogador jogador, Scanner sc, Prints tela, Heroi Shrek) {
         
-        Prints.limparTela();
+        Prints.limparTela(); // [TERMINAL]
         EventoMapa evento = nodoAtual.getEvento();
         //Prints.limparTela();  //talvez tenha q mudar de lugar
-        System.out.println(evento.getNomeFase());
+        System.out.println(evento.getNomeFase()); // [TERMINAL]
         //System.out.println(evento.getDialogo());
-        Prints.imprimirLetraPorLetra(evento.getDialogo());
+        Prints.imprimirLetraPorLetra(evento.getDialogo()); // [TERMINAL]
         
 
         if (evento.getTipo() == TipoEvento.BATALHA || evento.getTipo() == TipoEvento.BOSS) {
