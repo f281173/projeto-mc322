@@ -78,6 +78,9 @@ O projeto é dividido nas seguintes classes principais:
 |**EfeitoVeneno**| Classe concreta que estende Efeito e implementa o efeito veneno|
 |**EfeitoFraqueza**| Classe concreta que estende o efeito e implementa o efeito Fraqueza|
 |**EfeitoForça**| Classe concreta que estende o efeito e implementa o efeito Força|
+| **Evento**| Classe base abstrata para todos os eventos dos nós do mapa |
+| **Batalha / EventoLoja / EventoRecompensa**| Classes filhas de Evento que encapsulam as regras específicas de cada sala. |
+| **Campanha / NoMapa**| Estrutura de Grafos  que forma o mapa do jogo. |
 |**Prints**| Classe para implementar as telas durante o jogo|
 |**GameManager**|Classe que centraliza todos os eventos do jogo e manipula os estados de cada etapa do jogo |
 |**Jogador**| Classe que organiza os heróis para o jogo com múltiplas entidades|
