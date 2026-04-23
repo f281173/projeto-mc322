@@ -7,9 +7,8 @@ import mc322.jogo.entidades.Entidade;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
 import mc322.jogo.mapa.Campanha;
-import mc322.jogo.mapa.EventoMapa;
+import mc322.jogo.mapa.Evento;
 import mc322.jogo.mapa.NoMapa;
-import mc322.jogo.mapa.TipoEvento;
 import mc322.jogo.observer.Estados;
 import mc322.jogo.cartas.Baralho;
 import mc322.jogo.cartas.Carta;
@@ -20,6 +19,7 @@ import mc322.jogo.Cores;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.HashMap;
+
 
 /**
  * Classe do controle do jogo
@@ -105,117 +105,29 @@ public class GameManager implements Publisher {
 
 
 
-    public void viajarPeloGrafo(NoMapa nodoAtual, Jogador jogador, Scanner sc, Prints tela, Heroi Shrek, int dificuldade) {
-        
+   public void viajarPeloGrafo(NoMapa nodoAtual, Jogador jogador, Scanner sc, Prints tela, Heroi Shrek, int dificuldade) {
         Prints.limparTela();
-        EventoMapa evento = nodoAtual.getEvento();
-        //Prints.limparTela();  //talvez tenha q mudar de lugar
-        System.out.println(evento.getNomeFase());
-        //System.out.println(evento.getDialogo());
-        Prints.imprimirLetraPorLetra(evento.getDialogo());
+        Evento evento = nodoAtual.getEvento();
         
+        System.out.println(Cores.AMARELO + "📍 VOCÊ CHEGOU EM: " + evento.getNomeFase() + Cores.RESET);
 
-        if (evento.getTipo() == TipoEvento.BATALHA || evento.getTipo() == TipoEvento.BOSS) {
-            Batalha arena = new Batalha();
-            boolean sobreviveu = arena.executarCombate(jogador, evento.getOponente(), this, sc, tela);
-            if (!sobreviveu) return; 
+        
+        boolean sobreviveu = evento.iniciar(jogador, this, sc, tela, dificuldade);
 
+        if (!sobreviveu) return; 
 
-            int moedasGanhas = 0;
-            
-            if (evento.getTipo() == TipoEvento.BOSS) {
-                moedasGanhas = 20;
-            } else if (evento.getTipo() == TipoEvento.BATALHA) {
-                moedasGanhas = 10 * dificuldade;
-            }
-
-            jogador.adicionarMoedas(moedasGanhas);
-            System.out.println(Cores.AMARELO + "💰 Você ganhou " + moedasGanhas + " moedas!" + Cores.RESET);
-            System.out.println("Saldo atual: 💰 " + jogador.getMoedas() + "\n");
-
-        } 
-
-
-        else if (evento.getTipo() == TipoEvento.LOJA) {
-            int numLoja = 1;
-            if (evento.getNomeFase().equals("Tenda Misteriosa")) {
-                numLoja = 2;
-            }
-            abrirLoja(sc, jogador, numLoja);
-        }
-
-
-
-        else if (evento.getTipo() == TipoEvento.DESCANSO_BAR) {
-            System.out.println(Cores.VERDE + "🍺 Você bebeu uma poção de lama no bar! Recuperou 30 de vida." + Cores.RESET);
-            
-            for (Heroi heroi : jogador.getHeroisEscolhidos()) {
-                if (heroi.estaVivo()) {
-                    heroi.curar(30); 
-                }
-            }
-            
-        } 
-
-        else if (evento.getTipo() == TipoEvento.ARMADILHA) {
-            System.out.println(Cores.VERMELHO + "🕳️ Você caiu num buraco com espinhos! Perdeu 15 de vida." + Cores.RESET);
-            for (Heroi heroi : jogador.getHeroisEscolhidos()) {
-                if (heroi.estaVivo()) {
-                    heroi.recebeDanoEfeito(15); 
-                }
-            }
-        }
-
-        else if (evento.getTipo() == TipoEvento.RECOMPENSA_CARTA) {
-            Carta novaCarta = evento.getCartaRecompensa();
-            if (novaCarta != null) {
-                System.out.println(Cores.AZUL + "📜 Você encontrou uma nova carta: " + novaCarta.getNome() + "!" + Cores.RESET);
-                Shrek.ganhaCarta(novaCarta); 
-
-            }
-        } 
-
-
-        //companheiros
-        if (evento.getNomeFase().equals("Flor azul com espinhos vermelhos")) {
-            System.out.println(Cores.AZUL + " O Burro se juntou à sua equipe!" + Cores.RESET);
-            Heroi burro = Dados.criarBurro(this);
-            jogador.adicionarHeroiTodos(burro);
-            jogador.getHeroisEscolhidos().add(burro); 
-        } 
-
-        else if (evento.getNomeFase().equals("Flor vermelha com espinhos azuis")) {
-            System.out.println(Cores.AZUL + " O Gato de Botas se juntou à sua equipe!" + Cores.RESET);
-            Heroi pinoquio = Dados.criarPinoquio(this);        
-            jogador.adicionarHeroiTodos(pinoquio);
-            jogador.getHeroisEscolhidos().add(pinoquio);
-        }
-
-        else if (evento.getNomeFase().equals("Torre da Bruxa Velha")) {
-            System.out.println(Cores.AZUL + " Princesa Fiona se juntou à sua equipe!" + Cores.RESET);
-            Heroi fiona = Dados.criarFiona(this);            
-            jogador.adicionarHeroiTodos(fiona);
-            jogador.getHeroisEscolhidos().add(fiona);
-        }
-
- 
-      
-
-        //navegação
+       
         ArrayList<NoMapa> proximos = nodoAtual.getProximos();
-        
         if (proximos.isEmpty() || nodoAtual.FimDeJogo()) {
             System.out.println(Cores.VERDE + Cores.NEGRITO + "🏆 FIM DE JOGO! VOCÊ ZEROU A CAMPANHA!" + Cores.RESET);
             return;
         }
 
         Prints.PrintaMapa(evento.getNomeFase());
-
         System.out.println("\nPara onde você quer ir agora?");
         for (int i = 0; i < proximos.size(); i++) {
             System.out.println(i + " - " + proximos.get(i).getEvento().getNomeFase());
         }
-
 
         int escolha;
         while (true) {
@@ -223,7 +135,6 @@ public class GameManager implements Publisher {
             escolha = sc.nextInt();
             
             if (escolha >= 0 && escolha < proximos.size()) {
-    
                 viajarPeloGrafo(proximos.get(escolha), jogador, sc, tela, Shrek, dificuldade);
                 break; 
             } else {
@@ -233,75 +144,7 @@ public class GameManager implements Publisher {
     }
 
 
-
-
-    public void abrirLoja(Scanner sc, Jogador jogador, int numeroLoja) {
-        System.out.println("\n" + Cores.AMARELO + "=== 💰 BEM-VINDO À LOJA DO PÂNTANO (Loja " + numeroLoja + ") ===" + Cores.RESET);
-        System.out.println("Sua carteira: 💰 " + jogador.getMoedas());
-        
-        while (true) {
-            System.out.println("\nO que deseja comprar?");
-            System.out.println("1 - Poção de Cura (Recupera 30 HP) - 💰 20");
-            System.out.println("2 - Treinamento de Resiliência (+20 HP Máx) - 💰 50");
-            System.out.println("3 - Elixir de Café (+1 Energia Máx) - 💰 70");
-            
-            if (numeroLoja == 2) {
-                System.out.println("4 - [EASTER EGG] Recrutar o Lobinho! - 💰 100");
-            }
-            System.out.println("0 - Sair da Loja");
-            System.out.print("Escolha: ");
-            
-            int escolha = sc.nextInt(); 
-            sc.nextLine(); 
-            
-            if (escolha == 1) {
-                if (jogador.getMoedas() >= 20) {
-                    jogador.removerMoedas(20);
-                    jogador.getHeroisEscolhidos().get(0).curar(30);
-                    System.out.println("❤️ HP recuperado!");
-                } else {
-                    System.out.println("Dinheiro insuficiente!");
-                }
-            } 
-            else if (escolha == 2) {
-                if (jogador.getMoedas() >= 50) {
-                    jogador.removerMoedas(50);
-                    jogador.getHeroisEscolhidos().get(0).aumentarVidaInicial(20);
-                    System.out.println("💪 Vida máxima aumentada!");
-                } else {
-                    System.out.println("Dinheiro insuficiente!");
-                }
-            } 
-            else if (escolha == 3) {
-                if (jogador.getMoedas() >= 70) {
-                    jogador.removerMoedas(70);
-                    jogador.getHeroisEscolhidos().get(0).aumentarEnergia(1);
-                    System.out.println("⚡ Energia máxima aumentada!");
-                } else {
-                    System.out.println("Dinheiro insuficiente!");
-                }
-            } 
-            else if (escolha == 4 && numeroLoja == 2) {
-                if (jogador.getMoedas() >= 100) {
-                    jogador.removerMoedas(100);
-                    jogador.getHeroisEscolhidos().add(Dados.criarLobinho(this));
-                    System.out.println("VOCÊ É UM MONSTRO! - O Lobinho entrou no time!");
-                } else {
-                    System.out.println("Dinheiro insuficiente!");
-                }
-            } 
-            else if (escolha == 0) {
-                System.out.println("Saindo da loja...");
-                break; 
-            } 
-            else {
-                System.out.println("Opção inválida!");
-            }
-            
-            System.out.println("Saldo atual: 💰 " + jogador.getMoedas());
-        }
-    }
-
+    
 }
 
 
