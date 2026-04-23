@@ -35,6 +35,7 @@ Durante a jornada, o jogador navegará por um mapa visual de caminhos interligad
 * **🕳️ Armadilha:** Eventos de azar e acidentes pelo caminho que causam danos e prejudicam a equipe.
 * **🔀 Decisão/Encruzilhada:** Momentos críticos onde o jogador deve escolher entre dois ou mais caminhos, alterando completamente as batalhas e recompensas da sua rota.
 * **❓ Evento Surpresa:**  Pontos do mapa que podem ser recompensas ou armadilhas. Só é revelado quando o jogador se aproxima.
+* **❓ Evento Loja:**  Área em que o jogador pode comprar poções. É utilizado o dinheiro ganhado em batalhas.
 
 ---
 
