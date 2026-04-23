@@ -110,7 +110,7 @@ public class Heroi extends Entidade {
     }
 
     public void imprimeMaoJogador() {
-        this.maoJogador.imprimeCartas();
+        this.maoJogador.imprimeCartas(); // foi implementado em terminal
     }
 
     public MaoJogador getMaoJogador() {

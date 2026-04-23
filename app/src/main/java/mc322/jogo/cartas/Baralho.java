@@ -97,7 +97,7 @@ public class Baralho {
     /**
      * Método responsável por imprimir a pilha de compra de Cartas para o usuário montar a sua mão de Cartas.
      */
-    public void imprimePilhaCompra() {
+    public void imprimePilhaCompra() { // [TERMINAL] ja está impĺementado em terminal
         for (int i = 0; i < this.pilhaCompra.size(); i++) {
             System.out.println(Cores.NEGRITO + i + Cores.RESET + "-" + Cores.AZUL + this.pilhaCompra.get(i).getNome() + Cores.RESET + " -  "
                     + this.pilhaCompra.get(i).getDescricao());

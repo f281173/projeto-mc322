@@ -34,7 +34,7 @@ public class Jogador {
      * 
      * @param sc Objeto Scanner para leitura de dados do telado.
      */
-    public void escolherHerois(Scanner sc) {
+    public void escolherHerois(Scanner sc) { // [ESSE MÉTODO NÃO ESTAMOS USANDO MAIS NO MOMENTO]
         System.out.println("Heróis Disponíveis:");
         for (int i = 0; i < todosHerois.size(); i++) {
             System.out.println("[" + i + "] " + Cores.CIANO + todosHerois.get(i).getNome() + Cores.RESET

@@ -31,7 +31,7 @@ public class Prints {
      * @param herois     vetor com todos os Heróis escolhidos naquela batalha
      * @param inimigos   vetor com todo os inmigos escolhidos para aquela Batalha
      */
-    public void status_batalha(Heroi heroiAtual, ArrayList<Heroi> herois, ArrayList<Inimigo> inimigos) {
+    public void statusBatalha(Heroi heroiAtual, ArrayList<Heroi> herois, ArrayList<Inimigo> inimigos) {
         heroiAtual.imprimeEfeitos();
         System.out.println();
         System.out.println(
@@ -107,7 +107,7 @@ public class Prints {
      * @param limiteCompra    Limite de compras de cartas em um único turno
      * @param cartasCompradas quantidade de cartas que já foram compradas.
      */
-    public void faseCompra(int limiteCompra, int cartasCompradas) {
+    public static void faseCompra(int limiteCompra, int cartasCompradas) {
         System.out.println(Cores.NEGRITO + "\n--- FASE DE COMPRA ---" + Cores.RESET);
         System.out.println("Você pode comprar mais " + (limiteCompra - cartasCompradas) + " carta(s).");
         System.out.println("1 - Comprar carta");
@@ -119,7 +119,7 @@ public class Prints {
      * Método responsável pela tela no ínicio da batalha, logo após a fase de
      * compra.
      */
-    public void faseBatalha() {
+    public static void faseBatalha() {
         System.out.println("1 - Ver mão");
         System.out.println("2 - Usar Cartas");
         System.out.println("3 - Encerrar Turno");

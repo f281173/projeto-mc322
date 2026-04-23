@@ -33,7 +33,7 @@ public class MaoJogador {
         this.getMaoJogador().add(cartaEscolhida);
     }
 
-    public void imprimeCartas() {
+    public void imprimeCartas() { // implementado em terminal
         if (this.maoVazia()) {
             System.out.println("A sua mão está Vazia !!");
         }

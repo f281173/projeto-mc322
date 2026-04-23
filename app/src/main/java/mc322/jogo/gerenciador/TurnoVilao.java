@@ -33,12 +33,12 @@ public class TurnoVilao {
 
         System.out
                 .println("\n" + Cores.VERMELHO + Cores.NEGRITO
-                        + "================== TURNO DO INIMIGO ==================" + Cores.RESET);
+                        + "================== TURNO DO INIMIGO ==================" + Cores.RESET); // [TERMINAL]
 
         /* notificar a entidade que é inicio do turno */
         gm.notificar(enemy, Estados.INICIO_DE_TURNO);
 
-        System.out.println(Cores.VERMELHO + "O " + enemy.getNome() + " está atacando..." + Cores.RESET);
+        System.out.println(Cores.VERMELHO + "O " + enemy.getNome() + " está atacando..." + Cores.RESET); // [TERMINAL]
 
         ArrayList<Heroi> heroisVivos = new ArrayList<>();
         for (Heroi h : herois) { // poderia deixar isso aqui como responsabilidade da classe jogador [CORRECAO]
@@ -51,14 +51,14 @@ public class TurnoVilao {
 
             /* sorteia um heroi pra bater */
             Random gerador = new Random();
-            Heroi alvo = heroisVivos.get(gerador.nextInt(heroisVivos.size()));;
+            Heroi alvo = heroisVivos.get(gerador.nextInt(heroisVivos.size()));
 
             /* sorteia uma ação para ser executada */
-            AcaoInimigo acao = enemy.getSistemaAcoes().get(gerador.nextInt(enemy.getTamanhoSistemaAcoes()));
+            AcaoInimigo acao = enemy.getSistemaAcoes().get(gerador.nextInt(enemy.getTamanhoSistemaAcoes())); 
 
             String resposta = acao.executar(enemy, alvo);
-            System.out.println(resposta);
-            enemy.imprimeEfeitos();
+            System.out.println(resposta); // [TERMINAL] vamos mudar para ser um objeto DTO
+            enemy.imprimeEfeitos(); // [TERMINAL] tenho que mudar a implementação de imprimeEfeitos de Entidade
 
         }
 
@@ -66,7 +66,7 @@ public class TurnoVilao {
         gm.notificar(enemy, Estados.FIM_DE_TURNO);
 
         System.out.println(Cores.VERMELHO + Cores.NEGRITO + "======================================================\n"
-                + Cores.RESET);
+                + Cores.RESET); // [TERMINAL]
     }
 }
 

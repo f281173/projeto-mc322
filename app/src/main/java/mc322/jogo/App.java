@@ -9,7 +9,7 @@ import mc322.jogo.gerenciador.Prints;
 public class App {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in); // [TERMNINAL] apenas a classe terminal vai usar o scanner
         Prints tela = new Prints();
         GameManager gm = new GameManager();
         Dados.setGm(gm);
