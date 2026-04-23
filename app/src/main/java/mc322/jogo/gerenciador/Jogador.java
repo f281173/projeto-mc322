@@ -15,6 +15,7 @@ import mc322.jogo.entidades.Heroi;
 
 public class Jogador {
 
+    private int moedas = 0;
     private ArrayList<Heroi> todosHerois = new ArrayList<>();
     private ArrayList<Heroi> heroisEscolhidos = new ArrayList<>();
 
@@ -119,5 +120,21 @@ public class Jogador {
             return true;
         return false;
     }
+
+
+
+
+    public int getMoedas(){ 
+        return moedas; 
+    }
+
+    public void adicionarMoedas(int valor){ 
+        this.moedas += valor; 
+    }
+
+    public void removerMoedas(int valor){ 
+        this.moedas -= valor; 
+    }
+
 
 }

@@ -26,11 +26,13 @@ import mc322.jogo.gerenciador.Prints;
 41-batalha(farquad mascote)   42-bar      43-batalha(farquad mascote)     44-batalha(farquad mascote)  45-golpe       46-bar
 
                                 5-farquaad
+                                loja
                                 5-masmorra da velha
 
                      51-batalha(witch)           52-batalha(hammer soldiesr)
                        61 -old-lady/fiona             62-golpe
                                   7-encantado (hammer soldier)
+                                    loja
 
                       81-batalha(big bad wolf)    82-golpe
 
@@ -198,8 +200,8 @@ public class Campanha {
             TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarFarquadMascot(gm), dificuldade)));  //mascote
         
 
-        NoMapa n45_golpe = new NoMapa(new EventoMapa("Cabana do Mascote", 
-            Cores.NEGRITO + "Narrador: " + Cores.RESET + "Você saqueia o acampamento do caçador.", 
+        NoMapa n45_golpe = new NoMapa(new EventoMapa("Quintal de uma casa", 
+            Cores.NEGRITO + "Narrador: " + Cores.RESET + "Você encontra uma máscara do farquad. Parece de um mascote...", 
             TipoEvento.RECOMPENSA_CARTA, null));
         n45_golpe.getEvento().setCartaRecompensa(new CartaDano("Máscara da morte", "[Custo: 3 | Dano: 65]", 3, 65));
         
@@ -246,6 +248,11 @@ public class Campanha {
 
         // Até encantado-----------------------------------------------------------------------------------
 
+        NoMapa n5_loja = new NoMapa(new EventoMapa("Mercado de Duloc", 
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Aproveite para gastar suas moedas antes da masmorra!", 
+        TipoEvento.LOJA, null));
+
+
         NoMapa n51_batalha = new NoMapa(new EventoMapa("Vamos lá",
             Cores.NEGRITO + "Narrador: " + Cores.RESET + "No caminho para a masmorra, Shrek encontra inimigos...", 
             TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarWitch(gm), dificuldade))); //witch
@@ -269,8 +276,9 @@ public class Campanha {
             TipoEvento.BOSS, carregarBoss(Dados.criarHammerSoldier(gm)))); //marreta
 
 
-        n5_masmorra.adicionarCaminho(n51_batalha);
-        n5_masmorra.adicionarCaminho(n52_batalha);
+        n5_masmorra.adicionarCaminho(n5_loja);
+        n5_loja.adicionarCaminho(n51_batalha);
+        n5_loja.adicionarCaminho(n52_batalha);
 
         n51_batalha.adicionarCaminho(n61_torre_bruxa);
         n52_batalha.adicionarCaminho(n62_golpe);
@@ -281,6 +289,13 @@ public class Campanha {
 
         //fada e rumpel------------------------------------------------------------------------------------------------------
         
+
+        NoMapa n7_loja = new NoMapa(new EventoMapa("Tenda Misteriosa", 
+        Cores.NEGRITO + "Narrador: " + Cores.RESET + "Parece de algum conto de fadas...", 
+        TipoEvento.LOJA, null));
+
+
+
         NoMapa n81_batalha = new NoMapa(new EventoMapa("Voltar agora",
             Cores.NEGRITO + "Narrador: " + Cores.RESET + "Após derrotar o cavaleiro, Thelonius descobre e envia capangas...\n" + Cores.VERMELHO + Cores.NEGRITO + "Capangas: " + Cores.RESET + "Lá está ele. Atacar!\n",
             TipoEvento.BATALHA, carregaInimigoGenerico(gm, () -> Dados.criarGuards(gm), dificuldade))); 
@@ -304,8 +319,10 @@ public class Campanha {
             Prints.DIALOGO_N100,
             TipoEvento.BOSS, carregarBoss(Dados.criarDragao(gm))));//dragao
 
-        n7_cavaleiroMarreta.adicionarCaminho(n81_batalha);
-        n7_cavaleiroMarreta.adicionarCaminho(n82_golpe);
+       
+        n7_cavaleiroMarreta.adicionarCaminho(n7_loja);
+        n7_loja.adicionarCaminho(n81_batalha);
+        n7_loja.adicionarCaminho(n82_golpe);
 
         n81_batalha.adicionarCaminho(n9_thelonius);
         n82_golpe.adicionarCaminho(n9_thelonius);

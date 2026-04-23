@@ -7,5 +7,6 @@ public enum TipoEvento {
     ESCOLHA_HISTORIA, 
     DESCANSO_BAR, 
     ARMADILHA, 
-    RECOMPENSA_CARTA
+    RECOMPENSA_CARTA,
+    LOJA,
 }

@@ -59,7 +59,7 @@ public class Dados {
                             "Efeito: [Custo: 2 | Turnos: 5 |Força: +50%] - Renovado.", 2,
                             (new EfeitoForca(5, gm, 50))));
 
-            return new Heroi("Shrek", 200, 20, 6, 200, 20, true, gm, deckShrek) ;
+            return new Heroi("Shrek", 300, 20, 6, 300, 20, true, gm, deckShrek) ;
         }
 
 
@@ -162,6 +162,18 @@ public class Dados {
         }
 
 
+        public static Heroi criarLobinho(GameManager gm) {
+            Baralho deckLobinho = new Baralho();
+            deckLobinho.adicionaBaralho(new CartaDano("Rugido", "Dano: [Custo: 3 | Dano: 67]", 3, 67));
+            deckLobinho.adicionaBaralho(new CartaDano("Garras", "Dano: [Custo: 2 | Dano: 27]", 2, 27));
+            deckLobinho.adicionaBaralho(new CartaEfeito("Lobinho neles", "[Custo: 1 | Turnos: 1 | Força: +100%] - Simplesmente dobra sua força", 1, new EfeitoForca(1, gm, 100))); 
+
+            
+            return new Heroi("Biscoito", 50, 10, 3, 50, 30, true, gm, deckLobinho);
+        }
+
+
+
 
 
         // ---------------------- INIMIGOS GENERICOS --------------------------------------------
@@ -205,7 +217,7 @@ public class Dados {
         public static Inimigo criarMonsieurHood(GameManager gm) {
             ArrayList<AcaoInimigo> acoes = new ArrayList<>();
             acoes.add(new AcaoAtacar("Flechada", 10));
-            acoes.add(new AcaoAtacar("Tiro Certo", 35));
+            acoes.add(new AcaoAtacar("Tiro Certo", 25));
             acoes.add(new AcaoEscudo("Poção do caçador", 20));
             
             return new Inimigo("Caçador", 80, 20, 80, 45, true, gm, acoes);
@@ -216,7 +228,7 @@ public class Dados {
             ArrayList<AcaoInimigo> acoes = new ArrayList<>();
             acoes.add(new AcaoAtacar("Asas do corvo", 10));
             acoes.add(new AcaoAtacar("Bicada da morte", 25));
-            acoes.add(new AcaoEscudo("Voou pra longe", 30));
+            acoes.add(new AcaoEscudo("Voou pra longe", 20));
             
             return new Inimigo("Corvo", 50, 10, 50, 65, true, gm, acoes);
         }
@@ -225,7 +237,7 @@ public class Dados {
         public static Inimigo criarWitch(GameManager gm) {
             ArrayList<AcaoInimigo> acoes = new ArrayList<>();
             acoes.add(new AcaoAtacar("Risada fantasmagórica", 10));
-            acoes.add(new AcaoAtacar("Bombas de abóbora", 40));
+            acoes.add(new AcaoAtacar("Bombas de abóbora", 30));
             acoes.add(new AcaoEscudo("Fuga com a vassoura", 20));
             
             return new Inimigo("Bruxa", 90, 20, 90, 85, true, gm, acoes);
@@ -260,11 +272,11 @@ public class Dados {
         public static Inimigo criarDragao(GameManager gm) {
             ArrayList<AcaoInimigo> acoes = new ArrayList<>();
             acoes.add(new AcaoAtacar("Baforada de Fogo", 45));
-            acoes.add(new AcaoAtacar("Mordida Feroz", 15));
-            acoes.add(new AcaoEscudo("Escamas Duras", 15));
+            acoes.add(new AcaoAtacar("Mordida Feroz", 25));
+            acoes.add(new AcaoEscudo("Escamas Duras", 25));
             acoes.add(new AcaoEfeito("Fumaça Tóxica", new EfeitoVeneno(3, gm)));
-            acoes.add(new AcaoEfeito("Rugido Aterrorizante", new EfeitoFraqueza(4, gm, 25)));
-            acoes.add(new AcaoEfeito("Cauda Esmagadora", new EfeitoFraqueza(3, gm, 25)));
+            acoes.add(new AcaoEfeito("Rugido Aterrorizante", new EfeitoFraqueza(4, gm, 55)));
+            acoes.add(new AcaoEfeito("Cauda Esmagadora", new EfeitoFraqueza(3, gm, 75)));
             
             // acoes.add(new AcaoAtacarArea("Sopro de Fogo em Área", 20)); 
 
@@ -306,10 +318,10 @@ public class Dados {
             ArrayList<AcaoInimigo> acoes = new ArrayList<>();
             acoes.add(new AcaoAtacar("Super Soco", 55));
             acoes.add(new AcaoEscudo("Capa Resistente", 40));
-            acoes.add(new AcaoEfeito("Capa da fraqueza", new EfeitoFraqueza(5, gm, 35)));
-            acoes.add(new AcaoEfeito("Eu sou muito forte!", new EfeitoForca(4, gm, 30)));
+            acoes.add(new AcaoEfeito("Capa da fraqueza", new EfeitoFraqueza(5, gm, 45)));
+            acoes.add(new AcaoEfeito("Eu sou muito forte!", new EfeitoForca(4, gm, 40)));
 
-            return new Inimigo("Thelonius", 100, 70, 100, 55, true, gm, acoes);
+            return new Inimigo("Thelonius", 100, 90, 100, 55, true, gm, acoes);
         }
  
 

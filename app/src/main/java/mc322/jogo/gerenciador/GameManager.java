@@ -99,13 +99,13 @@ public class GameManager implements Publisher {
         // criar um mapa aqui eu acho
         NoMapa inicioDoMapa = Campanha.criarMapa(this, dificuldade);
         System.out.println("\nA JORNADA VAI COMEÇAR!\n\n");
-        viajarPeloGrafo(inicioDoMapa, jogador, sc, tela, shrek);
+        viajarPeloGrafo(inicioDoMapa, jogador, sc, tela, shrek, dificuldade);
 
     }
 
 
 
-    public void viajarPeloGrafo(NoMapa nodoAtual, Jogador jogador, Scanner sc, Prints tela, Heroi Shrek) {
+    public void viajarPeloGrafo(NoMapa nodoAtual, Jogador jogador, Scanner sc, Prints tela, Heroi Shrek, int dificuldade) {
         
         Prints.limparTela();
         EventoMapa evento = nodoAtual.getEvento();
@@ -119,7 +119,32 @@ public class GameManager implements Publisher {
             Batalha arena = new Batalha();
             boolean sobreviveu = arena.executarCombate(jogador, evento.getOponente(), this, sc, tela);
             if (!sobreviveu) return; 
+
+
+            int moedasGanhas = 0;
+            
+            if (evento.getTipo() == TipoEvento.BOSS) {
+                moedasGanhas = 20;
+            } else if (evento.getTipo() == TipoEvento.BATALHA) {
+                moedasGanhas = 10 * dificuldade;
+            }
+
+            jogador.adicionarMoedas(moedasGanhas);
+            System.out.println(Cores.AMARELO + "💰 Você ganhou " + moedasGanhas + " moedas!" + Cores.RESET);
+            System.out.println("Saldo atual: 💰 " + jogador.getMoedas() + "\n");
+
         } 
+
+
+        else if (evento.getTipo() == TipoEvento.LOJA) {
+            int numLoja = 1;
+            if (evento.getNomeFase().equals("Tenda Misteriosa")) {
+                numLoja = 2;
+            }
+            abrirLoja(sc, jogador, numLoja);
+        }
+
+
 
         else if (evento.getTipo() == TipoEvento.DESCANSO_BAR) {
             System.out.println(Cores.VERDE + "🍺 Você bebeu uma poção de lama no bar! Recuperou 30 de vida." + Cores.RESET);
@@ -199,11 +224,81 @@ public class GameManager implements Publisher {
             
             if (escolha >= 0 && escolha < proximos.size()) {
     
-                viajarPeloGrafo(proximos.get(escolha), jogador, sc, tela, Shrek);
+                viajarPeloGrafo(proximos.get(escolha), jogador, sc, tela, Shrek, dificuldade);
                 break; 
             } else {
                 System.out.println(Cores.VERMELHO + "Opção inválida! Digite um número do menu." + Cores.RESET);
             }
+        }
+    }
+
+
+
+
+    public void abrirLoja(Scanner sc, Jogador jogador, int numeroLoja) {
+        System.out.println("\n" + Cores.AMARELO + "=== 💰 BEM-VINDO À LOJA DO PÂNTANO (Loja " + numeroLoja + ") ===" + Cores.RESET);
+        System.out.println("Sua carteira: 💰 " + jogador.getMoedas());
+        
+        while (true) {
+            System.out.println("\nO que deseja comprar?");
+            System.out.println("1 - Poção de Cura (Recupera 30 HP) - 💰 20");
+            System.out.println("2 - Treinamento de Resiliência (+20 HP Máx) - 💰 50");
+            System.out.println("3 - Elixir de Café (+1 Energia Máx) - 💰 70");
+            
+            if (numeroLoja == 2) {
+                System.out.println("4 - [EASTER EGG] Recrutar o Lobinho! - 💰 100");
+            }
+            System.out.println("0 - Sair da Loja");
+            System.out.print("Escolha: ");
+            
+            int escolha = sc.nextInt(); 
+            sc.nextLine(); 
+            
+            if (escolha == 1) {
+                if (jogador.getMoedas() >= 20) {
+                    jogador.removerMoedas(20);
+                    jogador.getHeroisEscolhidos().get(0).curar(30);
+                    System.out.println("❤️ HP recuperado!");
+                } else {
+                    System.out.println("Dinheiro insuficiente!");
+                }
+            } 
+            else if (escolha == 2) {
+                if (jogador.getMoedas() >= 50) {
+                    jogador.removerMoedas(50);
+                    jogador.getHeroisEscolhidos().get(0).aumentarVidaInicial(20);
+                    System.out.println("💪 Vida máxima aumentada!");
+                } else {
+                    System.out.println("Dinheiro insuficiente!");
+                }
+            } 
+            else if (escolha == 3) {
+                if (jogador.getMoedas() >= 70) {
+                    jogador.removerMoedas(70);
+                    jogador.getHeroisEscolhidos().get(0).aumentarEnergia(1);
+                    System.out.println("⚡ Energia máxima aumentada!");
+                } else {
+                    System.out.println("Dinheiro insuficiente!");
+                }
+            } 
+            else if (escolha == 4 && numeroLoja == 2) {
+                if (jogador.getMoedas() >= 100) {
+                    jogador.removerMoedas(100);
+                    jogador.getHeroisEscolhidos().add(Dados.criarLobinho(this));
+                    System.out.println("VOCÊ É UM MONSTRO! - O Lobinho entrou no time!");
+                } else {
+                    System.out.println("Dinheiro insuficiente!");
+                }
+            } 
+            else if (escolha == 0) {
+                System.out.println("Saindo da loja...");
+                break; 
+            } 
+            else {
+                System.out.println("Opção inválida!");
+            }
+            
+            System.out.println("Saldo atual: 💰 " + jogador.getMoedas());
         }
     }
 

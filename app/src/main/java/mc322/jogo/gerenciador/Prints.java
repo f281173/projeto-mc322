@@ -274,7 +274,8 @@ public class Prints {
             case "Floresta densa": idAtual = "11"; break;
             case "Seguir pelo rio": idAtual = "12"; break;
             case "Passar pela ponte": idAtual = "13"; break;
-            case "Cabana do caçador": idAtual = "14"; break;
+            case "Cabana": idAtual = "14"; break;
+            case "Quintal de uma casa": idAtual = "30"; break;
             case "Seguindo pela floresta": idAtual = "15"; break;
             case "Castelo de Duloc": idAtual = "16"; break;
             case "Proposta": idAtual = "17"; break;
@@ -288,43 +289,50 @@ public class Prints {
             case "Seguir jornada": idAtual = "25"; break;
             case "Continuar": idAtual = "26"; break;
             case "I need a hero": idAtual = "27"; break;
+            case "Mercado de Duloc": idAtual = "28"; break;
+            case "Tenda Misteriosa": idAtual = "29"; break;
         }
 
 
         String mapa = 
-        "                            [01]\n" +
+        "                             [01]\n" +
         "                              |\n" +
-        "                            [02]\n" +
+        "                             [02]\n" +
         "                              |\n" +
-        "                            [03]\n" +
+        "                             [03]\n" +
         "                              |\n" +
-        "                            [04]\n" +
-        "                          /      \\\n" +
-        "                       [05]      [06]\n" +
-        "                      /    \\    /    \\\n" +
-        "                   [07]  [08]  [09]  [10]\n" +
-        "                  /   |    |     |     |\n" +
-        "                [11] [12] [13]  [14]  [15]\n" +
-        "                  \\   |    /     /     /\n" +
-        "                   \\__|___/_____/_____/\n" +
+        "                             [04]\n" +
+        "                           /       \\\n" +
+        "                          /         \\\n" +
+        "                       [05]          [06]\n" +
+        "                      /    \\       /     \\\n" +
+        "                   [07]  [08]     [09]     [10]\n" +
+        "                  /   |    |      /  \\      |\n" +
+        "                [11] [12] [13]  [14] [30]   [15]\n" +
+        "                  \\   |    /     |   |       /\n" +
+        "                   \\__|___/______|___|______/\n" +
         "                              |\n" +
         "                            [16]\n" +
         "                              |\n" +
         "                            [17]\n" +
+        "                              |\n" +
+        "                            [28]\n" +
         "                           /    \\\n" +
         "                        [18]    [19]\n" +
         "                          |      |\n" +
         "                        [20]    [21]\n" +
         "                           \\    /\n" +
         "                            [22]\n" +
+        "                              |\n" +
+        "                            [29]\n" +
         "                           /    \\\n" +
         "                        [23]    [24]\n" +
         "                          \\    /\n" +
-        "                           [25]\n" +
-        "                            |\n" +
-        "                           [26]\n" +
-        "                            |\n" +
-        "                           [27]\n";
+        "                            [25]\n" +
+        "                              |\n" +
+        "                            [26]\n" +
+        "                              |\n" +
+        "                            [27]\n";
 
   
         if (!idAtual.isEmpty()) {
@@ -339,7 +347,8 @@ public class Prints {
                     .replace("[16]", "[👹]") .replace("[17]", "[💬]") .replace("[18]", "[⚔️ ]")
                     .replace("[19]", "[⚔️ ]").replace("[20]", "[👹]")  .replace("[21]", "[❓]")
                     .replace("[22]", "[👹]") .replace("[23]", "[⚔️ ]").replace("[24]", "[❓]")
-                   .replace("[25]", "[👹]") .replace("[26]", "[❓]").replace("[27]", "[👹]");
+                   .replace("[25]", "[👹]") .replace("[26]", "[❓]").replace("[27]", "[👹]")
+                   .replace("[28]", "[💰]").replace("[29]", "[💰]");
 
         System.out.println(Cores.NEGRITO + "LEGENDA DO MAPA:" + Cores.RESET);
         System.out.println("📍 Você está aqui  |  ⚔️ Batalha   |  👹 Boss");
