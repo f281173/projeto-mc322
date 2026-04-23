@@ -2,6 +2,7 @@ package mc322.jogo.interfaceUsuario;
 
 import java.util.ArrayList;
 
+import mc322.jogo.cartas.Carta;
 import mc322.jogo.mapa.NoMapa;
 
 /**
@@ -32,5 +33,19 @@ public interface InterfaceUsuario {
 
     /** Pede ao jogador para escolher o próximo nó do grafo */
     public int escolherCaminhoMapa(ArrayList<NoMapa> caminhos);
+
+    public void fimDeJogo();
+
+    /** Avisa o usuário que a equipe descansou no bar */
+    public void mostrarEventoBar();
+
+    /** Avisa o usuário que a equipe caiu em uma armadilha */
+    public void mostrarEventoArmadilha();
+
+    /** Mostra a nova carta que o jogador encontrou */
+    public void mostrarRecompensaCarta(Carta carta);
+
+    /** Anuncia que um novo aliado entrou para o time */
+    public void mostrarNovoCompanheiro(String nomeCompanheiro);
 
 }
