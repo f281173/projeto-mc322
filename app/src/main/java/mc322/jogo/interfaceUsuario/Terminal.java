@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import mc322.jogo.Cores;
 import mc322.jogo.cartas.Carta;
+import mc322.jogo.efeitos.Efeito;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
 import mc322.jogo.gerenciador.Prints;
+import mc322.jogo.gerenciador.SistemaAcoes.ResultadoAcao;
+import mc322.jogo.gerenciador.SistemaAcoes.ResultadoAcao.TipoAcao;
 import mc322.jogo.mapa.NoMapa;
 
 public class Terminal implements InterfaceUsuario {
@@ -114,8 +117,32 @@ public class Terminal implements InterfaceUsuario {
     }
 
     /** Mostra os efeitos atuais do vilão (se houver) */
-    public void mostrarEfeitosVilao(String efeitos) {
-        System.out.println(efeitos); // tenho que mudar imprimeEfeitos() em Entidade para devolver uma string
+    public void mostrarEfeitosEntidade(ArrayList<Efeito> listaEfeito, String nome) {
+        /* Somente será impresso alguma coisa se existirem efeitos ativos */
+        if (listaEfeito.size() > 0) {
+            System.out.println("=================================================================");
+            System.out.println("EFEITOS QUE ESTÃO EM AÇÃO EM: " + nome);
+            for (Efeito efeito : listaEfeito) {
+                System.out.println(efeito.getString());
+            }
+            System.out.println("=================================================================");
+        }
+    }
+
+    public void mostrarAcaoVilao(ResultadoAcao resposta) {
+        if (resposta.getTipo() == TipoAcao.ATAQUE) {
+
+            System.out.println(resposta.getDono().getNome() + " usou '" + resposta.getNomeHabilidade() + "' e causou " + Cores.VERMELHO + resposta.getValor() + " de Dano" 
+            + Cores.RESET + " de dano no " + resposta.getAlvo().getNome() + "!");
+
+        } else if (resposta.getTipo() == TipoAcao.EFEITO) {
+            System.out.println(resposta.getDono().getNome() + " usou '" + resposta.getNomeHabilidade() + Cores.AZUL + " e ativou " 
+             + " efeito em " + resposta.getAlvo().getNome());
+
+        } else if (resposta.getTipo() == TipoAcao.ESCUDO) {
+            System.out.println(resposta.getDono().getNome() + " usou '" + resposta.getNomeHabilidade() + "' e ganhou " + Cores.AZUL 
+            + resposta.getValor() + Cores.RESET + " de escudo!");
+        }
     }
 
     /** Anuncia que o turno do inimigo acabou */
@@ -127,10 +154,9 @@ public class Terminal implements InterfaceUsuario {
     /*Implementação dos métodos que são de TurnoHeroi */
 
     public void mostrarStatusTurno(Heroi heroiAtual, ArrayList<Heroi> herois, ArrayList<Inimigo> inimigos) {
-        Prints tela = new Prints(); // quero deixar o método de Ptints estático, mas ainda não dá
-
-        tela.statusBatalha(heroiAtual, herois, inimigos);
-        tela.energia(heroiAtual.getEnergiaAtual());
+        this.mostrarEfeitosEntidade(heroiAtual.getListaEfeitos(), heroiAtual.getNome());
+        Prints.statusBatalha(heroiAtual, herois, inimigos);
+        Prints.energia(heroiAtual.getEnergiaAtual());
     }
 
     public int escolherAcaoCompra(int limiteCompra, int cartasCompradas) {
@@ -149,6 +175,11 @@ public class Terminal implements InterfaceUsuario {
 
         int i = sc.nextInt(); // podemos melhorar no futuro com a entrada de STRINGS
         return i;
+    }
+
+    public void limparTela() {
+        Prints.limparTela();
+        System.out.println("\n");
     }
 
     public void mostrarMensagem(String mensagem) {
@@ -177,8 +208,6 @@ public class Terminal implements InterfaceUsuario {
     }
 
     public int escolherCartaParaUsar(ArrayList<Carta> mao) {
-        this.mostrarCartasMao(mao);
-
         if (mao.isEmpty())
             return -1;
 
@@ -230,4 +259,29 @@ public class Terminal implements InterfaceUsuario {
         return heroiEscolhido;
     }
 
+    /*Implementação de Batalha */
+
+    public void mostrarInicioBatalha() {
+        System.out.println(Cores.AMARELO + Cores.NEGRITO + "\n=== A BATALHA COMEÇOU! ===" + Cores.RESET);
+    }
+
+    public void mostrarNovaRodada(String nomeHeroi) {
+        System.out.println(Cores.CIANO + "\n>>> Turno de " + nomeHeroi + " <<<" + Cores.RESET);
+    }
+
+    public void mostrarVitoriaBatalha() {
+        System.out.println(Cores.VERDE + "\n🎉 VITÓRIA! A área foi limpa." + Cores.RESET);
+    }
+
+    public void mostrarDerrotaBatalha() {
+        System.out.println(Cores.VERMELHO + "\n☠️ DERROTA... Sua jornada termina aqui." + Cores.RESET);
+    }
+
+    /*implementação de jogar novamente */
+    public int escolheJogarNovamente() {
+        Prints.jogarNovamente();
+
+        int escolha = sc.nextInt();
+        return escolha;
+    }
 }

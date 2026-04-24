@@ -31,57 +31,12 @@ public class Prints {
      * @param herois     vetor com todos os Heróis escolhidos naquela batalha
      * @param inimigos   vetor com todo os inmigos escolhidos para aquela Batalha
      */
-    public void statusBatalha(Heroi heroiAtual, ArrayList<Heroi> herois, ArrayList<Inimigo> inimigos) {
-        heroiAtual.imprimeEfeitos();
+    public static void statusBatalha(Heroi heroiAtual, ArrayList<Heroi> herois, ArrayList<Inimigo> inimigos) {
         System.out.println();
         System.out.println(
                 "\n" + Cores.NEGRITO + "=================== STATUS DA BATALHA ===================" + Cores.RESET);
 
-        imprimeHerois(herois, heroiAtual);
-        System.out.println(Cores.NEGRITO + "                           vs" + Cores.RESET);
-        imprimeInimigosVivos(inimigos);
-
-        System.out.println(Cores.NEGRITO + "=========================================================" + Cores.RESET);
-    }
-
-    /**
-     * Método responsável por imprimir a energia do Heroi na tela
-     * 
-     * @param energia inteiro que representa o atritbuto energia do herói
-     */
-    public void energia(int energia) {
-        System.out.println(Cores.AMARELO + "⚡ Energia: " + Cores.RESET + energia + " disponíveis");
-    }
-
-    /**
-     * Método responsável por imprimir todas as informações do Inimigo no status de
-     * batalha.
-     * 
-     * @param inimigos vetor com todos os inimigos escolhidos naquela Batalha.
-     */
-    public void imprimeInimigosVivos(ArrayList<Inimigo> inimigos) {
-        for (Inimigo enemy : inimigos) {
-            if (enemy.estaVivo()) {
-                System.out.println(Cores.VERMELHO + Cores.NEGRITO + enemy.getNome() + Cores.RESET + " "
-                        + Cores.VERDE + "[VIVO] " + enemy.getVida() + "/" + enemy.getVidaInicial() + Cores.RESET
-                        + " de vida"
-                        + "  | "
-                        + Cores.AZUL + "🛡️  " + enemy.getEscudo() + Cores.RESET + " de escudo"
-                        + enemy.statusEfeitoForca() + " " + enemy.statusEfeitoFraqueza());
-            } else {
-                System.out.println(Cores.VERMELHO + Cores.NEGRITO + enemy.getNome() + Cores.RESET + " "
-                        + Cores.VERMELHO + "[MORTO] 💀" + Cores.RESET);
-            }
-        }
-    }
-
-    /**
-     * Imprime as informações do Heroi no momento do seu turno.
-     * 
-     * @param herois     vetor com todos os herois escolhidos
-     * @param heroiAtual héroi que vai executar a ação
-     */
-    public void imprimeHerois(ArrayList<Heroi> herois, Heroi heroiAtual) {
+        /* Lógica de imprimir aqui dentro os Herois*/
         for (Heroi h : herois) {
 
             String destaque = (h == heroiAtual) ? Cores.AMARELO + " ⬅️ [SEU TURNO]" + Cores.RESET : "";
@@ -98,6 +53,33 @@ public class Prints {
                         + Cores.VERMELHO + "[MORTO] 💀" + Cores.RESET);
             }
         }
+
+        System.out.println(Cores.NEGRITO + "                           vs" + Cores.RESET);
+        /*vamos imprimir os inimigos vivos */
+        for (Inimigo enemy : inimigos) {
+            if (enemy.estaVivo()) {
+                System.out.println(Cores.VERMELHO + Cores.NEGRITO + enemy.getNome() + Cores.RESET + " "
+                        + Cores.VERDE + "[VIVO] " + enemy.getVida() + "/" + enemy.getVidaInicial() + Cores.RESET
+                        + " de vida"
+                        + "  | "
+                        + Cores.AZUL + "🛡️  " + enemy.getEscudo() + Cores.RESET + " de escudo"
+                        + enemy.statusEfeitoForca() + " " + enemy.statusEfeitoFraqueza());
+            } else {
+                System.out.println(Cores.VERMELHO + Cores.NEGRITO + enemy.getNome() + Cores.RESET + " "
+                        + Cores.VERMELHO + "[MORTO] 💀" + Cores.RESET);
+            }
+        }
+
+        System.out.println(Cores.NEGRITO + "=========================================================" + Cores.RESET);
+    }
+
+    /**
+     * Método responsável por imprimir a energia do Heroi na tela
+     * 
+     * @param energia inteiro que representa o atritbuto energia do herói
+     */
+    public static void energia(int energia) {
+        System.out.println(Cores.AMARELO + "⚡ Energia: " + Cores.RESET + energia + " disponíveis");
     }
 
     /**
@@ -154,7 +136,7 @@ public class Prints {
         System.out.print(Cores.NEGRITO + "\nOpção: " + Cores.RESET);
     }
 
-    public void jogarNovamente() {
+    public static void jogarNovamente() {
         System.out.println("\n" + Cores.NEGRITO + "=======================================" + Cores.RESET);
         System.out.println(Cores.NEGRITO + "   Deseja jogar novamente? (1 - Sim / 2 - Não): " + Cores.RESET);
         System.out.println(Cores.NEGRITO + "=======================================" + Cores.RESET);

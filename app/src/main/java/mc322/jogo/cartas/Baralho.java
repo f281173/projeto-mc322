@@ -1,6 +1,5 @@
 package mc322.jogo.cartas;
 
-import mc322.jogo.Cores;
 import mc322.jogo.entidades.Heroi;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -94,14 +93,8 @@ public class Baralho {
         personagem.recebeCarta(carta);;
     }
 
-    /**
-     * Método responsável por imprimir a pilha de compra de Cartas para o usuário montar a sua mão de Cartas.
-     */
-    public void imprimePilhaCompra() { // [TERMINAL] ja está impĺementado em terminal
-        for (int i = 0; i < this.pilhaCompra.size(); i++) {
-            System.out.println(Cores.NEGRITO + i + Cores.RESET + "-" + Cores.AZUL + this.pilhaCompra.get(i).getNome() + Cores.RESET + " -  "
-                    + this.pilhaCompra.get(i).getDescricao());
-        }
+    public ArrayList<Carta> getPilhaCompra() {
+        return this.pilhaCompra;
     }
 
     public void adicionaPilhaDescarte(Carta carta) {

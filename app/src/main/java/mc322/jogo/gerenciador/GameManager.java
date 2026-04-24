@@ -1,10 +1,10 @@
 package mc322.jogo.gerenciador;
 
-import mc322.jogo.Cores;
 import mc322.jogo.Dados;
 import mc322.jogo.Musica;
 import mc322.jogo.entidades.Entidade;
 import mc322.jogo.entidades.Heroi;
+import mc322.jogo.interfaceUsuario.InterfaceUsuario;
 import mc322.jogo.mapa.Campanha;
 import mc322.jogo.mapa.EventoMapa;
 import mc322.jogo.mapa.NoMapa;
@@ -14,7 +14,6 @@ import mc322.jogo.cartas.Carta;
 import mc322.jogo.observer.Publisher;
 import mc322.jogo.observer.Subscriber;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.HashMap;
 
 /**
@@ -31,10 +30,16 @@ public class GameManager implements Publisher {
      * de subscribers
      */
     private HashMap<Estados, ArrayList<Subscriber>> efeitosAtivos;
+    private InterfaceUsuario ui;
     Musica dj = new Musica();
 
-    public GameManager() {
+    public GameManager(InterfaceUsuario ui) {
         this.inicializaEfeitosAtivos();
+        this.ui = ui;
+    }
+
+    public InterfaceUsuario getUi() {
+        return this.ui;
     }
 
     /**
@@ -78,14 +83,13 @@ public class GameManager implements Publisher {
      * @param sc   Scanner de leitura de dados do teclado
      * @param tela para impressão no terminal.
      */
-    public void prepararPartida(Scanner sc, Prints tela) {
+    public void prepararPartida() {
 
-        tela.comeco(); // [TERMINAL]
+        this.ui.telaInicial();
         dj.tocarMusica("../sons/Funkytown.wav");
 
-        tela.dificuldade(); // [TERMINAL]
-        int dificuldade = sc.nextInt(); // [TERMINAL]
-        sc.nextLine(); // [TERMINAL]
+        
+        int dificuldade = ui.escolheDificuldade();
 
         Jogador jogador = new Jogador();
         Heroi shrek = Dados.criarShrek(this);
@@ -94,30 +98,25 @@ public class GameManager implements Publisher {
 
         // criar um mapa aqui eu acho
         NoMapa inicioDoMapa = Campanha.criarMapa(this, dificuldade);
-        System.out.println("\nA JORNADA VAI COMEÇAR!\n\n"); // [TERMINAL]
-        viajarPeloGrafo(inicioDoMapa, jogador, sc, tela, shrek);
+        viajarPeloGrafo(inicioDoMapa, jogador, shrek);
 
     }
 
-    public void viajarPeloGrafo(NoMapa nodoAtual, Jogador jogador, Scanner sc, Prints tela, Heroi Shrek) {
+    public void viajarPeloGrafo(NoMapa nodoAtual, Jogador jogador, Heroi Shrek) {
 
-        Prints.limparTela(); // [TERMINAL]
         EventoMapa evento = nodoAtual.getEvento();
-        // Prints.limparTela(); //talvez tenha q mudar de lugar
-        System.out.println(evento.getNomeFase()); // [TERMINAL]
-        // System.out.println(evento.getDialogo());
-        Prints.imprimirLetraPorLetra(evento.getDialogo()); // [TERMINAL]
+        this.ui.mostrarDialogoEvento(evento.getNomeFase(), evento.getDialogo());
+
 
         if (evento.getTipo() == TipoEvento.BATALHA || evento.getTipo() == TipoEvento.BOSS) {
             Batalha arena = new Batalha();
-            boolean sobreviveu = arena.executarCombate(jogador, evento.getOponente(), this, sc, tela);
+            boolean sobreviveu = arena.executarCombate(jogador, evento.getOponente(), this, ui);
             if (!sobreviveu)
                 return;
         }
 
         else if (evento.getTipo() == TipoEvento.DESCANSO_BAR) {
-            System.out.println(
-                    Cores.VERDE + "🍺 Você bebeu uma poção de lama no bar! Recuperou 30 de vida." + Cores.RESET); // [TERMINAL]
+            this.ui.mostrarEventoBar();
 
             for (Heroi heroi : jogador.getHeroisEscolhidos()) {
                 if (heroi.estaVivo()) {
@@ -128,8 +127,7 @@ public class GameManager implements Publisher {
         }
 
         else if (evento.getTipo() == TipoEvento.ARMADILHA) {
-            System.out.println(
-                    Cores.VERMELHO + "🕳️ Você caiu num buraco com espinhos! Perdeu 15 de vida." + Cores.RESET); // [TERMINAL]
+            this.ui.mostrarEventoArmadilha();
             for (Heroi heroi : jogador.getHeroisEscolhidos()) {
                 if (heroi.estaVivo()) {
                     heroi.recebeDanoEfeito(15);
@@ -140,8 +138,7 @@ public class GameManager implements Publisher {
         else if (evento.getTipo() == TipoEvento.RECOMPENSA_CARTA) {
             Carta novaCarta = evento.getCartaRecompensa();
             if (novaCarta != null) {
-                System.out.println(
-                        Cores.AZUL + "📜 Você encontrou uma nova carta: " + novaCarta.getNome() + "!" + Cores.RESET); // [TERMINAL]
+                this.ui.mostrarRecompensaCarta(novaCarta);
                 Shrek.ganhaCarta(novaCarta);
 
             }
@@ -149,21 +146,21 @@ public class GameManager implements Publisher {
 
         // companheiros
         if (evento.getNomeFase().equals("Flor azul com espinhos vermelhos")) {
-            System.out.println(Cores.AZUL + " O Burro se juntou à sua equipe!" + Cores.RESET); // [TERMINAL]
+            this.ui.mostrarNovoCompanheiro("Burro");
             Heroi burro = Dados.criarBurro(this);
             jogador.adicionarHeroiTodos(burro);
             jogador.getHeroisEscolhidos().add(burro);
         }
 
         else if (evento.getNomeFase().equals("Flor vermelha com espinhos azuis")) {
-            System.out.println(Cores.AZUL + " O Gato de Botas se juntou à sua equipe!" + Cores.RESET); // [TERMINAL]
+            this.ui.mostrarNovoCompanheiro("Pinoquio");
             Heroi pinoquio = Dados.criarPinoquio(this);
             jogador.adicionarHeroiTodos(pinoquio);
             jogador.getHeroisEscolhidos().add(pinoquio);
         }
 
         else if (evento.getNomeFase().equals("Torre da Bruxa Velha")) {
-            System.out.println(Cores.AZUL + " Princesa Fiona se juntou à sua equipe!" + Cores.RESET); // [TERMINAL]
+            this.ui.mostrarNovoCompanheiro("Fiona");
             Heroi fiona = Dados.criarFiona(this);
             jogador.adicionarHeroiTodos(fiona);
             jogador.getHeroisEscolhidos().add(fiona);
@@ -173,30 +170,13 @@ public class GameManager implements Publisher {
         ArrayList<NoMapa> proximos = nodoAtual.getProximos();
 
         if (proximos.isEmpty() || nodoAtual.FimDeJogo()) {
-            System.out.println(Cores.VERDE + Cores.NEGRITO + "🏆 FIM DE JOGO! VOCÊ ZEROU A CAMPANHA!" + Cores.RESET); // [TERMINAL]
+            this.ui.fimDeJogo();
             return;
         }
 
-        Prints.PrintaMapa(evento.getNomeFase()); // [TERMINAL]
-
-        System.out.println("\nPara onde você quer ir agora?");
-        for (int i = 0; i < proximos.size(); i++) {
-            System.out.println(i + " - " + proximos.get(i).getEvento().getNomeFase());
-        }
-
-        int escolha; // [TERMINAL]
-        while (true) {
-            System.out.print(Cores.NEGRITO + "Sua escolha: " + Cores.RESET); // [TERMINAL]
-            escolha = sc.nextInt();// [TERMINAL]
-
-            if (escolha >= 0 && escolha < proximos.size()) {// [TERMINAL]
-
-                viajarPeloGrafo(proximos.get(escolha), jogador, sc, tela, Shrek); // deve continuar aqui
-                break;
-            } else {
-                System.out.println(Cores.VERMELHO + "Opção inválida! Digite um número do menu." + Cores.RESET);// [TERMINAL]
-            }
-        }
+        this.ui.mostrarMapa(evento.getNomeFase());
+        int escolha = this.ui.escolherCaminhoMapa(proximos);
+        viajarPeloGrafo(proximos.get(escolha), jogador, Shrek); // deve continuar aqui
     }
 
 }

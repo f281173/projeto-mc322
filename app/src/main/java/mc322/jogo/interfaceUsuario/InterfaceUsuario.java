@@ -3,8 +3,10 @@ package mc322.jogo.interfaceUsuario;
 import java.util.ArrayList;
 
 import mc322.jogo.cartas.Carta;
+import mc322.jogo.efeitos.Efeito;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
+import mc322.jogo.gerenciador.SistemaAcoes.ResultadoAcao;
 import mc322.jogo.mapa.NoMapa;
 
 /**
@@ -58,7 +60,9 @@ public interface InterfaceUsuario {
     public void mostrarAcaoVilao(String descricaoAcao);
 
     /** Mostra os efeitos atuais do vilão (se houver) */
-    public void mostrarEfeitosVilao(String efeitos);
+    public void mostrarEfeitosEntidade(ArrayList<Efeito> listaEfeito, String nome);
+
+    public void mostrarAcaoVilao(ResultadoAcao resposta);
 
     /** Anuncia que o turno do inimigo acabou */
     public void mostrarFimTurnoVilao();
@@ -71,7 +75,7 @@ public interface InterfaceUsuario {
     /** Pergunta se ele quer comprar carta ou ir para a batalha */
     public int escolherAcaoCompra(int limiteCompra, int cartasCompradas);
 
-    /** Mostra a vitrine de cartas e pede para escolher uma (ou cancelar) */
+    /** Mostra as cartas disponiveis e pede para escolher uma (ou cancelar) */
     public int escolherCartaParaComprar(ArrayList<Carta> pilhaCompra);
 
     /** Menu principal da batalha: Ver Mão, Usar Carta ou Encerrar */
@@ -91,6 +95,23 @@ public interface InterfaceUsuario {
 
     public void mostrarMensagem(String mensagem);
 
+    public void limparTela();
 
+    /*-----------------MÉTODOS DE BATALHA--------------------------- */
+
+    /** Anuncia o início de um combate (Fase de Inimigos) */
+    public void mostrarInicioBatalha();
+
+    /** Anuncia o início de uma nova rodada (Turno X) */
+    public void mostrarNovaRodada(String nomeHeroi);
+
+    /** Anuncia que os heróis venceram a batalha atual */
+    public void mostrarVitoriaBatalha();
+
+    /** Anuncia que todos os heróis morreram (Game Over) */
+    public void mostrarDerrotaBatalha();
+
+    /*--------------MÉTODO JOGAR NOVAMENTE------------------------- */
+    public int escolheJogarNovamente();
 
 }

@@ -3,10 +3,11 @@ package mc322.jogo.gerenciador;
 import java.util.ArrayList;
 import java.util.Random;
 
-import mc322.jogo.Cores;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
 import mc322.jogo.gerenciador.SistemaAcoes.AcaoInimigo;
+import mc322.jogo.gerenciador.SistemaAcoes.ResultadoAcao;
+import mc322.jogo.interfaceUsuario.InterfaceUsuario;
 import mc322.jogo.observer.Estados;
 
 /**
@@ -29,16 +30,10 @@ public class TurnoVilao {
      * @param enemy  Entidade da Classe Inimigo responsável por realizar o ataque
      * @param herois Um Vetor com todos os heróis no campo de batalha.
      */
-    public void jogar(Inimigo enemy, ArrayList<Heroi> herois) {
-
-        System.out
-                .println("\n" + Cores.VERMELHO + Cores.NEGRITO
-                        + "================== TURNO DO INIMIGO ==================" + Cores.RESET); // [TERMINAL]
-
+    public void jogar(Inimigo enemy, ArrayList<Heroi> herois, InterfaceUsuario ui) {
         /* notificar a entidade que é inicio do turno */
         gm.notificar(enemy, Estados.INICIO_DE_TURNO);
-
-        System.out.println(Cores.VERMELHO + "O " + enemy.getNome() + " está atacando..." + Cores.RESET); // [TERMINAL]
+        ui.mostrarInicioTurnoVilao(enemy.getNome());
 
         ArrayList<Heroi> heroisVivos = new ArrayList<>();
         for (Heroi h : herois) { // poderia deixar isso aqui como responsabilidade da classe jogador [CORRECAO]
@@ -56,17 +51,15 @@ public class TurnoVilao {
             /* sorteia uma ação para ser executada */
             AcaoInimigo acao = enemy.getSistemaAcoes().get(gerador.nextInt(enemy.getTamanhoSistemaAcoes())); 
 
-            String resposta = acao.executar(enemy, alvo);
-            System.out.println(resposta); // [TERMINAL] vamos mudar para ser um objeto DTO
-            enemy.imprimeEfeitos(); // [TERMINAL] tenho que mudar a implementação de imprimeEfeitos de Entidade
+            ResultadoAcao resposta = acao.executar(enemy, alvo);
+            ui.mostrarAcaoVilao(resposta);
+           ui.mostrarEfeitosEntidade(enemy.getListaEfeitos(), enemy.getNome());
 
         }
 
         /* tenho que publicar que o turno do inimigo terminou */
         gm.notificar(enemy, Estados.FIM_DE_TURNO);
-
-        System.out.println(Cores.VERMELHO + Cores.NEGRITO + "======================================================\n"
-                + Cores.RESET); // [TERMINAL]
+        ui.mostrarFimTurnoVilao();
     }
 }
 

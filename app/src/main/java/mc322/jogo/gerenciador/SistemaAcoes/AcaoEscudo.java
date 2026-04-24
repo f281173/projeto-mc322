@@ -1,8 +1,8 @@
 package mc322.jogo.gerenciador.SistemaAcoes;
 
-import mc322.jogo.Cores;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
+import mc322.jogo.gerenciador.SistemaAcoes.ResultadoAcao.TipoAcao;
 
 /**
  * Classe que implementa AçãoInimigo e tem a função de
@@ -17,9 +17,10 @@ public class AcaoEscudo implements AcaoInimigo {
         this.nomeAcao = nomeAcao;
     }
 
-    public String executar(Inimigo dono, Heroi alvo) {
+    public ResultadoAcao executar(Inimigo dono, Heroi alvo) {
         dono.ganhaEscudo(valorEscudo);
-        return dono.getNome() + " usou '" + this.nomeAcao + "' e ganhou " + Cores.AZUL + this.valorEscudo + Cores.RESET + " de escudo!";
+        ResultadoAcao resultado = new ResultadoAcao(TipoAcao.ESCUDO, this.nomeAcao, dono, alvo, valorEscudo);
+        return resultado;
     }
 
     public String getnomeAcao() {

@@ -117,6 +117,10 @@ public class Heroi extends Entidade {
         return this.maoJogador;
     }
 
+    public ArrayList<Carta> getMao() {
+        return this.getMaoJogador().getMaoJogador();
+    }
+
     public void recebeCarta(Carta cartaEscolhida) {
         this.getMaoJogador().ganhaCarta(cartaEscolhida);
     }

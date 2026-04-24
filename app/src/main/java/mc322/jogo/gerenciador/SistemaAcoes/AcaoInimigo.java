@@ -20,6 +20,6 @@ public interface AcaoInimigo {
      * @param alvo Quem o inimigo quer de fato atingir com a ação.
      * @return
      */
-    public String executar(Inimigo dono, Heroi alvo);
+    public ResultadoAcao executar(Inimigo dono, Heroi alvo);
 
 }

@@ -1,10 +1,10 @@
 package mc322.jogo.gerenciador.SistemaAcoes;
 
-import mc322.jogo.Cores;
 import mc322.jogo.efeitos.Efeito;
 import mc322.jogo.efeitos.TiposEfeitos;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
+import mc322.jogo.gerenciador.SistemaAcoes.ResultadoAcao.TipoAcao;
 
 /**
  * Classe que implementa a AçãoInimigo e tem a função
@@ -19,7 +19,7 @@ public class AcaoEfeito implements AcaoInimigo {
         this.nomeAcao = nomeAcao;
     }
 
-    public String executar(Inimigo dono, Heroi alvo) {
+    public ResultadoAcao executar(Inimigo dono, Heroi alvo) {
         if (this.efeito.getTipo() == TiposEfeitos.FORCA)
             dono.aplicarEfeito(efeito);
 
@@ -28,7 +28,8 @@ public class AcaoEfeito implements AcaoInimigo {
 
         else if (this.efeito.getTipo() == TiposEfeitos.VENENO)
             alvo.aplicarEfeito(efeito);
-        return dono.getNome() + " usou '" + this.nomeAcao + Cores.AZUL + " ativou " + this.efeito.getString() + " em " + alvo.getNome();
+        ResultadoAcao resultado = new ResultadoAcao(TipoAcao.EFEITO, this.efeito.getString(), dono, alvo, efeito.getAcumulos());
+        return resultado;
     }
 
     public String getnomeAcao() {

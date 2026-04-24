@@ -99,14 +99,14 @@ public class Jogador {
         return false;
     }
 
-    public void imprimeHeroisVivos() {
-        for (int j = 0; j < this.heroisEscolhidos.size(); j++) {
-            if (this.heroisEscolhidos.get(j).estaVivo()) {
-                System.out.println(j + " - " + this.heroisEscolhidos.get(j).getNome() + " (Vida: "
-                        + this.heroisEscolhidos.get(j).getVida() + ")");
-            }
-        }
-    }
+    // public void imprimeHeroisVivos() { // a ideia é deletar esse método com entrada do terminal
+    //     for (int j = 0; j < this.heroisEscolhidos.size(); j++) {
+    //         if (this.heroisEscolhidos.get(j).estaVivo()) {
+    //             System.out.println(j + " - " + this.heroisEscolhidos.get(j).getNome() + " (Vida: "
+    //                     + this.heroisEscolhidos.get(j).getVida() + ")");
+    //         }
+    //     }
+    // }
 
     /**
      * método para validar escolha do usuário

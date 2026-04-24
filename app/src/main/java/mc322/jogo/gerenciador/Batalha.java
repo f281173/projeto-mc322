@@ -1,12 +1,10 @@
 package mc322.jogo.gerenciador;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import mc322.jogo.Cores;
 import mc322.jogo.entidades.Entidade;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
+import mc322.jogo.interfaceUsuario.InterfaceUsuario;
 
 
 
@@ -17,10 +15,9 @@ import mc322.jogo.entidades.Inimigo;
 public class Batalha {
 
     // Recebe as classes encapsuladas: Jogador e Oponente
-    public boolean executarCombate(Jogador jogador, Oponente oponente, GameManager gm, Scanner sc, Prints tela) {
+    public boolean executarCombate(Jogador jogador, Oponente oponente, GameManager gm, InterfaceUsuario ui) {
         
-        System.out.println(Cores.AMARELO + Cores.NEGRITO + "\n=== A BATALHA COMEÇOU! ===" + Cores.RESET);
-
+        ui.mostrarInicioBatalha();
 
         // Junta os escolhidos dos heróis e vilões para decidir a ordem do turno
         ArrayList<Entidade> ordemTurno = new ArrayList<>();
@@ -60,12 +57,10 @@ public class Batalha {
 
                     if (entidadeAtual instanceof Heroi) {
                         Heroi heroiAtual = (Heroi) entidadeAtual;
-                        System.out.println(
-                                Cores.CIANO + "\n>>> Turno de " + heroiAtual.getNome() + " <<<" + Cores.RESET);
+                        ui.mostrarNovaRodada(heroiAtual.getNome());
 
                         // O herói recebe o deckGeral e a lista de inimigos disponíveis
-                        turnoHeroi.jogar(heroiAtual, jogador, oponente,
-                                tela, sc);
+                        turnoHeroi.jogar(heroiAtual, jogador, oponente, ui);
 
                         /* após um turno do heroi, podemos ter a morte de todos os inimigos */
                         if (!jogador.temHeroisVivos() || !oponente.temInimigosVivos())
@@ -74,7 +69,7 @@ public class Batalha {
                     } else if (entidadeAtual instanceof Inimigo) {
                         Inimigo inimigoAtual = (Inimigo) entidadeAtual;
                         // O inimigo ataca um herói aleatório da lista
-                        turnoVilao.jogar(inimigoAtual, jogador.getHeroisEscolhidos());
+                        turnoVilao.jogar(inimigoAtual, jogador.getHeroisEscolhidos(), ui);
 
                         /* verificar se ainda temos herois e inimigos vivos */
                         if (!jogador.temHeroisVivos() || !oponente.temInimigosVivos())
@@ -89,11 +84,11 @@ public class Batalha {
         }
 
         if (jogador.temHeroisVivos()) {
-            System.out.println(Cores.VERDE + "\n🎉 VITÓRIA! A área foi limpa." + Cores.RESET);
+            ui.mostrarVitoriaBatalha();
             
             return true; 
         } else {
-            System.out.println(Cores.VERMELHO + "\n☠️ DERROTA... Sua jornada termina aqui." + Cores.RESET);
+            ui.mostrarDerrotaBatalha();
             return false; 
         }
     }

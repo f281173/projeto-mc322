@@ -193,21 +193,6 @@ public abstract class Entidade {
      * 
      */
     public abstract void ataque(Entidade alvo, int valorDano);
-
-    /** Método para impressão de todos os efeitos ativos naquela Entidade */
-    public void imprimeEfeitos() {
-
-        /* Somente será impresso alguma coisa se existirem efeitos ativos */
-        if (this.getListaEfeitos().size() > 0) {
-            System.out.println("=================================================================");
-            System.out.println("EFEITOS QUE ESTÃO EM AÇÃO EM: " + this.getNome());
-            for (Efeito efeito : this.getListaEfeitos()) {
-                System.out.println(efeito.getString());
-            }
-            System.out.println("=================================================================");
-        }
-    }
-
     /**
      * Método para pegar os dados sobre o Efeito Força que estiver em ação na lista
      * de efeitos da

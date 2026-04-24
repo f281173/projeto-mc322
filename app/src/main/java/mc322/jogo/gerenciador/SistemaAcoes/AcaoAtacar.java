@@ -1,8 +1,8 @@
 package mc322.jogo.gerenciador.SistemaAcoes;
 
-import mc322.jogo.Cores;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.entidades.Inimigo;
+import mc322.jogo.gerenciador.SistemaAcoes.ResultadoAcao.TipoAcao;
 
 /**
  * Classe que implementa açãoInimigo e tem a função de criar
@@ -17,14 +17,14 @@ public class AcaoAtacar implements AcaoInimigo {
         this.nomeAcao = nomeAcao;
     }
 
-    public String executar(Inimigo dono, Heroi alvo) {
+    public ResultadoAcao executar(Inimigo dono, Heroi alvo) {
         dono.ataque(alvo, valorDano);
         /*
          * Isso aqui não resolve a questão de imprimir certo quando usa fraqueza
          * [CORRECAO]
          */
-        return dono.getNome() + " usou '" + this.nomeAcao + "' e causou " + Cores.VERMELHO + this.valorDano + " de Dano"
-                + Cores.RESET + " de dano no " + alvo.getNome() + "!";
+        ResultadoAcao resultado = new ResultadoAcao(TipoAcao.ATAQUE, this.nomeAcao, dono, alvo, valorDano);
+        return resultado;
     }
 
     public String getnomeAcao() {
