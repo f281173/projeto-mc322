@@ -267,4 +267,14 @@ public class Heroi extends Entidade {
 
     
 
+    public void aumentarVidaInicial(int bonus) {
+        this.vidaInicial += bonus;
+        this.vida += bonus; // Cura o valor que aumentou
+    }
+
+    public void aumentarEnergia(int bonus) {
+        this.energiaInicial += bonus;
+    }
+
+
 }

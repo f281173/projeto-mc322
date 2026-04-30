@@ -6,11 +6,9 @@ import mc322.jogo.entidades.Entidade;
 import mc322.jogo.entidades.Heroi;
 import mc322.jogo.interfaceUsuario.InterfaceUsuario;
 import mc322.jogo.mapa.Campanha;
-import mc322.jogo.mapa.EventoMapa;
+import mc322.jogo.mapa.Evento;
 import mc322.jogo.mapa.NoMapa;
-import mc322.jogo.mapa.TipoEvento;
 import mc322.jogo.observer.Estados;
-import mc322.jogo.cartas.Carta;
 import mc322.jogo.observer.Publisher;
 import mc322.jogo.observer.Subscriber;
 import java.util.ArrayList;
@@ -88,7 +86,6 @@ public class GameManager implements Publisher {
         this.ui.telaInicial();
         dj.tocarMusica("../sons/Funkytown.wav");
 
-        
         int dificuldade = ui.escolheDificuldade();
 
         Jogador jogador = new Jogador();
@@ -97,74 +94,21 @@ public class GameManager implements Publisher {
         jogador.getHeroisEscolhidos().add(shrek);
 
         // criar um mapa aqui eu acho
-        NoMapa inicioDoMapa = Campanha.criarMapa(this, dificuldade);
-        viajarPeloGrafo(inicioDoMapa, jogador, shrek);
+        NoMapa inicioDoMapa = Campanha.criarMapa(this, dificuldade, this.ui);
+
+        viajarPeloGrafo(inicioDoMapa, jogador, shrek, dificuldade);
 
     }
 
-    public void viajarPeloGrafo(NoMapa nodoAtual, Jogador jogador, Heroi Shrek) {
+    public void viajarPeloGrafo(NoMapa nodoAtual, Jogador jogador, Heroi Shrek, int dificuldade) {
 
-        EventoMapa evento = nodoAtual.getEvento();
+        Evento evento = nodoAtual.getEvento();
         this.ui.mostrarDialogoEvento(evento.getNomeFase(), evento.getDialogo());
 
+        boolean sobreviveu = evento.iniciar(jogador, this, this.ui, dificuldade);
 
-        if (evento.getTipo() == TipoEvento.BATALHA || evento.getTipo() == TipoEvento.BOSS) {
-            Batalha arena = new Batalha();
-            boolean sobreviveu = arena.executarCombate(jogador, evento.getOponente(), this, ui);
-            if (!sobreviveu)
-                return;
-        }
-
-        else if (evento.getTipo() == TipoEvento.DESCANSO_BAR) {
-            this.ui.mostrarEventoBar();
-
-            for (Heroi heroi : jogador.getHeroisEscolhidos()) {
-                if (heroi.estaVivo()) {
-                    heroi.curar(30);
-                }
-            }
-
-        }
-
-        else if (evento.getTipo() == TipoEvento.ARMADILHA) {
-            this.ui.mostrarEventoArmadilha();
-            for (Heroi heroi : jogador.getHeroisEscolhidos()) {
-                if (heroi.estaVivo()) {
-                    heroi.recebeDanoEfeito(15);
-                }
-            }
-        }
-
-        else if (evento.getTipo() == TipoEvento.RECOMPENSA_CARTA) {
-            Carta novaCarta = evento.getCartaRecompensa();
-            if (novaCarta != null) {
-                this.ui.mostrarRecompensaCarta(novaCarta);
-                Shrek.ganhaCarta(novaCarta);
-
-            }
-        }
-
-        // companheiros
-        if (evento.getNomeFase().equals("Flor azul com espinhos vermelhos")) {
-            this.ui.mostrarNovoCompanheiro("Burro");
-            Heroi burro = Dados.criarBurro(this);
-            jogador.adicionarHeroiTodos(burro);
-            jogador.getHeroisEscolhidos().add(burro);
-        }
-
-        else if (evento.getNomeFase().equals("Flor vermelha com espinhos azuis")) {
-            this.ui.mostrarNovoCompanheiro("Pinoquio");
-            Heroi pinoquio = Dados.criarPinoquio(this);
-            jogador.adicionarHeroiTodos(pinoquio);
-            jogador.getHeroisEscolhidos().add(pinoquio);
-        }
-
-        else if (evento.getNomeFase().equals("Torre da Bruxa Velha")) {
-            this.ui.mostrarNovoCompanheiro("Fiona");
-            Heroi fiona = Dados.criarFiona(this);
-            jogador.adicionarHeroiTodos(fiona);
-            jogador.getHeroisEscolhidos().add(fiona);
-        }
+        if (!sobreviveu)
+            return;
 
         // navegação
         ArrayList<NoMapa> proximos = nodoAtual.getProximos();
@@ -176,7 +120,8 @@ public class GameManager implements Publisher {
 
         this.ui.mostrarMapa(evento.getNomeFase());
         int escolha = this.ui.escolherCaminhoMapa(proximos);
-        viajarPeloGrafo(proximos.get(escolha), jogador, Shrek); // deve continuar aqui
+        viajarPeloGrafo(proximos.get(escolha), jogador, Shrek, dificuldade); // deve continuar aqui
+
     }
 
 }

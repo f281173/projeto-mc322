@@ -3,10 +3,10 @@ package mc322.jogo.mapa;
 import java.util.ArrayList;
 
 public class NoMapa {
-    private EventoMapa evento;
+    private Evento evento;
     private ArrayList<NoMapa> proximosCaminhos; // A lista de para onde eu posso ir
 
-    public NoMapa(EventoMapa evento) {
+    public NoMapa(Evento evento) {
         this.evento = evento;
         this.proximosCaminhos = new ArrayList<>();
     }
@@ -16,7 +16,7 @@ public class NoMapa {
         this.proximosCaminhos.add(proximoNodo);
     }
 
-    public EventoMapa getEvento() {
+    public Evento getEvento() {
         return this.evento;
     }
 
