@@ -90,8 +90,8 @@ public class Batalha extends Evento {
             
             int moedasGanhas = isBoss ? 20 : (10 * dificuldade);
             jogador.adicionarMoedas(moedasGanhas);
-            System.out.println(Cores.AMARELO + "💰 Você ganhou " + moedasGanhas + " moedas!" + Cores.RESET);
-            System.out.println("Saldo atual: 💰 " + jogador.getMoedas() + "\n");
+            ui.mostrarMensagem(Cores.AMARELO + "💰 Você ganhou " + moedasGanhas + " moedas!" + Cores.RESET);
+            ui.mostrarMensagem("Saldo atual: 💰 " + jogador.getMoedas() + "\n");
             
             darRecompensaExtra(jogador, gm); 
             return true; 

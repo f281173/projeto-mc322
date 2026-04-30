@@ -114,4 +114,16 @@ public interface InterfaceUsuario {
     /*--------------MÉTODO JOGAR NOVAMENTE------------------------- */
     public int escolheJogarNovamente();
 
+    /*------------MÉTODOS PARA A LOJA DE RECOMPENSAS-------------- */
+    public void telaInicialLoja(String dialogo, int numeroLoja);
+
+    public void mostrarSaldo(int moedas);
+
+    public void mostrarSaldoInsuficiente();
+
+    public void mostrarSaidaLoja();
+
+    public void telaOpcaoLoja();
+
+    public int escolhaOpcaoLoja();
 }

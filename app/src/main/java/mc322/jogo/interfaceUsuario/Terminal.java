@@ -284,4 +284,42 @@ public class Terminal implements InterfaceUsuario {
         int escolha = sc.nextInt();
         return escolha;
     }
+
+    /*métodos para o evento da loja*/
+
+    public void telaInicialLoja(String dialogo, int numeroLoja) {
+        Prints.imprimirLetraPorLetra(dialogo);
+        System.out.println("\n" + Cores.AMARELO + "=== 💰 BEM-VINDO À LOJA DO PÂNTANO (Loja " + numeroLoja + ") ==="
+                + Cores.RESET);
+    }
+
+    public void mostrarSaldo(int moedas) {
+        System.out.println("Saldo atual: 💰 " + moedas);
+    }
+
+    public void mostrarSaldoInsuficiente() {
+        System.out.println("Dinheiro insuficiente ou opção inválida!");
+    }
+
+    public void mostrarSaidaLoja() {
+        System.out.println("Saindo da loja...");
+    }
+
+    public void telaOpcaoLoja() {
+            System.out.println("\nO que deseja comprar?");
+            System.out.println("1 - Poção de Cura (Recupera 30 HP) - 💰 20");
+            System.out.println("2 - Treinamento de Resiliência (+20 HP Máx) - 💰 50");
+            System.out.println("3 - Elixir de Café (+1 Energia Máx) - 💰 70");
+    }
+
+    public int escolhaOpcaoLoja() {
+        System.out.println("0 - Sair da Loja");
+        System.out.print("Escolha: ");
+
+        int escolha = sc.nextInt();
+        sc.nextLine();
+
+        return escolha;
+    }
+
 }
