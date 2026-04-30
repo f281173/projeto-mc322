@@ -10,6 +10,8 @@ import mc322.jogo.entidades.Inimigo;
  * ATACAR: tem uma habilidade que gera dano no oponente
  * ESCUDO: pode usar o seu escudo durante um turno
  * EFEITOS: tem efeitos que ele pode aplicar em um oponente
+ * 
+ * Vale ressaltar que essa interface é quem  organiza o Pattern Strategy
  */
 public interface AcaoInimigo {
     /**

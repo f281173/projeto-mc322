@@ -153,6 +153,31 @@ Feito o comando, vá pelo explorador de arquivos até app/build/docs/javadoc/ind
 
 Feito o comando, vá pelo explorador de arquivos até app/build/reports/jacoco/test/html/index.html
 
+## Padrões de projeto usados no nosso Jogo
+
+- Padrão Strategy: Usados para que se tenha um conjunto de diferentes comportamentos sem a necessidade 
+de modificação de código já existente para futuras expansões de comportamento.  
+
+    1. Foi usado esse padrão no pacote de sistemaAcoes, que define uma interface comum com o método executar para diferentes implementações que 
+    define diferentes formas de ações para o inimigo. Veja que nesse caso podemos expandir as ações sem modificar código já existente.  
+
+
+    2. O principal uso do Strategy está no pacote interfaceUsuario em que estamos usando o padrão para que possa ser executado esse jogo
+    tanto no terminal (onde atualmente é a única implementação totalmente funcional) e a execução em uma interface gráfica (estamos ainda implementando esse modo) de modo que todo o nosso jogo usa os métodos dessa interface sem saber qual o modo de execução naquele momento. Embora não exista ainda a implementação
+    da interface gráfica por completo, o padrão todo já está implementado de modo que podemos expandir a interface gráfica sem modificar código já existente.
+
+    Fontes:  
+    [Site refactoring guru](https://refactoring.guru/pt-br/design-patterns/strategy)  
+    [Artigo do Medium](https://medium.com/@eshikashah2001/understanding-the-strategy-design-pattern-in-software-engineering-8774086a1895)
+
+- Padrão DTO (Data Transfer Object): Usado para que seja possível transferir os dados de um objeto de modo simples para que possa ser usado em outras partes do código. Esse tipo de objeto não tem regras de negócio e servem apenas para acumular informações.
+
+    1. Foi usado na classe ResultadoAcao para que as informações sobre a excução de uma determinada ação, como por exemplo, em  qual  entidade foi o alvo, possa
+    ser transferido e consumido pela interfaceusuario de modo deiferentes, a depender se será impressa no terminal ou então usada em uma interface gráfica.
+
+    Fontes:  
+    [Artigo do Medium com exemplos em java](https://medium.com/@alxkm/the-complete-guide-to-data-transfer-objects-dtos-from-basics-to-enterprise-patterns-fcddd3a6bc9a)  
+    [Outro artgo do Medium](https://medium.com/@jigorsilva/entendendo-dtos-em-java-um-guia-completo-para-iniciantes-55e82264918f) 
 
 
 
