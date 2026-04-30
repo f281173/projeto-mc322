@@ -7,6 +7,7 @@ import mc322.jogo.Dados;
 import mc322.jogo.gerenciador.GameManager;
 import mc322.jogo.gerenciador.Jogador;
 import mc322.jogo.gerenciador.Prints;
+import mc322.jogo.interfaceUsuario.InterfaceUsuario;
 
 public class EventoLoja extends Evento {
     private int numeroLoja;
@@ -17,7 +18,9 @@ public class EventoLoja extends Evento {
     }
 
     @Override
-    public boolean iniciar(Jogador jogador, GameManager gm, Scanner sc, Prints tela, int dificuldade) {
+    public boolean iniciar(Jogador jogador, GameManager gm,InterfaceUsuario ui, int dificuldade) {
+        Scanner sc = new Scanner(System.in);
+        
         Prints.imprimirLetraPorLetra(getDialogo());
         System.out.println("\n" + Cores.AMARELO + "=== 💰 BEM-VINDO À LOJA DO PÂNTANO (Loja " + numeroLoja + ") ===" + Cores.RESET);
         
