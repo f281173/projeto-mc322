@@ -179,5 +179,10 @@ de modificação de código já existente para futuras expansões de comportamen
     [Artigo do Medium com exemplos em java](https://medium.com/@alxkm/the-complete-guide-to-data-transfer-objects-dtos-from-basics-to-enterprise-patterns-fcddd3a6bc9a)  
     [Outro artgo do Medium](https://medium.com/@jigorsilva/entendendo-dtos-em-java-um-guia-completo-para-iniciantes-55e82264918f) 
 
+- Padrão Observer: Usado desde a tarefa 3 com o intuito de gerenciar a comunicação de determinados acontecimentos do jogo para a ação correta dos efeitos. Pode
+ser visto no pacote Observer.
+
+    Fontes:  
+    [Site refactoring Guru](https://refactoring.guru/pt-br/design-patterns/observer)
 
 
